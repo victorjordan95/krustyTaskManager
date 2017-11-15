@@ -1,0 +1,31 @@
+<header class="header" ng-controller="HeaderCtrl">
+    <a ng-href="#!/home" class="header-logo"> 
+		<span class="header-logo-name">Krusty</span>
+		<span class="header-logo-description">
+			Task <br>
+			Manager
+		</span> 
+  	</a>
+    <button type="button" class="btn-sidebar-collapse active"><i class="fa fa-bars " aria-hidden="true"></i></button>
+    <div class="header-icons">
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropdown-toggle header-icons-action" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-cogs" aria-hidden="true"></i> </a>
+                <ul class="dropdown-menu">
+                    <li> <a href="#/change-password">
+                			Alterar senha
+                    	</a>
+                    </li>
+                    <li> <a href="#"> Editar Perfil </a> </li>
+                </ul>
+            </li>
+            <li>
+                <a ng-href="/login" class="dropdown-toggle header-icons-action" data-toggle="dropdown" role="button" aria-haspopup="true"
+                    aria-expanded="false"> 
+                    <i class="fa fa-sign-out" aria-hidden="true"></i> 
+                </a> 
+                    <!-- ng-click="logout()" -->
+            </li>
+        </ul>
+    </div>
+</header>

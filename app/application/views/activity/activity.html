@@ -1,0 +1,56 @@
+<div ng-include="'application/views/templates/header.html'"></div>
+<div ng-include="'application/views/templates/aside.html'"></div>
+<main>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 col-sm-6">
+				<h2>Atividades</h2>
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				<button class="btn btn-register" data-ng-click="activityCtrl.openModal()">
+					<i class="fa fa-plus" aria-hidden="true"></i>
+					<span class="text-btn">Inserir atividade</span>
+				</button>
+			</div>
+		</div>
+	</div>
+
+
+	<section class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12">
+				<filter pagecontroller="activityCtrl" pagetranslator="activity.filter."></filter>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-sm-4 col-md-3">
+				<div class="card-table">
+					<header class="card-header">
+
+						<i class="fa fa-wrench" aria-hidden="true"></i>
+						<h2 class="title">
+							Fabricante
+							<span class="help-block subtitle">Teste</span>
+						</h2>
+						<span class="status confirm">ativo</span>
+
+					</header>
+					<div class="card-body">
+					</div>
+					<footer class="action">
+						<a href="" data-toggle="modal"  data-ng-click="activityCtrl.openModal(activity)">
+							<i class="fa fa-pencil-square-o icons" aria-hidden="true"></i>
+						</a>
+						<a href="" data-toggle="modal" data-ng-click="activityCtrl.openModalExclude(activity)">
+							<i class="fa fa-trash-o icons" aria-hidden="true"></i>
+						</a>
+						<button href="" data-toggle="modal" data-target="#anexo">
+							<i class="fa fa-paperclip icons" aria-hidden="true"></i>
+						</button>
+					</footer>
+				</div>
+			</div>
+
+		</div>
+	</section>
+</main>
