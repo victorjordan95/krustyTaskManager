@@ -1,0 +1,87 @@
+<div ng-include="'application/views/templates/header.html'"></div>
+<div ng-include="'application/views/templates/aside.html'"></div>
+<div ng-include="'application/views/templates/loader.html'"></div>
+<main>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 col-sm-6">
+				<h2>{{'header.division.title' | translate}}</h2>
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				<button class="btn btn-primary btn-create" data-ng-click="divisionCtrl.openModal()">
+				<i class="fa fa-plus" aria-hidden="true"></i>
+				{{ 'common.insert' | translate }} {{ 'header.division.title' | translate }}
+			</button>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<div class="card">
+			<div class="row">
+			
+				<filter pagecontroller="divisionCtrl" pagetranslator="division.filter."></filter>
+			
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="table-responsive">
+							<table class="table table-hover table-striped">
+								<thead>
+									<tr>
+										<th> {{'common.actions' | translate}}</th>
+										<th>
+											<a ng-click="divisionCtrl.pagination.setSortColumn('name')">{{'division.name' | translate}}  
+												<i ng-class="{true:'fa fa-angle-down', false:'fa fa-angle-up'}[divisionCtrl.pagination.getListSortItens()['name']]" aria-hidden="true"></i>
+											</a>
+										</th>
+										<th>
+											<a ng-click="divisionCtrl.pagination.setSortColumn('initials')">{{'division.initials' | translate}}
+												<i ng-class="{true:'fa fa-angle-down', false:'fa fa-angle-up'}[divisionCtrl.pagination.getListSortItens()['initials']]" aria-hidden="true"></i>
+											</a>
+										</th>
+										<th>
+											<a ng-click="divisionCtrl.pagination.setSortColumn('active')">{{'division.status' | translate}}
+												<i ng-class="{true:'fa fa-angle-down', false:'fa fa-angle-up'}[divisionCtrl.pagination.getListSortItens()['active']]" aria-hidden="true"></i>
+											</a>
+										</th>
+										<th>
+											<a ng-click="divisionCtrl.pagination.setSortColumn('lastModifiedDate')"> {{'common.lastModifiedDate' | translate}}
+												<i ng-class="{true:'fa fa-angle-down', false:'fa fa-angle-up'}[divisionCtrl.pagination.getListSortItens()['lastModifiedDate']]" aria-hidden="true"></i>
+											</a>
+										</th>
+										<th>
+											<a ng-click="divisionCtrl.pagination.setSortColumn('lastModifiedBy.fullName')"> {{'common.lastLogin' | translate}}
+												<i ng-class="{true:'fa fa-angle-down', false:'fa fa-angle-up'}[divisionCtrl.pagination.getListSortItens()['lastModifiedBy.fullName']]" aria-hidden="true"></i>
+											</a>
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr data-toggle="modal" data-target="#myModal" ng-repeat="division in divisionCtrl.pagination.items() | orderBy:name">
+										<td>
+											<button class="btn btn-default btn-circle" uib-tooltip="{{ 'button.edit' | translate }}" data-ng-click="divisionCtrl.openModal(division)">
+				                            <i class="glyphicon glyphicon-pencil"></i>
+				                        </button>
+											<button class="btn btn-default btn-circle" data-toggle="tooltip" data-original-title="{{'button.delete' | translate}}" data-ng-click="divisionCtrl.openModalDelete(division)">
+											<i class="fa fa-trash-o" aria-hidden="true"></i>
+										</button>
+										</td>
+										<td> {{division.name}} </td>
+										<td> {{division.initials}} </td>
+										<td> {{'common.active.'+division.active | translate}} </td>
+										<td> {{division.lastModifiedDate}} </td>
+										<td> {{division.lastModifiedBy.fullName}} </td>
+									</tr>
+								</tbody>
+							</table>
+
+							<pagination pagecontroller="divisionCtrl"></pagination>
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</main>

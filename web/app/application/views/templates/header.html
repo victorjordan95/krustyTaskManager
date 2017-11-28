@@ -1,0 +1,47 @@
+<header class="header" ng-controller="HeaderCtrl">
+    <a ng-href="#!/home" class="header-logo"> 
+		<span class="header-logo-name">Krusty</span>
+		<span class="header-logo-description">
+			Task <br>
+			Manager
+		</span> 
+  	</a>
+    <button type="button" class="btn-sidebar-collapse active"><i class="fa fa-bars " aria-hidden="true"></i></button>
+    <div class="header-icons">
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown-toggle header-user">
+                <i class="fa fa-user sidebar-user-icon" aria-hidden="true"></i> {{actualUser.userName}}
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropdown-toggle header-icons-action" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-cogs" aria-hidden="true"></i> </a>
+                <ul class="dropdown-menu">
+                    <li> <a href="#/change-password">
+                			{{'header.user.edtPassword' | translate}}
+                    	</a>
+                    </li>
+                    <li> <a href="#"> Editar Perfil </a> </li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle dropdown-toggle-language" data-toggle="dropdown" href="javascript:void(0)">
+                    <div id="actual-language" class="pt-br-flag"></div>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="javascript:void(0)" data-ng-click="changeLang('pt-br')" class="flag-language br-flag">
+                            <div class="pt-br-flag"></div> {{'header.language.portuguese' | translate}} </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" data-ng-click="changeLang('en-us')" class="flag-language en-flag br-flag">
+                            <div class="eua-flag"></div> {{'header.language.english' | translate}} </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a ng-href="/login" class="dropdown-toggle header-icons-action" data-toggle="dropdown" role="button" aria-haspopup="true"
+                    aria-expanded="false"> <i class="fa fa-sign-out" aria-hidden="true"></i> </a> 
+                    <!-- ng-click="logout()" -->
+            </li>
+        </ul>
+    </div>
+</header>

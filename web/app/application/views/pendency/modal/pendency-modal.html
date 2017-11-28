@@ -1,0 +1,213 @@
+<form name="form" novalidate data-ng-submit="save()">
+	<div class="modal-header">
+		<h2 class="modal-title col-xs-9">
+			{{ (pendencyModal.id == null ? 'common.insert' : 'common.update') | translate }} {{'header.pendency.title' | translate}}
+		</h2>
+		<button type="button" class="close col-xs-3 text-right" data-ng-click="cancel()">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+
+	<div class="modal-body">
+		<div class="modal-body">
+			
+			<wizard>
+		
+				<wz-step wz-title="{{'pendency.modal.wizard.page1.title' | translate}}" ng-init="prepareCenter()" canexit="prepareCenter" >
+					<div class="row">
+						<div class="form-group col-xs-6">
+							<label><strong>{{'pendency.id' | translate}}</strong></label>
+							<input type="text" placeholder="{{'pendency.id' | translate}}" data-ng-model="pendencyModal.name" maxlength="50" ng-maxlength="50"
+							 class="form-control" required autofocus="autofocus" />
+						</div>
+						<div class="form-group col-xs-6">
+							<label><strong>{{'pendency.client' | translate}}</strong></label>
+							<ui-select id="clientFilter" data-ng-model="pendencyModal.contact">
+							    <ui-select-match>
+							        <span ng-bind="$select.selected.client"></span>
+							    </ui-select-match>
+							    <ui-select-choices repeat="client in (clientList | filter: $select.search)">
+							        <span ng-bind="client.fullName"></span>
+							    </ui-select-choices>
+							</ui-select>
+						</div>
+						<div class="form-group col-xs-6">
+							<label><strong>{{'pendency.division' | translate}}</strong></label>
+							<ui-select id="divisionFilter" data-ng-model="pendencyModal.division">
+							    <ui-select-match>
+							        <span ng-bind="$select.selected.division"></span>
+							    </ui-select-match>
+							    <ui-select-choices repeat="division in (divisionList | filter: $select.search)">
+							        <span ng-bind="division.name"></span>
+							    </ui-select-choices>
+							</ui-select>
+						</div>
+						<div class="form-group col-xs-6">
+							<label><strong>{{'pendency.demand' | translate}}</strong></label>
+							<ui-select id="demandFilter" data-ng-model="pendencyModal.demand">
+							    <ui-select-match>
+							        <span ng-bind="$select.selected.demand"></span>
+							    </ui-select-match>
+							    <ui-select-choices repeat="demand in (demandList | filter: $select.search)">
+							        <span ng-bind="demand.demandDesc"></span>
+							    </ui-select-choices>
+							</ui-select>
+						</div>
+						<div class="form-group col-xs-6">
+							<label><strong>{{'pendency.modal.summary' | translate}}</strong></label>
+							<input type="text" placeholder="{{'pendency.modal.summary' | translate}}" data-ng-model="pendencyModal.summary" maxlength="50" data-ng-maxlength="50"
+							 class="form-control" required />
+						</div>
+						<div class="form-group col-xs-6">
+							<label><strong>{{'pendency.business' | translate}}</strong></label>
+							<ui-select id="businessFilter" data-ng-model="pendencyModal.business">
+							    <ui-select-match>
+							        <span ng-bind="$select.selected.business"></span>
+							    </ui-select-match>
+							    <ui-select-choices repeat="business in (businessList | filter: $select.search)">
+							        <span ng-bind="business.name"></span>
+							    </ui-select-choices>
+							</ui-select>
+						</div>
+						<div class="form-group col-xs-6">
+							<label><strong>{{'pendency.organization' | translate}}</strong></label>
+							<ui-select id="organizationFilter" data-ng-model="pendencyModal.organization">
+							    <ui-select-match>
+							        <span ng-bind="$select.selected.organization"></span>
+							    </ui-select-match>
+							    <ui-select-choices repeat="organization in (organizationList | filter: $select.search)">
+							        <span ng-bind="organization.name"></span>
+							    </ui-select-choices>
+							</ui-select>
+						</div>
+						<div class="form-group col-xs-6">
+							<label><strong>{{'pendency.process' | translate}}</strong></label>
+							<input type="text" placeholder="{{'pendency.process' | translate}}" data-ng-model="pendencyModal.process" class="form-control" required />
+						</div>
+						<div class="form-group col-xs-6">
+							<label><strong>{{'pendency.responsible' | translate}}</strong></label>
+							<ui-select id="responsibleFilter" data-ng-model="pendencyModal.responsible">
+							    <ui-select-match>
+							        <span ng-bind="$select.selected.responsible"></span>
+							    </ui-select-match>
+							    <ui-select-choices repeat="responsible in (responsibleList | filter: $select.search)">
+							        <span ng-bind="responsible.fullName"></span>
+							    </ui-select-choices>
+							</ui-select>
+						</div>
+						<div class="form-group col-xs-12">
+							<label><strong>{{'pendency.desc' | translate}}</strong></label>
+							<textarea type="text" placeholder="{{'pendency.desc' | translate}}" data-ng-model="pendencyModal.description" class="form-control" required />
+						</div>
+					</div>
+					
+					<div class="modal-footer">
+						<button type="submit" wz-next class="btn btn-primary" data-dismiss="modal">
+					        {{ 'button.next' | translate }}
+					    </button>
+				    </div>
+				</wz-step>
+				
+				<wz-step wz-title="{{'pendency.modal.wizard.page2.title' | translate}}" >
+					<div class="row">
+						<div class="form-group col-xs-6">
+							<label><strong>{{'pendency.modality' | translate}}</strong></label>
+							<ui-select id="modalityFilter" data-ng-model="pendencyModal.modality">
+							    <ui-select-match>
+							        <span ng-bind="$select.selected.modality"></span>
+							    </ui-select-match>
+							    <ui-select-choices repeat="modality in (modalityList | filter: $select.search)">
+							        <span ng-bind="modality.name"></span>
+							    </ui-select-choices>
+							</ui-select>
+						</div>
+						<div class="form-group col-xs-6">
+							<label><strong>{{'pendency.filter.contract.name' | translate}}</strong></label>
+							<ui-select id="contractFilter" data-ng-model="pendencyModal.contract">
+							    <ui-select-match>
+							        <span ng-bind="$select.selected.contract"></span>
+							    </ui-select-match>
+							    <ui-select-choices repeat="contract in (contractList | filter: $select.search)">
+							        <span ng-bind="contract.name"></span>
+							    </ui-select-choices>
+							</ui-select>
+						</div>
+						<div class="form-group col-xs-6">
+							<label><strong>{{'pendency.modal.initialDate' | translate}}</strong></label>
+							<input type="text" placeholder="{{'pendency.modal.initialDate' | translate}}" data-ng-model="pendencyModal.initialDate" class="form-control" 
+							required maxlength="10" date-ng-maxlength="10" mask="99/99/9999" />
+						</div>
+						<div class="form-group col-xs-6">
+							<label><strong>{{'pendency.deadline' | translate}}</strong></label>
+							<input type="text" placeholder="{{'pendency.deadline' | translate}}" data-ng-model="pendencyModal.deadline" class="form-control" 
+								required maxlength="10" date-ng-maxlength="10" mask="99/99/9999" />
+						</div>
+						<div class="form-group col-xs-6">
+							<label><strong>{{'pendency.modal.dateFirstAction' | translate}}</strong></label>
+							<input type="text" placeholder="{{'pendency.modal.dateFirstAction' | translate}}" data-ng-model="pendencyModal.dateFirstAction" class="form-control" 
+								required maxlength="10" date-ng-maxlength="10" mask="99/99/9999" />
+						</div>
+						<div class="form-group col-xs-6">
+							<label><strong>{{'pendency.modal.dateFirstAction' | translate}}</strong></label>
+							<input type="text" placeholder="{{'pendency.modal.dateFirstAction' | translate}}" data-ng-model="pendencyModal.dateFirstAction" class="form-control" 
+								required maxlength="10" date-ng-maxlength="10" mask="99/99/9999" />
+						</div>
+						<div class="form-group col-xs-6">
+							<label><strong>{{'pendency.modal.intervalDate' | translate}}</strong></label>
+							<input type="text" placeholder="{{'pendency.modal.intervalDate' | translate}}" data-ng-model="pendencyModal.intervalDate" class="form-control" required />
+						</div>
+						<div class="form-group col-xs-6">
+							<label class="control-label input-group"><strong>{{'pendency.modal.intervalTime' | translate}}</strong></label>
+							<label class="radio-inline">
+								<input ng-value="0" type="radio" ng-model="pendencyModal.intervalTime">
+								{{'pendency.modal.interval.days' | translate}}
+							</label>
+							<label class="radio-inline">
+								<input ng-value="1" type="radio" ng-model="pendencyModal.intervalTime">
+								{{'pendency.modal.interval.months' | translate}}
+							</label>
+							<label class="radio-inline">
+								<input ng-value="2" type="radio" ng-model="pendencyModal.intervalTime">
+								{{'pendency.modal.interval.years' | translate}}
+							</label>
+						</div>
+						<div class="form-group col-xs-6"></div>
+						<div class="form-group col-xs-6">
+							<label class="control-label input-group"><strong>{{'pendency.extended' | translate}}</strong></label>
+							<label class="radio-inline">
+								<input ng-value="1" type="radio" ng-model="pendencyModal.extended">
+								{{'common.filterSelect.1' | translate}}
+							</label>
+							<label class="radio-inline">
+								<input ng-value="0" type="radio" ng-model="pendencyModal.extended">
+								{{'common.filterSelect.0' | translate}}
+							</label>
+						</div>
+						<div class="form-group col-xs-6">
+							<label class="control-label input-group"><strong>{{'pendency.modal.highPriority' | translate}}</strong></label>
+							<label class="radio-inline">
+								<input ng-value="1" type="radio" ng-model="pendencyModal.highPriority">
+								{{'common.filterSelect.1' | translate}}
+							</label>
+							<label class="radio-inline">
+								<input ng-value="0" type="radio" ng-model="pendencyModal.highPriority">
+								{{'common.filterSelect.0' | translate}}
+							</label>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" wz-previous class="btn btn-primary pull-left" data-dismiss="modal" >
+					        {{ 'button.previous' | translate }}
+					    </button>
+						<button type="submit" wz-finish class="btn btn-primary" data-dismiss="modal" data-ng-disabled="form.$invalid">
+					        {{ 'button.save' | translate }}
+					    </button>
+				    </div>
+				</wz-step>
+			
+			</wizard>
+			
+		</div>
+	</div>
+	
+</form>

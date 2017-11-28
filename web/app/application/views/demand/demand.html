@@ -1,0 +1,104 @@
+<div ng-include="'application/views/templates/header.html'"></div>
+<div ng-include="'application/views/templates/aside.html'"></div>
+<main>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 col-sm-6">
+				<h2>{{'header.demand.title' | translate}}</h2>
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				<button class="btn btn-primary btn-create" data-ng-click="demandCtrl.openModal()">
+					<i class="fa fa-plus" aria-hidden="true"></i>
+					{{ 'common.insert' | translate }} {{ 'header.demand.title' | translate }}
+				</button>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid">
+		<div class="card">
+			<div class="row">
+	
+				<filter pagecontroller="demandCtrl" pagetranslator="demand.filter."></filter>
+				
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="table-responsive">
+							<table class="table table-hover table-striped">
+								<thead>
+									<tr>
+										<th> {{'common.actions' | translate}}</th>
+										<th>
+											<a ng-click="demandCtrl.pagination.setSortColumn('demandDesc')">{{'demand.demand' | translate}}
+												<i ng-class="{true:'fa fa-angle-down', false:'fa fa-angle-up'}[demandCtrl.pagination.getListSortItens()['demandDesc']]" aria-hidden="true"></i>
+											</a>
+										</th>
+										<th>
+											<a ng-click="demandCtrl.pagination.setSortColumn('initials')">{{'demand.initial' | translate}}
+												<i ng-class="{true:'fa fa-angle-down', false:'fa fa-angle-up'}[demandCtrl.pagination.getListSortItens()['initials']]" aria-hidden="true"></i>
+											</a>
+										</th>
+										<th>
+											<a ng-click="demandCtrl.pagination.setSortColumn('active')">{{'demand.status' | translate}} 
+												<i ng-class="{true:'fa fa-angle-down', false:'fa fa-angle-up'}[demandCtrl.pagination.getListSortItens()['active']]" aria-hidden="true"></i>
+											</a>
+										</th>
+										<th>
+											<a ng-click="demandCtrl.pagination.setSortColumn('division.name')"> {{'demand.division' | translate}}
+												<i ng-class="{true:'fa fa-angle-down', false:'fa fa-angle-up'}[demandCtrl.pagination.getListSortItens()['division.name']]" aria-hidden="true"></i>
+											</a>
+										</th>
+										<th>
+											<a ng-click="demandCtrl.pagination.setSortColumn('division.initials')"> {{'demand.initial' | translate}}
+												<i ng-class="{true:'fa fa-angle-down', false:'fa fa-angle-up'}[demandCtrl.pagination.getListSortItens()['division.initials']]" aria-hidden="true"></i>
+											</a>
+										</th>
+										<th>
+											<a ng-click="demandCtrl.pagination.setSortColumn('deadline')"> {{'demand.deadline' | translate}}
+												<i ng-class="{true:'fa fa-angle-down', false:'fa fa-angle-up'}[demandCtrl.pagination.getListSortItens()['deadline']]" aria-hidden="true"></i>
+											</a>
+										</th>
+										<th>
+											<a ng-click="demandCtrl.pagination.setSortColumn('lastModifiedDate')"> {{'common.lastModifiedDate' | translate}}
+												<i ng-class="{true:'fa fa-angle-down', false:'fa fa-angle-up'}[demandCtrl.pagination.getListSortItens()['lastModifiedDate']]" aria-hidden="true"></i>
+											</a>
+										</th>
+										<th>
+											<a ng-click="demandCtrl.pagination.setSortColumn('lastModifiedBy.fullName')"> {{'common.lastLogin' | translate}}
+												<i ng-class="{true:'fa fa-angle-down', false:'fa fa-angle-up'}[demandCtrl.pagination.getListSortItens()['lastModifiedBy.fullName']]" aria-hidden="true"></i>
+											</a>
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr data-toggle="modal" data-target="#myModal" ng-repeat="demand in demandCtrl.pagination.items() | orderBy:demandDesc" >
+										<td>
+											<button class="btn btn-default btn-circle" uib-tooltip="{{ 'button.edit' | translate }}" data-ng-click="demandCtrl.openModal(demand)">
+					                            <i class="glyphicon glyphicon-pencil"></i>
+					                        </button>
+											<button class="btn btn-default btn-circle" uib-tooltip="{{'button.delete' | translate}}"  data-ng-click="demandCtrl.openModalConfirmation(demand)"> 
+												<i class="fa fa-trash-o" aria-hidden="true"></i>
+											</button>
+										</td>
+										<td> {{demand.demandDesc}}</td>
+										<td> {{demand.initials}} </td>
+										<td> {{'common.active.'+demand.active | translate}} </td>
+										<td> {{demand.division.name}}</td>
+										<td> {{demand.division.initials}} </td>
+										<td> {{demand.deadline}} </td>
+										<td> {{demand.lastModifiedDate}} </td>
+										<td> {{demand.lastModifiedBy.fullName}} </td>
+									</tr>
+								</tbody>
+							</table>
+	
+							<pagination pagecontroller="demandCtrl"></pagination>
+	
+						</div>
+					</div>
+				</div>
+	
+			</div>
+		</div>
+	</div>
+</main>

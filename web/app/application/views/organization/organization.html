@@ -1,0 +1,141 @@
+<div ng-include="'application/views/templates/header.html'"></div>
+<div ng-include="'application/views/templates/aside.html'"></div>
+<main>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 col-sm-6">
+				<h2>{{'header.organization.title' | translate}}</h2>
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				<button class="btn btn-primary btn-create" data-ng-click="organizationCtrl.openModal()">
+					<i class="fa fa-plus" aria-hidden="true"></i>
+					{{ 'common.insert' | translate }} {{ 'organization.organization' | translate }}
+				</button>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid">
+		<div class="card">
+			<div class="row">
+
+				<filter pagecontroller="organizationCtrl" pagetranslator="organization.filter."></filter>
+				<div class="filter-search filter-search-apply" ng-show="organizationCtrl.filterApplyed.length>0">
+					<span class="filter-search-label">
+						{{'common.filter' | translate}}
+						({{organizationCtrl.filterApplyed.length}})
+					</span>
+					<div class="filter-search-result">
+						<span class="filter-search-result-val" ng-repeat="val in organizationCtrl.filterApplyed">
+							{{'organization.filter.'+val.name | translate}}:
+							<strong>{{val.value}}</strong>
+							<i class="filter-search-result-remove glyphicon glyphicon-remove"
+							uib-tooltip="{{'common.filterRemove' | translate}}"
+							ng-click="organizationCtrl.deleteFilterItem($index)"></i>
+						</span>
+					</div>
+				</div>
+	
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="table-responsive">
+							<table class="table table-hover table-striped">
+								<thead>
+									<tr>
+										<th> {{'common.actions' | translate}}</th>
+										<th>
+											<a ng-click="organizationCtrl.pagination.setSortColumn('name')">{{'organization.name' | translate}}
+												<i ng-class="{true:'fa fa-angle-down', false:'fa fa-angle-up'}[organizationCtrl.pagination.getListSortItens()['name']]" aria-hidden="true"></i>
+											</a>
+										</th>
+										<th>
+											<a ng-click="organizationCtrl.pagination.setSortColumn('initials')">{{'organization.initials' | translate}}
+												<i ng-class="{true:'fa fa-angle-down', false:'fa fa-angle-up'}[organizationCtrl.pagination.getListSortItens()['initials']]" aria-hidden="true"></i>
+											</a>
+										</th>
+										<th>
+											<a ng-click="organizationCtrl.pagination.setSortColumn('regional')">{{'organization.regional' | translate}}
+												<i ng-class="{true:'fa fa-angle-down', false:'fa fa-angle-up'}[organizationCtrl.pagination.getListSortItens()['regional']]" aria-hidden="true"></i>
+											</a>
+										</th>
+										<th>
+											<a ng-click="organizationCtrl.pagination.setSortColumn('active')">{{'organization.status' | translate}}
+												<i ng-class="{true:'fa fa-angle-down', false:'fa fa-angle-up'}[organizationCtrl.pagination.getListSortItens()['active']]" aria-hidden="true"></i>
+											</a>
+										</th>
+										<th>
+											<a ng-click="organizationCtrl.pagination.setSortColumn('lastModifiedDate')"> {{'common.lastModifiedDate' | translate}}
+												<i ng-class="{true:'fa fa-angle-down', false:'fa fa-angle-up'}[organizationCtrl.pagination.getListSortItens()['lastModifiedDate']]" aria-hidden="true"></i>
+											</a>
+										</th>
+										<th>
+											<a ng-click="organizationCtrl.pagination.setSortColumn('lastModifiedBy.fullName')"> {{'common.lastLogin' | translate}}
+												<i ng-class="{true:'fa fa-angle-down', false:'fa fa-angle-up'}[organizationCtrl.pagination.getListSortItens()['lastModifiedBy.fullName']]" aria-hidden="true"></i>
+											</a>
+										</th>
+										<th>
+											{{ 'common.rowExpansion' | translate }}
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr data-toggle="modal" data-target="#myModal" ng-repeat-start="organization in organizationCtrl.pagination.items() | orderBy:name">
+										<td>
+											<button class="btn btn-default btn-circle" uib-tooltip="{{ 'button.edit' | translate }}" data-ng-click="organizationCtrl.openModal(organization)">
+					                            <i class="glyphicon glyphicon-pencil"></i>
+					                        </button>
+											<button class="btn btn-default btn-circle" uib-tooltip="{{'button.delete' | translate}}"  ng-click="organizationCtrl.openModalConfirmation(organization)"> 
+												<i class="fa fa-trash-o" aria-hidden="true"></i>
+											</button>
+										</td>
+										<td> {{organization.name}} </td>
+										<td> {{organization.initials}} </td>
+										<td> {{organization.regional}} </td>
+										<td> {{'common.active.'+organization.active | translate}} </td>
+										<td> {{organization.lastModifiedDate}} </td>
+										<td> {{organization.lastModifiedBy.fullName}} </td>
+										<td>
+											<button class="btn btn-default btn-circle" uib-tooltip="{{ 'common.rowExpansion' | translate }}" data-ng-click="organizationCtrl.expandSelected(organization)">
+												<i ng-if="!organization.expanded" class="glyphicon glyphicon-chevron-down" aria-hidden="true"></i>
+												<i ng-if="organization.expanded" class="glyphicon glyphicon-chevron-up" aria-hidden="true"></i>
+											</button>
+										</td>
+									</tr>
+									<!-- FONTE DE CONSULTA: http://johnculviner.com/expandable-collapsable-detail-in-a-table-with-angular-js/ -->
+									<tr ng-if="organization.expanded" ng-repeat-end="">
+										<td colspan="6">
+											<div class="col-xs-12 col-sm-6">
+												<div class="col-xs-6 text-right"><b>{{'organization.street' | translate}}: </b></div>
+												<div>{{organization.address.street}}</div>
+												<div class="col-xs-6 text-right"><b>{{'organization.number' | translate}}: </b></div>
+												<div>{{organization.address.number}} {{organization.address.complement}}</div>
+												<div class="col-xs-6 text-right"> <b>{{'organization.city' | translate}}: </b></div>
+												<div>{{organization.address.city}}</div>
+												<div class="col-xs-6 text-right"> <b>{{'organization.district' | translate}}: </b></div>
+												<div>{{organization.address.district}}</div>
+											</div>
+											<div class="col-xs-12 col-sm-6">
+												<div class="col-xs-6 text-right"> <b>{{'organization.state' | translate}}: </b></div>
+												<div>{{organization.address.state}} </div>
+												<div class="col-xs-6 text-right"> <b>{{'organization.zipCode' | translate}}: </b></div>
+												<div>{{organization.address.zipCode}} </div>
+												<div ng-repeat="phone in organization.phones">
+													<div class="col-xs-6 text-right" ng-if="$index == 0"><b>{{'organization.phone' | translate}}: </b></div>
+													<div class="col-xs-6 text-right" ng-if="$index > 0">&nbsp;</div><div>{{phone.type}}: {{phone.number}} </div>
+												</div>
+											</div>                             
+						                </td>                                  
+									</tr>
+								</tbody>
+							</table>
+	
+							<pagination pagecontroller="organizationCtrl"></pagination>
+	
+						</div>
+					</div>
+				</div>
+	
+			</div>
+		</div>
+	</div>
+</main>

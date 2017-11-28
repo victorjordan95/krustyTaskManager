@@ -1,0 +1,30 @@
+<form name="form">
+	<div class="modal-header">
+		<button type="button" class="close" data-ng-click="businessDeleteCtrl.cancel()">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	
+		<h4 class="modal-title">
+			{{'common.confirmDelete' | translate}}
+		</h4>
+	</div>
+	<div class="modal-body">
+		<p>
+			{{'common.alert.messageRemove' | translate}} 
+			<strong>
+				{{businessDeleteCtrl.businessElement.name}}
+			</strong>
+		</p>
+		<p>{{'common.alert.confirmRemove' | translate}} </p>
+	</div>
+	{{businessElement.id}}
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal" data-ng-click="businessDeleteCtrl.cancel()">
+			{{'button.cancel' | translate}}
+		</button>
+		<button type="button" class="btn btn-danger" data-dismiss="modal" data-ng-click="businessDeleteCtrl.delete()">
+			<i class="glyphicon glyphicon-trash"></i>
+			{{'button.delete' | translate}}
+		</button>
+	</div>
+</form>
