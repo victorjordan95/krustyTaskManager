@@ -1,0 +1,118 @@
+
+.VYMape {
+    background: #fff;
+    bottom: 0;
+    direction: ltr;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+}
+
+.main {
+    z-index: 2;
+    .login-form {
+        color: #424242;
+        padding: 0 15px;
+    }
+    .full-height {
+        min-height: calc(100vh);
+    }
+    .login-logo {
+        background-color: #f8971a;
+    }
+    .img-flag-login {
+        cursor: pointer;
+        width: 30px;
+        margin: 10px 5px;
+    }
+
+    .form-box {
+        align-items: center;
+        display: flex;
+        flex-flow: row;
+        .alert-danger {
+            background-color: #f2dede;
+            border-color: #ebccd1;
+            color: #a94442;
+            margin: 8px 0;
+        }
+        .form-group {
+            margin-bottom: 8px;
+            .input-group {
+                margin: 0 auto;
+            }
+        }
+    }
+    input[type="submit"] {
+        background-color: $green;
+        border: 0px solid #fff;
+        border-radius: 3px;
+        color: #eee;
+        display: block;
+        font-weight: bold;
+        margin: 8px auto;
+        opacity: 1;
+        transition: background-color 1s, color .5s;
+        text-transform: uppercase;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .main {
+        .form-box {
+            .alert-danger {
+                background-color: #f2dede;
+                border-color: #ebccd1;
+                color: #a94442;
+                float: none;
+                margin: 8px auto;
+                width: 50%;
+            }
+            .form-group {
+                margin-bottom: 8px;
+            }
+        }
+        input[type="submit"] {
+            float: none;
+            margin: 8px auto;
+            transition: background-color 1s, color .5s;
+            width: 50%;
+            &:hover {
+                background-color: darken($green, 5%);
+                border-color: transparent;
+                color: #fff;
+            }
+        }
+        .forget-password {
+            color: #fff;
+            padding: 9px 0;
+            text-align: center;
+            a {
+                color: #fff;
+                text-decoration: underline;
+            }
+        }
+        .form {
+            a {
+                color: #fff;
+                font-weight: bolder;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .main {
+        .form-box {
+            .alert-danger {
+                width: 25%;
+            }
+        }
+        input[type="submit"] {
+            width: 25%;
+        }
+    }
+}
