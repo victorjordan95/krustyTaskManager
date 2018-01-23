@@ -1480,15 +1480,19 @@ hr.form-hr {
   width: 95%; }
 
 .VYMape {
-  background: #fff;
-  bottom: 0;
-  direction: ltr;
-  left: 0;
-  overflow: hidden;
-  position: absolute;
-  right: 0;
-  top: 0;
-  z-index: 1; }
+  display: none; }
+  @media screen and (min-width: 1024px) {
+    .VYMape {
+      background: #fff;
+      bottom: 0;
+      direction: ltr;
+      display: block;
+      left: 0;
+      overflow: hidden;
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: 1; } }
 
 .main {
   z-index: 2; }

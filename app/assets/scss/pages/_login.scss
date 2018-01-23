@@ -1,14 +1,17 @@
-
 .VYMape {
-    background: #fff;
-    bottom: 0;
-    direction: ltr;
-    left: 0;
-    overflow: hidden;
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 1;
+    display: none;
+    @media screen and (min-width: 1024px) {
+        background: #fff;
+        bottom: 0;
+        direction: ltr;
+        display: block;
+        left: 0;
+        overflow: hidden;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 1;
+    }
 }
 
 .main {
@@ -28,7 +31,6 @@
         width: 30px;
         margin: 10px 5px;
     }
-
     .form-box {
         align-items: center;
         display: flex;
