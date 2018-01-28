@@ -30,10 +30,6 @@
                     
                     commonsService.success('Paciente removido com sucesso!');
 					location.reload();
-                    // Order = $resource("http://localhost:8080/theCemDente/paciente/getall");
-                    // console.log(Order);
-					// $timeout( function(){
-					// }, 500 );
                 })
                 .catch(function (error) {
                     if (error.objeto.data.exception.includes('LinkedExpcetion')) {

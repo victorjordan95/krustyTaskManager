@@ -3,9 +3,14 @@
 		.module('ktm')
 		.service('CrudService', ['RestService', function (rest) {
 
-			const url = "http://localhost:8080";
+			const url = "http://krusty-api.herokuapp.com";
 			
 			return {
+				users : {
+					findAll : function(){
+						return rest.get(url)
+					}
+				},
 				user: {
 					findAll: function (filterData) {
 						return rest.get('/ktm/user/?' + filterData);

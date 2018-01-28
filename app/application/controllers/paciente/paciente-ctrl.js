@@ -3,7 +3,7 @@
 		.module('ktm')
 		.controller('PacienteCtrl', PacienteCtrl);
 	
-	function PacienteCtrl($scope, CrudService,DTOptionsBuilder, DTColumnDefBuilder, $httpParamSerializer, $location, $uibModal) {
+	function PacienteCtrl($scope, CrudService,DTOptionsBuilder, DTColumnDefBuilder, $httpParamSerializer, $location, $uibModal, commonsService) {
 		
 		var self = this;
 
@@ -35,8 +35,7 @@
 			DTColumnDefBuilder.newColumnDef(0).notSortable().withOption('width', '100px'),
 		];
 
-		$scope.dtOptions = DTOptionsBuilder.newOptions()
-		.withLanguage(language);
+		$scope.dtOptions = DTOptionsBuilder.newOptions().withLanguage(language);
 
         //Modal
 		self.openModal = function(paciente) {
@@ -71,12 +70,13 @@
 		};
 		
 		$scope.load = function(){
-			CrudService.paciente.findAll()
+			CrudService.users.findAll()
 			.then(function(response){
-				$scope.patients = response.data;
+				$scope.users = response.data;
 			})
 			.catch(function (error) {
-				$scope.error(error.message);
+				commonsService.error('Erro ao obter os dados');
+				// $scope.error(error.message);
 			});
 		};
     	
@@ -94,5 +94,5 @@
         
 	};
 	
-	PacienteCtrl.$inject = ['$scope', 'CrudService','DTOptionsBuilder','DTColumnDefBuilder', '$httpParamSerializer', '$location', '$uibModal'];
+	PacienteCtrl.$inject = ['$scope', 'CrudService','DTOptionsBuilder','DTColumnDefBuilder', '$httpParamSerializer', '$location', '$uibModal', 'commonsService'];
 })();
