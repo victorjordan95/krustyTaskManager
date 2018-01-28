@@ -26,13 +26,13 @@
 
 		$scope.navbarFields = [
 			{ "name":"Perfil", "route" : "perfil",  "icon" : "fa-user"},
-			{ "name":"Colocação", "route" : "rank", "icon" : "fa-trophy"},
+			{ "name":"Rank", "route" : "rank", "icon" : "fa-trophy"},
 			{ "name":"Tarefas", "route" : "tarefas", "icon" : "fa-clipboard"},
 			{ "name":"Paciente", "route" : "paciente",  "icon" : "fa-users"},
 		];
 
 		$scope.selectedMenu = function(navbarFields){
-			var menu = navbarFields.name;
+			var menu = navbarFields.name.toLowerCase();
 			if (window.location.hash.split("#/")[1] == menu) {
 				return 'sidebar-user sidebar-links active';
 			}

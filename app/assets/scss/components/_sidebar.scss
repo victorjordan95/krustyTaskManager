@@ -174,12 +174,12 @@
         background-color: $primary;
         border-left : 5px solid transparent;
         &.active {
-            background: rgba(33, 115, 69, 0.2);
-            border-left: 5px solid $text-color;
+            background-color: rgba(238, 238, 238, 0.3);
+            border-left: 4px solid $light-green;
         }
         &:hover {
-            background: rgba(33, 115, 69, 0.2);
-            border-left: solid 5px $text-color;
+            background-color: rgba(238, 238, 238, 0.3);
+            border-left: 4px solid $light-green;
         }
     }
 }
