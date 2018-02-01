@@ -3,7 +3,7 @@
 		.module('ktm')
 		.service('CrudService', ['RestService', function (rest) {
 
-			const url = "http://krusty-api.herokuapp.com";
+			const url = "https://krusty-api.herokuapp.com";
 			
 			return {
 				users : {
