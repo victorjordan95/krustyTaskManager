@@ -8,7 +8,7 @@
 			return {
 				users : {
 					findAll : function(){
-						return rest.get(url)
+						return rest.get(`${url}/user/1`)
 					}
 				},
 				user: {
