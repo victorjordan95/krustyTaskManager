@@ -35,7 +35,7 @@
 							</tr>
 						</tfoot>
 						<tbody>
-							<tr ng-repeat="patient in users">
+							<tr ng-repeat="user in users">
 								<td>
 									<button class="btn btn-default btn-circle" uib-tooltip="Editar" ng-click="pacienteCtrl.openModal(patient)">
 										<i class="fa fa-pencil" aria-hidden="true"></i>
@@ -44,7 +44,7 @@
 										<i class="fa fa-trash-o" aria-hidden="true"></i>
 									</button>
 								</td>
-								<td>{{patient.nome}}</td>
+								<td>{{user.name}}</td>
 							</tr>
 						</tbody>
 					</table>

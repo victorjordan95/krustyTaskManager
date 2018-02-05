@@ -25,10 +25,10 @@
 		};
 
 		$scope.navbarFields = [
+			{ "name":"Usuários", "route" : "users",  "icon" : "fa-users"},
 			{ "name":"Perfil", "route" : "perfil",  "icon" : "fa-user"},
 			{ "name":"Rank", "route" : "rank", "icon" : "fa-trophy"},
 			{ "name":"Tarefas", "route" : "tarefas", "icon" : "fa-clipboard"},
-			{ "name":"Paciente", "route" : "paciente",  "icon" : "fa-users"},
 		];
 
 		$scope.selectedMenu = function(navbarFields){

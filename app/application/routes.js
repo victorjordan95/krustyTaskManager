@@ -30,14 +30,14 @@
         };
         states.push(login);
         
-        var paciente = {
-            name: 'paciente',
-            url: '/paciente',
-            controller: 'PacienteCtrl',
-            controllerAs: 'pacienteCtrl',
-            templateUrl: 'application/views/paciente/paciente.html'
+        var users = {
+            name: 'users',
+            url: '/users',
+            controller: 'UsersCtrl',
+            controllerAs: 'usersCtrl',
+            templateUrl: 'application/views/users/users.html'
         };
-        states.push(paciente);
+        states.push(users);
         
         var rank = {
             name: 'Rank',

@@ -1,12 +1,12 @@
 (function () {
 	angular
 		.module('ktm')
-		.controller('PacienteModalController', PacienteModalController);
-	function PacienteModalController($scope, paciente, CrudService, $uibModalInstance, commonsService) {
+		.controller('UsersModalController', UsersModalController);
+	function UsersModalController($scope, users, CrudService, $uibModalInstance, commonsService) {
 
 		var self = this;
-		$scope.pacienteModal = {};
-		$scope.pacienteModal.active = '1';
+		$scope.usersModal = {};
+		$scope.usersModal.active = '1';
 
 		$scope.dtInstance = {};
 
@@ -50,7 +50,7 @@
 		}
 
 		self.load = function(){
-			CrudService.paciente.findAll()
+			CrudService.users.findAll()
 			.then(function(response){
 				$scope.patients = response.data;
 			})
@@ -60,22 +60,22 @@
 		};
 
 		$scope.save = function () {
-			$scope.pacienteModal.estado = $scope.selected_state.estado;
+			$scope.usersModal.estado = $scope.selected_state.estado;
 
-			return CrudService.paciente.save($scope.pacienteModal)
+			return CrudService.users.save($scope.usersModal)
 				.then(function (response) {
 
-					commonsService.success('Paciente criado com sucesso!');
+					commonsService.success('Users criado com sucesso!');
 					$uibModalInstance.close(response.data);
 					location.reload();
 				})
 				.catch(function (error) {
 					if (error.objeto.data.exception.includes('EmptyOrNullValueException')) {
-						commonsService.error('paciente.alert.emptyOrNullValueException');
+						commonsService.error('users.alert.emptyOrNullValueException');
 						return;
 					} else {
 						if (error.objeto.data.exception.includes('UniqueConstraintException')) {
-							commonsService.error('paciente.alert.uniqueConstraintException.' + error.objeto.data.message);
+							commonsService.error('users.alert.uniqueConstraintException.' + error.objeto.data.message);
 							return;
 						}
 					}
@@ -84,17 +84,17 @@
 
 		var init = function() {
 			//To preserve original organization.
-			$scope.pacienteModal = angular.copy(paciente);
+			$scope.usersModal = angular.copy(users);
 			//new / edit
-			if(_.isUndefined($scope.pacienteModal)){
+			if(_.isUndefined($scope.usersModal)){
 				console.log('creating');
 				console.log($scope.states[0]);
 		        $scope.selected_state = $scope.states[0];
 			}else{
 				_.each($scope.states, function(state) {
-					//$scope.pacienteModal.estado = $scope.selected_state.estado;
-					if($scope.pacienteModal.estado == state.estado){
-						console.log('entrou no if ', $scope.pacienteModal.estado);
+					//$scope.usersModal.estado = $scope.selected_state.estado;
+					if($scope.usersModal.estado == state.estado){
+						console.log('entrou no if ', $scope.usersModal.estado);
 						console.log(state)
 						$scope.selected_state = state;
 					}
@@ -105,5 +105,5 @@
 		init();
 	};
 
-	PacienteModalController.$inject = ['$scope', 'paciente', 'CrudService', '$uibModalInstance', 'commonsService'];
+	UsersModalController.$inject = ['$scope', 'users', 'CrudService', '$uibModalInstance', 'commonsService'];
 })();
