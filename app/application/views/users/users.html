@@ -26,12 +26,18 @@
 							<tr>
 								<th>Ação</th>
 								<th>Nome</th>
+								<th>CPF</th>
+								<th>Telefone</th>
+								<th>E-mail</th>
 							</tr>
 						</thead>
 						<tfoot>
 							<tr>
 								<th>Ação</th>
 								<th>Nome</th>
+								<th>CPF</th>
+								<th>Telefone</th>
+								<th>E-mail</th>
 							</tr>
 						</tfoot>
 						<tbody>
@@ -44,7 +50,10 @@
 										<i class="fa fa-trash-o" aria-hidden="true"></i>
 									</button>
 								</td>
-								<td>{{user.name}}</td>
+								<td>{{user.user.name}}</td>
+								<td>{{user.user.cpf}}</td>
+								<td>{{user.user.contactDetails.phone}}</td>
+								<td>{{user.user.contactDetails.email}}</td>
 							</tr>
 						</tbody>
 					</table>
