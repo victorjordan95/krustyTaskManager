@@ -12,15 +12,6 @@
 
         var states = [];
 
-		var home = {
-			name: 'home',
-            url: '/home',
-            controller: 'HomeCtrl',
-            controllerAs: 'homectrl',
-            templateUrl: 'application/views/home/home.html',
-		};
-		states.push(home);
-
         var login = {
             name: 'login',
             url: '/',
@@ -29,6 +20,24 @@
             templateUrl: 'application/views/login/login.html'
         };
         states.push(login);
+
+		var home = {
+			name: 'home',
+            url: '/home',
+            controller: 'HomeCtrl',
+            controllerAs: 'homectrl',
+            templateUrl: 'application/views/home/home.html',
+		};
+        states.push(home);
+        
+        var changePassword = {
+            name: 'changePassword',
+            url: '/alterar-senha',
+            controller: 'ChangePasswordCtrl',
+            controllerAs: 'changePasswordctrl',
+            templateUrl: 'application/views/changePassword/changePassword.html'
+        };
+        states.push(changePassword);
         
         var users = {
             name: 'users',
