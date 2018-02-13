@@ -10,7 +10,7 @@ O projeto está dividido em módulos:
 
 - Application: Módulo responsável por conter os arquivos do AngularJS, como controllers, directives, services, views.
 - Assets: Módulo responsável por conter os arquivos estáticos da aplicação, como CSS, fontes, imagens e também arquivos do 
-[Bootstrap](https://en.wikipedia.org/wiki/Bootstrap_(front-end_framework) "_Bootstrap_")
+[Bootstrap](https://en.wikipedia.org/wiki/Bootstrap_(front-end_framework) "Bootstrap")
 
 ### Como rodar a aplicação
 
@@ -25,7 +25,7 @@ npm install
 Ao instalar as dependências, você deverá rodar um servidor, para que a aplicação possa funcionar corretamente, 
 pode ser feito com Node,Gulp ou outro a sua escolha.
 
-Para facilitar, usaremos [Gulp](https://gulpjs.com/ "_Gulp_") para servir como servidor.
+Para facilitar, usaremos [Gulp](https://gulpjs.com/ "Gulp") para servir como servidor.
 
 Instale o Gulp com o seguinte comando
 
@@ -40,3 +40,9 @@ gulp
 ```
 
 Se tudo ocorrer bem, a aplicação irá abrir em seu navegador!
+
+### Aplicação online
+
+Está implementado nesse repositório o deploy automático com o [Heroku](https://www.heroku.com/what "Heroku"), sendo assim, qualquer alteração feita nele, refletirá automaticamente na aplicação.
+
+Você pode acessar a aplicação clicando [aqui](krustytaskmanager.herokuapp.com "Krusty Task Manager").
