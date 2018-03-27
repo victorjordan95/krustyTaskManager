@@ -41,7 +41,7 @@
         
         var users = {
             name: 'users',
-            url: '/users',
+            url: '/usuarios',
             controller: 'UsersCtrl',
             controllerAs: 'usersCtrl',
             templateUrl: 'application/views/users/users.html'
@@ -55,7 +55,16 @@
             controllerAs: 'rankCtrl',
             templateUrl: 'application/views/rank/rank.html'
         };
-        states.push(rank); 
+        states.push(rank);
+        
+        var projects = {
+            name: 'Projetos',
+            url: '/projetos',
+            controller: 'ProjectsCtrl',
+            controllerAs: 'projectsCtrl',
+            templateUrl: 'application/views/projects/projects.html'
+        };
+        states.push(projects); 
 
         var tasks = {
             name: 'Tarefas',

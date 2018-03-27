@@ -1,14 +1,14 @@
 (function () {
 	angular
 		.module('ktm')
-		.controller('UsersCtrl', UsersCtrl);
+		.controller('ProjectsCtrl', ProjectsCtrl);
 
-	function UsersCtrl($scope, CrudService, DTOptionsBuilder, DTColumnDefBuilder, $httpParamSerializer, $location, $uibModal, commonsService, DataTableService) {
+	function ProjectsCtrl($scope, CrudService, DTOptionsBuilder, DTColumnDefBuilder, $httpParamSerializer, $location, $uibModal, commonsService, DataTableService) {
 		// const url = 'https://chatbotbycasseb.herokuapp.com/setTransaction';
 		const parameter = {
 			"interactors": [{
 				"recordAction": "QUERY_ADD",
-				"entityName": "DJ"
+				"entityName": "Projeto"
 			}]
 		};
 		var self = this;
@@ -34,7 +34,6 @@
 
 		//Immediately-invoked function expression (IIFE)
 		(function () {
-			console.log('IIFE');
 			CrudService.tasks.findAll(parameter)
 				.then(function (response) {
 					var tasks = response.data;
@@ -46,32 +45,32 @@
 		})();
 
 		//Modal
-		self.openModal = function (users) {
+		self.openModal = function (projects) {
 			var modalInstance = $uibModal.open({
 				animation: true,
-				templateUrl: 'application/views/users/modal/users-modal.html',
+				templateUrl: 'application/views/projects/modal/projects-modal.html',
 				size: 'md',
 				controller: 'UsersModalController',
 				controllerAs: '$ctrl',
 				resolve: {
-					users: function () {
-						return users;
+					projects: function () {
+						return projects;
 					}
 				}
 			});
 		};
 
 		//Modal
-		self.openModalConfirmation = function (users) {
+		self.openModalConfirmation = function (projects) {
 			var modalInstance = $uibModal.open({
 				animation: true,
-				templateUrl: 'application/views/users/modal/confirmation-modal.html',
+				templateUrl: 'application/views/projects/modal/confirmation-modal.html',
 				size: 'md',
 				controller: 'UsersConfirmationController',
-				controllerAs: 'usersConfirmationCtrl',
+				controllerAs: 'projectsConfirmationCtrl',
 				resolve: {
-					users: function () {
-						return users;
+					projects: function () {
+						return projects;
 					}
 				}
 			});
@@ -79,10 +78,10 @@
 
 		//Remove
 		self.remove = function (id) {
-			CrudService.users.remove(id)
+			CrudService.projects.remove(id)
 				.then(function (response) {
 					self.load();
-					commonsService.success('users.alert.success');
+					commonsService.success('projects.alert.success');
 				});
 		}
 
@@ -90,5 +89,5 @@
 
 	};
 
-	UsersCtrl.$inject = ['$scope', 'CrudService', 'DTOptionsBuilder', 'DTColumnDefBuilder', '$httpParamSerializer', '$location', '$uibModal', 'commonsService', 'DataTableService'];
+	ProjectsCtrl.$inject = ['$scope', 'CrudService', 'DTOptionsBuilder', 'DTColumnDefBuilder', '$httpParamSerializer', '$location', '$uibModal', 'commonsService', 'DataTableService'];
 })();

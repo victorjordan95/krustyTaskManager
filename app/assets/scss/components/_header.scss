@@ -1,5 +1,5 @@
 .header {
-	background-color: $primary;
+	background-color: #FAFAFA;
   	box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.2);
 	height: $header-height;
 	@include user-select();
@@ -7,10 +7,12 @@
 	top: 0;
 	width: 100%;
 	z-index: 10;
+	@media (min-width: 768px) {
+        padding-left: $header-height;
+    }
 
 	.header-logo {
-		//background: url(../img/embraer-logo.png) no-repeat 18px 15px;
-		color: $text-color;
+		color: $primary;
 		display: block;
 		float: left;
 		font-size: 30px;
@@ -73,7 +75,7 @@
 	}
 
 	.header-user {
-		color: $text-color;
+		color: $primary;
 		display: block;
 		float: left;
 		font-size: 20px;
@@ -110,7 +112,7 @@
 			display: none;
 
 			@media (min-width: $screen-tablet-min) {
-			    color: $text-color;
+			    color: $primary;
 			    display: block;
 			    float: left;
 				font-size: 20px;

@@ -69,16 +69,39 @@
 				}
 			});
 		};
-		
-		// $scope.load = function(){
-		// 	CrudService.tasks.findAll()
-		// 	.then(function(response){
-		// 		$scope.patients = response.data;
-		// 	})
-		// 	.catch(function (error) {
-		// 		$scope.error(error.message);
-		// 	});
-		// };
+
+		const parameter = {
+			"interactors": [
+				{
+					"recordAction": "QUERY_ADD",
+					"entityName": "DJ"
+				}
+			]
+		};
+	
+		$scope.load = function(){
+			CrudService.tasks.findAll(parameter)
+			.then(function(response){
+				$scope.tasks = response.data;
+				console.log($scope.tasks);
+			})
+			.catch(function (error) {
+				$scope.error(error.message);
+			});
+		}();
+
+		$scope.pretty = function(){
+			$scope.load();
+			console.log($scope.tasks);
+			CrudService.tasks.findAllPretty($scope.tasks)
+			.then(function(response){
+				$scope.tasksPretty = response.data;
+				console.log($scope.tasksPretty);
+			})
+			.catch(function (error) {
+				$scope.error(error.message);
+			});
+		};
     	
     	//Remove
         self.remove = function (id) {
@@ -89,7 +112,7 @@
     		});
 		}
 		
-		// $scope.load();
+		
         
         
 	};

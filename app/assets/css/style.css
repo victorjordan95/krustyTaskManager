@@ -266,7 +266,7 @@ textarea {
   color: #fff; }
 
 .header {
-  background-color: #009688;
+  background-color: #FAFAFA;
   box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.2);
   height: 60px;
   -webkit-touch-callout: none;
@@ -279,8 +279,11 @@ textarea {
   top: 0;
   width: 100%;
   z-index: 10; }
+  @media (min-width: 768px) {
+    .header {
+      padding-left: 60px; } }
   .header .header-logo {
-    color: #fff;
+    color: #009688;
     display: block;
     float: left;
     font-size: 30px;
@@ -323,7 +326,7 @@ textarea {
         .header .navbar-right .dropdown-menu a img {
           margin-right: 6px; }
   .header .header-user {
-    color: #fff;
+    color: #009688;
     display: block;
     float: left;
     font-size: 20px;
@@ -348,7 +351,7 @@ textarea {
       display: none; }
       @media (min-width: 768px) {
         .header .header-icons .header-icons-action {
-          color: #fff;
+          color: #009688;
           display: block;
           float: left;
           font-size: 20px;
@@ -369,7 +372,7 @@ textarea {
   left: 0;
   top: 0;
   overflow: auto;
-  padding-top: 60px;
+  padding-top: 0;
   transition: transform ease 0.2s, width 0.25s linear;
   -moz-transform: translate(-238px, 0);
   -o-transform: translate(-238px, 0);
@@ -383,7 +386,7 @@ textarea {
   -ms-user-select: none;
   user-select: none;
   width: 210px;
-  z-index: 9; }
+  z-index: 10; }
   #sidebar.active {
     -moz-transform: translate(0, 0);
     -o-transform: translate(0, 0);
@@ -413,27 +416,30 @@ textarea {
     font-family: 'Glyphicons Halflings';
     color: #fff;
     content: "\e079";
-    position: absolute;
     right: 20px;
     top: 17px;
     transition: transform 0.2s ease; }
   #sidebar .sidebar-menu .sidebar-link {
-    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
     color: #fff;
     cursor: pointer;
     display: block;
     font-weight: 300;
     position: relative;
-    padding: 30px 20px 30px 0;
+    padding: 16px 0;
+    text-align: center;
     text-decoration: none;
     transition: border-left 0.4s cubic-bezier(0.46, 0.03, 0.52, 0.96); }
     #sidebar .sidebar-menu .sidebar-link i {
       color: #fff;
       font-size: 26px; }
+    #sidebar .sidebar-menu .sidebar-link .sidebar-fieldname {
+      color: #fff;
+      display: block;
+      font-size: 10px; }
     #sidebar .sidebar-menu .sidebar-link .sidebar-icon {
       font-size: 18px;
       text-align: center;
-      position: absolute;
       left: 21px;
       width: 25px;
       height: 20px;
@@ -499,7 +505,6 @@ textarea {
       margin: auto;
       left: 10px;
       padding: 0;
-      position: absolute;
       top: 8px;
       width: 34px; }
     #sidebar .sidebar-user.sidebar-dropdown .sidebar-link {
@@ -524,8 +529,7 @@ textarea {
         -webkit-transform: rotate(-180deg);
         transform: rotate(-180deg); }
   #sidebar .sidebar-links {
-    background-color: #009688;
-    border-left: 5px solid transparent; }
+    background-color: #009688; }
     #sidebar .sidebar-links.active {
       background-color: rgba(238, 238, 238, 0.3);
       border-left: 4px solid #b2dfdb; }
