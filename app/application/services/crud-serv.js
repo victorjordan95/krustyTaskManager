@@ -11,6 +11,15 @@
 						return rest.get(`${url}/users/`)
 					}
 				},
+				tasks : {
+					findAll : function(parameters) {
+						return rest.post('https://chatbotbycasseb.herokuapp.com/setTransaction', JSON.stringify(parameters));
+					},
+					findAllPretty : function(parameters){
+						return rest.post('https://chatbotbycasseb.herokuapp.com/parseToEasyRecord', JSON.stringify(parameters));
+					}
+
+				},
 				user: {
 					findAll: function (filterData) {
 						return rest.get('/ktm/user/?' + filterData);
