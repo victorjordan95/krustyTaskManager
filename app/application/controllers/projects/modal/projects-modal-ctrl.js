@@ -2,11 +2,11 @@
 	angular
 		.module('ktm')
 		.controller('ProjectsModalController', ProjectsModalController);
-	function ProjectsModalController($scope, users, CrudService, $uibModalInstance, commonsService) {
+	function ProjectsModalController($scope, projects, CrudService, $uibModalInstance, commonsService) {
 
 		var self = this;
-		$scope.usersModal = {};
-		$scope.usersModal.active = '1';
+		$scope.projectModal = {};
+		$scope.projectModal.active = '1';
 
 		$scope.dtInstance = {};
 
@@ -41,6 +41,10 @@
 			{ value: 'TO', estado: 'Tocantins' }
 		];
 
+		$scope.clients = [
+			{ cliente : "Cliente|Iniciativa|1" }
+		];
+
 		$scope.cancel = function () {
 			$uibModalInstance.close();
 		};
@@ -50,7 +54,7 @@
 		}
 
 		self.load = function(){
-			CrudService.users.findAll()
+			CrudService.projects.findAll()
 			.then(function(response){
 				$scope.patients = response.data;
 			})
@@ -60,22 +64,36 @@
 		};
 
 		$scope.save = function () {
-			$scope.usersModal.estado = $scope.selected_state.estado;
-
-			return CrudService.users.save($scope.usersModal)
+			debugger;
+			$scope.projectModal.cliente = $scope.selected_client.cliente;
+			var project = {
+				"interactors":[
+					{
+						"recordAction" : "ADD",
+						"entityName" : "Projeto",
+						"fieldAndValue" : {
+							"Nome" : $scope.projectModal.nome,
+							"Custo" : $scope.projectModal.custo,
+							"Cliente" : $scope.projectModal.cliente,
+							"Descricao" : $scope.projectModal.descricao,
+							"Requisitos" : $scope.projectModal.requisitos
+						}
+					}	
+				]
+			};
+			return CrudService.projects.save(project)
 				.then(function (response) {
-
 					commonsService.success('Users criado com sucesso!');
 					$uibModalInstance.close(response.data);
 					location.reload();
 				})
 				.catch(function (error) {
 					if (error.objeto.data.exception.includes('EmptyOrNullValueException')) {
-						commonsService.error('users.alert.emptyOrNullValueException');
+						commonsService.error('projects.alert.emptyOrNullValueException');
 						return;
 					} else {
 						if (error.objeto.data.exception.includes('UniqueConstraintException')) {
-							commonsService.error('users.alert.uniqueConstraintException.' + error.objeto.data.message);
+							commonsService.error('projects.alert.uniqueConstraintException.' + error.objeto.data.message);
 							return;
 						}
 					}
@@ -84,17 +102,17 @@
 
 		var init = function() {
 			//To preserve original organization.
-			$scope.usersModal = angular.copy(users);
+			$scope.projectModal = angular.copy(projects);
 			//new / edit
-			if(_.isUndefined($scope.usersModal)){
+			if(_.isUndefined($scope.projectModal)){
 				console.log('creating');
 				console.log($scope.states[0]);
 		        $scope.selected_state = $scope.states[0];
 			}else{
 				_.each($scope.states, function(state) {
-					//$scope.usersModal.estado = $scope.selected_state.estado;
-					if($scope.usersModal.estado == state.estado){
-						console.log('entrou no if ', $scope.usersModal.estado);
+					//$scope.projectsModal.estado = $scope.selected_state.estado;
+					if($scope.projectModal.estado == state.estado){
+						console.log('entrou no if ', $scope.projectModal.estado);
 						console.log(state)
 						$scope.selected_state = state;
 					}
@@ -105,5 +123,5 @@
 		init();
 	};
 
-	ProjectsModalController.$inject = ['$scope', 'users', 'CrudService', '$uibModalInstance', 'commonsService'];
+	ProjectsModalController.$inject = ['$scope', 'projects', 'CrudService', '$uibModalInstance', 'commonsService'];
 })();

@@ -1,72 +1,43 @@
 <form name="form" novalidate data-ng-submit="save()">
     <div class="modal-header">
-        <h2 class="modal-title">
-            {{ (pacienteModal.id == null ? 'common.insert' : 'common.edit') | translate }} usuário
-        </h2>
+        <h3 class="modal-title">
+            {{ (projectModal.id == null ? 'Inserir' : 'Editar') | translate }} projeto
+        </h3>
     </div>
     <div class="modal-body">
         <div class="row">
+            <div class="form-group col-xs-12 col-md-6">
+                <label>Nome</label>
+                <input name="nome" type="text" placeholder="Nome" data-ng-model="projectModal.nome" maxlength="50" class="form-control" autofocus="autofocus"
+                    required>
+            </div>
+            <div class="form-group col-xs-12 col-md-6">
+                <label>Custo</label>
+                <input name="nome" type="text" placeholder="Custo do Projeto" data-ng-model="projectModal.custo" maxlength="50" class="form-control"
+                    mask="123?4?" restrict="reject" limit="false" required>
+            </div>
+        </div>
+        <div class="row">
             <div class="form-group col-xs-12">
-                <label>
-                    <strong>Nome</strong>
-                </label>
-                <input name="nome" type="text" placeholder="Nome" data-ng-model="pacienteModal.nome" maxlength="50" class="form-control"
-                    autofocus="autofocus" required>
+                <label>Cliente</label>
+                <select ng-model="selected_client" ng-options="client as client.cliente for client in clients" class="form-control">           
+                </select>
             </div>
-            <div class="form-group col-xs-12 col-md-6">
-                <label>
-                    <strong>RG</strong>
-                </label>
-                <input name="rg" type="text" mask="99.999.999-*" placeholder="RG" data-ng-model="pacienteModal.rg" maxlength="20" class="form-control"
-                    required>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <label>Descrição</label>
+                    <textarea class="form-control" placeholder="Descrição" data-ng-model="projectModal.descricao" required></textarea>
+                </div>
             </div>
-            <div class="form-group col-xs-12 col-md-6">
-                <label>
-                    <strong>CPF</strong>
-                </label>
-                <input name="cpf" type="text" mask="999.999.999-99" placeholder="CPF" data-ng-model="pacienteModal.cpf" maxlength="20" class="form-control"
-                    required>
-            </div>
-            <div class="form-group col-xs-12 col-md-6">
-                <label>
-                    <strong>Endereço</strong>
-                </label>
-                <input name="endereco" type="text" restrict="reject" placeholder="Endereço" data-ng-model="pacienteModal.endereco" class="form-control"
-                    required>
-            </div>
-            <div class="form-group col-xs-12 col-md-6">
-                <label>
-                    <strong>Nº</strong>
-                </label>
-                <input name="numero" type="tel" restrict="reject" placeholder="Endereço" data-ng-model="pacienteModal.numero" class="form-control"
-                    required>
-            </div>
-            <div class="form-group col-xs-12 col-md-6">
-                <label>
-                    <strong>Bairro</strong>
-                </label>
-                <input name="bairro" type="text" restrict="reject" placeholder="Bairro" data-ng-model="pacienteModal.bairro" class="form-control"
-                    required>
-            </div>
-            <div class="form-group col-xs-12 col-md-6">
-                <label>
-                    <strong>Cidade</strong>
-                </label>
-                <input name="cidade" type="text" restrict="reject" placeholder="Cidade" data-ng-model="pacienteModal.cidade" class="form-control"
-                    required>
-            </div>
-            <div class="form-group col-xs-12">
-                <label>
-                    <strong>Estado</strong>
-                </label>
-                <!-- <select>
-                    <option ng-value="state.value" data-ng-model="state.estado" ng-repeat="state in states" >{{state.estado}} - {{state.value}}</option>
-                </select> -->
-
-                <select ng-model="selected_state" 
-                        ng-options="state as state.estado for state in states" class="form-control">           
-                </select>      
-
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <label>Requisitos</label>
+                    <textarea class="form-control" placeholder="Requisitos" data-ng-model="projectModal.requisitos" required></textarea>
+                </div>
             </div>
         </div>
     </div>
