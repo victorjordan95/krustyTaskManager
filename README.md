@@ -45,4 +45,4 @@ Se tudo ocorrer bem, a aplicação irá abrir em seu navegador!
 
 Está implementado nesse repositório o deploy automático com o [Heroku](https://www.heroku.com/what "Heroku"), sendo assim, qualquer alteração feita nele, refletirá automaticamente na aplicação.
 
-Você pode acessar a aplicação clicando [aqui](https://krustytaskmanager.herokuapp.com "Krusty Task Manager").
+Você pode acessar a aplicação clicando [aqui](https://taskmanagerkrusty.herokuapp.com "Krusty Task Manager").
