@@ -18,7 +18,17 @@
 					findAllPretty : function(parameters){
 						return rest.post('https://chatbotbycasseb.herokuapp.com/parseToEasyRecord', JSON.stringify(parameters));
 					}
-
+				},
+				projects: {
+					findAll: function(parameters) {
+						return rest.post('https://chatbotbycasseb.herokuapp.com/setTransaction', JSON.stringify(parameters));
+					},
+					findAllPretty : function(parameters){
+						return rest.post('https://chatbotbycasseb.herokuapp.com/parseToEasyRecord', JSON.stringify(parameters));
+					},
+					save : function(project) {
+						return rest.post('https://chatbotbycasseb.herokuapp.com/setTransaction', JSON.stringify(project))
+					}
 				},
 				user: {
 					findAll: function (filterData) {

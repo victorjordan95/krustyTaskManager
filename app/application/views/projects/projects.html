@@ -7,7 +7,7 @@
 				<h2>Projetos Ativos</h2>
 			</div>
 			<div class="col-xs-12 col-sm-6">
-				<button class="btn btn-primary btn-create" data-ng-click="pacienteCtrl.openModal()">
+				<button class="btn btn-primary btn-create" data-ng-click="projectsCtrl.openModal()">
 					<i class="fa fa-plus" aria-hidden="true"></i>
 					Cadastrar projeto
 				</button>
@@ -26,28 +26,38 @@
 							<tr>
 								<th>Ação</th>
 								<th>Nome</th>
-								<th>CPF</th>
+								<th>Cliente</th>
+								<th>Custo</th>
+								<th>Descrição</th>
+								<th>Requisito</th>
 							</tr>
 						</thead>
 						<tfoot>
 							<tr>
 								<th>Ação</th>
 								<th>Nome</th>
-								<th>CPF</th>
+								<th>Cliente</th>
+								<th>Custo</th>
+								<th>Descrição</th>
+								<th>Requisito</th>
 							</tr>
 						</tfoot>
 						<tbody>
-							<tr ng-repeat="task in tasksPretty">
+							<tr ng-repeat="project in projectsPretty">
 								<td>
-									<button class="btn btn-default btn-circle" uib-tooltip="Editar" ng-click="pacienteCtrl.openModal(patient)">
+									<button class="btn btn-default btn-circle" uib-tooltip="Editar" ng-click="projectsCtrl.openModal(project)">
 										<i class="fa fa-pencil" aria-hidden="true"></i>
 									</button>
-									<button class="btn btn-default btn-circle" uib-tooltip="Excluir" ng-click="pacienteCtrl.openModalConfirmation(patient)">
+									<button class="btn btn-default btn-circle" uib-tooltip="Excluir" ng-click="projectsCtrl.openModalConfirmation(project)">
 										<i class="fa fa-trash-o" aria-hidden="true"></i>
 									</button>
 								</td>
-								<td>{{task.fields.CampoA}}</td>
-								<td>{{task.fields.CampoB}}</td>
+								<td>{{project.fields.Nome}}</td>
+								<td>{{project.fields.Cliente}}</td>
+								<td>{{project.fields.Custo}}</td>
+								<td>{{project.fields.Requisitos}}</td>
+								<td>{{project.fields.Descricao}}</td>
+
 							</tr>
 						</tbody>
 					</table>
