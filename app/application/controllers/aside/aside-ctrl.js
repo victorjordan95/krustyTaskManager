@@ -25,11 +25,11 @@
 		};
 
 		$scope.navbarFields = [
-			{ "name":"Usuários", "route" : "usuarios",  "icon" : "fa-users"},
 			{ "name":"Perfil", "route" : "perfil",  "icon" : "fa-user"},
+			{ "name":"Usuários", "route" : "usuarios",  "icon" : "fa-users"},
 			{ "name":"Rank", "route" : "rank", "icon" : "fa-trophy"},
+			{ "name":"Projetos", "route" : "projetos", "icon" : "fa-handshake-o"},
 			{ "name":"Tarefas", "route" : "tarefas", "icon" : "fa-clipboard"},
-			{ "name":"Projetos", "route" : "projetos", "icon" : "fa-clipboard"},
 		];
 
 		$scope.selectedMenu = function(navbarFields){
