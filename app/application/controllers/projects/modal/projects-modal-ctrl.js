@@ -42,7 +42,8 @@
 		];
 
 		$scope.clients = [
-			{ cliente : "Cliente|Iniciativa|1" }
+			{ Cliente : "Selecione uma opção" },
+			{ Cliente : "Cliente|Iniciativa|1" },
 		];
 
 		$scope.cancel = function () {
@@ -72,11 +73,11 @@
 						"recordAction" : "ADD",
 						"entityName" : "Projeto",
 						"fieldAndValue" : {
-							"Nome" : $scope.projectModal.nome,
-							"Custo" : $scope.projectModal.custo,
-							"Cliente" : $scope.projectModal.cliente,
-							"Descricao" : $scope.projectModal.descricao,
-							"Requisitos" : $scope.projectModal.requisitos
+							"Nome" : $scope.projectModal.Nome,
+							"Custo" : $scope.projectModal.Custo,
+							"Cliente" : $scope.projectModal.Cliente,
+							"Descricao" : $scope.projectModal.Descricao,
+							"Requisitos" : $scope.projectModal.Requisitos
 						}
 					}	
 				]
@@ -102,19 +103,18 @@
 
 		var init = function() {
 			//To preserve original organization.
+			debugger;
 			$scope.projectModal = angular.copy(projects);
 			//new / edit
 			if(_.isUndefined($scope.projectModal)){
-				console.log('creating');
-				console.log($scope.states[0]);
-		        $scope.selected_state = $scope.states[0];
+		        $scope.selected_client = $scope.clients[0];
 			}else{
-				_.each($scope.states, function(state) {
-					//$scope.projectsModal.estado = $scope.selected_state.estado;
-					if($scope.projectModal.estado == state.estado){
-						console.log('entrou no if ', $scope.projectModal.estado);
-						console.log(state)
-						$scope.selected_state = state;
+				_.each($scope.clients, function(client) {
+					// $scope.projectModal.selected_client = $scope.projectModal.Cliente;
+					if($scope.projectModal.Cliente == client.Cliente){
+						console.log('entrou no if ', $scope.projectModal.Cliente);
+						console.log(client)
+						$scope.selected_client = client;
 					}
 				});
 			}
