@@ -45,7 +45,7 @@
 						<tbody>
 							<tr ng-repeat="project in projectsPretty">
 								<td>
-									<button class="btn btn-default btn-circle" uib-tooltip="Editar" ng-click="projectsCtrl.openModal(project.fields)">
+									<button class="btn btn-default btn-circle" uib-tooltip="Editar" ng-click="projectsCtrl.openModal(project)">
 										<i class="fa fa-pencil" aria-hidden="true"></i>
 									</button>
 									<button class="btn btn-default btn-circle" uib-tooltip="Excluir" ng-click="projectsCtrl.openModalConfirmation(project)">

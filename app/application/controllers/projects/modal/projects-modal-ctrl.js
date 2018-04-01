@@ -65,7 +65,6 @@
 		};
 
 		$scope.save = function () {
-			debugger;
 			$scope.projectModal.cliente = $scope.selected_client.cliente;
 			var project = {
 				"interactors":[
@@ -103,8 +102,8 @@
 
 		var init = function() {
 			//To preserve original organization.
-			debugger;
-			$scope.projectModal = angular.copy(projects);
+			$scope.projectModal = angular.copy(projects.fields);
+			var projectKey = projects.key;
 			//new / edit
 			if(_.isUndefined($scope.projectModal)){
 		        $scope.selected_client = $scope.clients[0];
