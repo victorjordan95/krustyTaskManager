@@ -28,6 +28,9 @@
 					},
 					save : function(project) {
 						return rest.post('https://chatbotbycasseb.herokuapp.com/setTransaction', JSON.stringify(project))
+					},
+					delete : function(project) {
+						return rest.post('https://chatbotbycasseb.herokuapp.com/setTransaction', JSON.stringify(project))
 					}
 				},
 				user: {
