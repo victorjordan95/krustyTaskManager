@@ -66,7 +66,8 @@
 		};
 
 		$scope.save = function () {
-			$scope.projectModal.cliente = $scope.selected_client.cliente;
+			debugger;
+			$scope.projectModal.Cliente = $scope.selected_client.Cliente;
 			var project = {
 				"interactors":[
 					{

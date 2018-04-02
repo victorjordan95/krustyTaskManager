@@ -15,7 +15,10 @@ table.dataTable {
 .dataTables_length,
 .dataTables_filter {
     display: inline-block;
-    padding: 20px 30px;
+    padding: 10px 0;
+    @media screen and (min-width: 768px) {
+        padding: 20px 30px;
+    }
 
     label {
         font-weight: normal;
