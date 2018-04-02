@@ -279,7 +279,7 @@ textarea {
   top: 0;
   width: 100%;
   z-index: 10; }
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     .header {
       padding-left: 60px; } }
   .header .header-logo {
@@ -385,7 +385,7 @@ textarea {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  width: 210px;
+  width: 90px;
   z-index: 10; }
   #sidebar.active {
     -moz-transform: translate(0, 0);
@@ -400,6 +400,9 @@ textarea {
       -ms-transform: translate(0, 0);
       -webkit-transform: translate(0, 0);
       transform: translate(0, 0); } }
+  @media (min-width: 1024px) {
+    #sidebar {
+      width: 210px; } }
   #sidebar::-webkit-scrollbar {
     width: 8px; }
   #sidebar::-webkit-scrollbar-track {
@@ -539,22 +542,22 @@ textarea {
 
 .sidebar-collapse-active {
   overflow-x: hidden; }
-
-@media (min-width: 768px) {
-  .sidebar-collapse-active #sidebar {
-    overflow: hidden;
-    width: 66px; }
-  .sidebar-collapse-active .sidebar-link:after {
-    display: none; }
-  .sidebar-collapse-active .sidebar-submenu {
-    display: none; }
-  .sidebar-collapse-active main {
-    padding-left: 74px; }
-  .sidebar-collapse-active #sidebar .sidebar-user .sidebar-link:after {
-    display: none; }
-  .sidebar-collapse-active #sidebar .sidebar-menu-name {
-    padding: 16px 0 4px;
-    text-align: center; } }
+  @media (min-width: 768px) {
+    .sidebar-collapse-active #sidebar {
+      overflow: hidden;
+      width: 66px; }
+    .sidebar-collapse-active .sidebar-link:after {
+      display: none; }
+    .sidebar-collapse-active .sidebar-submenu {
+      display: none; }
+    .sidebar-collapse-active #sidebar .sidebar-user .sidebar-link:after {
+      display: none; }
+    .sidebar-collapse-active #sidebar .sidebar-menu-name {
+      padding: 16px 0 4px;
+      text-align: center; } }
+  @media (min-width: 1024px) {
+    .sidebar-collapse-active main {
+      padding-left: 74px; } }
 
 #sidebar.sidebar-collapse-hover.active {
   width: 238px;
@@ -586,7 +589,7 @@ main {
 .btn-sidebar-collapse {
   background: none;
   border: none;
-  color: #fff;
+  color: #009688;
   float: right;
   height: 60px;
   padding: 14px 20px;
@@ -599,7 +602,7 @@ main {
         background-color: rgba(238, 238, 238, 0.3); } }
   .btn-sidebar-collapse .fa-bars {
     border-radius: 1px;
-    color: #fff;
+    color: #009688;
     font-size: 24px;
     margin: 6px 0;
     transition-duration: .3s; }
@@ -996,7 +999,11 @@ table.dataTable {
 .dataTables_length,
 .dataTables_filter {
   display: inline-block;
-  padding: 20px 30px; }
+  padding: 10px 0; }
+  @media screen and (min-width: 768px) {
+    .dataTables_length,
+    .dataTables_filter {
+      padding: 20px 30px; } }
   .dataTables_length label,
   .dataTables_filter label {
     font-weight: normal; }
@@ -1224,11 +1231,6 @@ table.dataTable {
   .btn.btn-primary {
     background-color: #009688;
     border-color: #009688; }
-    .btn.btn-primary:hover {
-      background-color: #FFF;
-      color: #009688; }
-    .btn.btn-primary.active {
-      border-color: #009688; }
   .btn:active, .btn:focus {
     outline: none !important; }
   .btn.btn-icon i {
@@ -1258,12 +1260,40 @@ table.dataTable {
   background-color: #fff; }
 
 .btn-add {
-  position: absolute;
-  right: 16px;
-  top: -5px; }
+  border-radius: 50%;
+  box-shadow: 1px 0 4px 1px #a5a5a5;
+  bottom: 50px;
+  height: 50px;
+  padding: 10px;
+  position: fixed;
+  right: 25px;
+  width: 50px;
+  z-index: 3; }
+  .btn-add .btn-add--text {
+    display: none; }
   @media (min-width: 768px) {
     .btn-add {
-      top: 4px; } }
+      bottom: 25px; } }
+  @media (min-width: 1024px) {
+    .btn-add {
+      float: right;
+      border-radius: 5px;
+      box-shadow: 0 0 0 0 #a5a5a5;
+      bottom: 0px;
+      float: right;
+      height: auto;
+      margin-bottom: 10px;
+      margin-top: 20px;
+      position: relative;
+      padding: 10px;
+      right: 0;
+      transition: background-color ease 0.5s;
+      width: auto;
+      z-index: 3; }
+      .btn-add .btn-add--text {
+        display: inline-block; } }
+  .btn-add:hover {
+    background-color: #007d71; }
 
 .btn-create {
   margin-bottom: 10px;
