@@ -5,6 +5,7 @@
 	function ProjectsModalController($scope, projects, CrudService, $uibModalInstance, commonsService) {
 
 		var self = this;
+		var projectKey;
 		$scope.projectModal = {};
 		$scope.projectModal.active = '1';
 
@@ -101,18 +102,15 @@
 		};
 
 		var init = function() {
-			//To preserve original organization.
-			$scope.projectModal = angular.copy(projects.fields);
-			var projectKey = projects.key;
 			//new / edit
-			if(_.isUndefined($scope.projectModal)){
-		        $scope.selected_client = $scope.clients[0];
+			if(_.isUndefined(projects)){
+				$scope.selected_client = $scope.clients[0];
+				$scope.projectModal = angular.copy(projects);
 			}else{
+				$scope.projectModal = angular.copy(projects.fields);
+				projectKey = projects.key;
 				_.each($scope.clients, function(client) {
-					// $scope.projectModal.selected_client = $scope.projectModal.Cliente;
 					if($scope.projectModal.Cliente == client.Cliente){
-						console.log('entrou no if ', $scope.projectModal.Cliente);
-						console.log(client)
 						$scope.selected_client = client;
 					}
 				});
