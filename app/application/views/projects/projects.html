@@ -52,7 +52,11 @@
 										<i class="fa fa-trash-o" aria-hidden="true"></i>
 									</button>
 								</td>
-								<td>{{project.fields.Nome}}</td>
+								<td>
+									<a ng-href="#/tarefas/{{project.fields.Id}}/{{project.fields.Nome}}">
+										{{project.fields.Nome}}
+									</a>
+								</td>
 								<td>{{project.fields.Cliente}}</td>
 								<td>{{project.fields.Custo}}</td>
 								<td>{{project.fields.Requisitos}}</td>

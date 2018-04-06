@@ -5,6 +5,16 @@
 	
 	function TasksCtrl($scope, CrudService,DTOptionsBuilder, DTColumnDefBuilder, $httpParamSerializer, $location, $uibModal) {
 		
+		var pathArray = window.location.hash.split( '/' );
+		var withoutSpace = pathArray[pathArray.length - 1].split("%20");
+		var nameProject = "";
+		
+		withoutSpace.forEach(function(element) {
+			element === withoutSpace[withoutSpace.length - 1] ? nameProject += `${element}` : nameProject += `${element} `;
+		});
+		
+		var id = `${pathArray[2]}|${nameProject}`;
+
 		var self = this;
 
 		var language = {
@@ -35,8 +45,7 @@
 			DTColumnDefBuilder.newColumnDef(0).notSortable().withOption('width', '100px'),
 		];
 
-		$scope.dtOptions = DTOptionsBuilder.newOptions()
-		.withLanguage(language);
+		$scope.dtOptions = DTOptionsBuilder.newOptions().withLanguage(language);
 
         //Modal
 		self.openModal = function(tasks) {
@@ -80,6 +89,7 @@
 		};
 	
 		$scope.load = function(){
+			console.log('entrei no projeto: ' + id)
 			CrudService.tasks.findAll(parameter)
 			.then(function(response){
 				$scope.tasks = response.data;

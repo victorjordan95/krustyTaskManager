@@ -66,24 +66,24 @@
         };
         states.push(projects); 
 
+        // var tasks = {
+        //     name: 'Tarefas',
+        //     url: '/tarefas',
+        //     controller: 'TasksCtrl',
+        //     controllerAs: 'tasksCtrl',
+        //     templateUrl: 'application/views/tasks/tasks.html'
+        // };
+        // states.push(tasks); 
+
+        // Exemplo nested route
         var tasks = {
             name: 'Tarefas',
-            url: '/tarefas',
+            url: '/tarefas/:id/:nome',
             controller: 'TasksCtrl',
             controllerAs: 'tasksCtrl',
             templateUrl: 'application/views/tasks/tasks.html'
         };
         states.push(tasks); 
-
-        //Exemplo nested route
-        // var pendencyView = {
-        //     name: 'pendencyView',
-        //     url: '/pendencias/view/:id',
-        //     controller: 'PendencyViewCtrl',
-        //     controllerAs: 'pendencyViewCtrl',
-        //     templateUrl: 'application/views/pendency/pendency-view.html'
-        // };
-        // states.push(pendencyView); 
         
         states.forEach(function(state) {
             $stateProvider.state(state);

@@ -106,8 +106,6 @@
 				});
 		}
 
-
-
 	};
 
 	ProjectsCtrl.$inject = ['$scope', 'CrudService', 'DTOptionsBuilder', 'DTColumnDefBuilder', '$httpParamSerializer', '$location', '$uibModal', 'commonsService', 'DataTableService'];
