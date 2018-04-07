@@ -1,0 +1,51 @@
+<form name="form" novalidate data-ng-submit="save()">
+    <div class="modal-header">
+        <h3 class="modal-title">
+            {{ (projectModal.Id == null ? 'Inserir' : 'Editar') | translate }} projeto
+        </h3>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-group col-xs-12 col-md-6">
+                <label>Nome</label>
+                <input name="nome" type="text" placeholder="Nome" data-ng-model="projectModal.Nome" maxlength="50" class="form-control" autofocus="autofocus"
+                    required>
+            </div>
+            <div class="form-group col-xs-12 col-md-6">
+                <label>Custo</label>
+                <input name="nome" type="text" placeholder="Custo do Projeto" data-ng-model="projectModal.Custo" numbers-only class="form-control" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-xs-12">
+                <label>Cliente</label>
+                <select ng-model="selected_client" ng-options="client as client.Cliente for client in clients" class="form-control">           
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <label>Descrição</label>
+                    <textarea class="form-control" placeholder="Descrição" data-ng-model="projectModal.Descricao" required></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <label>Requisitos</label>
+                    <textarea class="form-control" placeholder="Requisitos" data-ng-model="projectModal.Requisitos" required></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" data-ng-click="cancel()">
+            Cancelar
+        </button>
+        <button type="submit" class="btn btn-primary" data-dismiss="modal" data-ng-disabled="form.$invalid">
+            Salvar
+        </button>
+    </div>
+</form>

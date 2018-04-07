@@ -66,14 +66,14 @@
         };
         states.push(projects); 
 
-        // var tasks = {
-        //     name: 'Tarefas',
-        //     url: '/tarefas',
-        //     controller: 'TasksCtrl',
-        //     controllerAs: 'tasksCtrl',
-        //     templateUrl: 'application/views/tasks/tasks.html'
-        // };
-        // states.push(tasks); 
+        var taskType = {
+            name: 'Tipo Tarefa',
+            url: '/tipo-tarefa',
+            controller: 'TypeTaskCtrl',
+            controllerAs: 'typeTaskCtrl',
+            templateUrl: 'application/views/typeTasks/typeTasks.html'
+        };
+        states.push(taskType); 
 
         // Exemplo nested route
         var tasks = {
