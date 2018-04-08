@@ -11,14 +11,6 @@
 						return rest.get(`${url}/users/`)
 					}
 				},
-				tasks : {
-					findAll : function(parameters) {
-						return rest.post('https://chatbotbycasseb.herokuapp.com/setTransaction', JSON.stringify(parameters));
-					},
-					findAllPretty : function(parameters){
-						return rest.post('https://chatbotbycasseb.herokuapp.com/parseToEasyRecord', JSON.stringify(parameters));
-					}
-				},
 				projects: {
 					findAll: function(parameters) {
 						return rest.post('https://chatbotbycasseb.herokuapp.com/setTransaction', JSON.stringify(parameters));
@@ -31,6 +23,28 @@
 					},
 					delete : function(project) {
 						return rest.post('https://chatbotbycasseb.herokuapp.com/setTransaction', JSON.stringify(project))
+					}
+				},
+				tasks : {
+					findAll : function(parameters) {
+						return rest.post('https://chatbotbycasseb.herokuapp.com/setTransaction', JSON.stringify(parameters));
+					},
+					findAllPretty : function(parameters){
+						return rest.post('https://chatbotbycasseb.herokuapp.com/parseToEasyRecord', JSON.stringify(parameters));
+					}
+				},
+				typeTasks : {
+					findAll : function(parameters) {
+						return rest.post('https://chatbotbycasseb.herokuapp.com/setTransaction', JSON.stringify(parameters));
+					},
+					findAllPretty : function(parameters){
+						return rest.post('https://chatbotbycasseb.herokuapp.com/parseToEasyRecord', JSON.stringify(parameters));
+					},
+					save : function(typeTask) {
+						return rest.post('https://chatbotbycasseb.herokuapp.com/setTransaction', JSON.stringify(typeTask));
+					},
+					delete : function(typeTask) {
+						return rest.post('https://chatbotbycasseb.herokuapp.com/setTransaction', JSON.stringify(typeTask));
 					}
 				},
 				user: {

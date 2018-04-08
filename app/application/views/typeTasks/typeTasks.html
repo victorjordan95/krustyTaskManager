@@ -8,8 +8,7 @@
 				<h2>Tipos de Tarefas</h2>
 			</div>
 			<div class="col-xs-12 col-sm-6">
-				<button class="btn btn-primary btn-add"> 
-						<!-- data-ng-click="typeTaskCtrl.openModal()" -->
+				<button class="btn btn-primary btn-add" data-ng-click="typeTaskCtrl.openModal()"> 
 					<i class="fa fa-plus" aria-hidden="true"></i>
 					<span class="btn-add--text">Cadastrar tipo de tarefa</span>
 				</button>
@@ -27,15 +26,13 @@
 						<thead>
 							<tr>
 								<th>Ação</th>
-								<th>Tipo</th>
-								<th>Descrição</th>
+								<th>Nome</th>
 							</tr>
 						</thead>
 						<tfoot>
 							<tr>
 								<th>Ação</th>
-								<th>Tipo</th>
-								<th>Descrição</th>
+								<th>Nome</th>
 							</tr>
 						</tfoot>
 						<tbody>
@@ -49,13 +46,7 @@
 										<i class="fa fa-trash-o" aria-hidden="true"></i>
 									</button>
 								</td>
-								<td>
-									<a ng-href="#/tarefas/{{typeTask.fields.Id}}/{{typeTask.fields.Nome}}">
-										{{typeTask.fields.Nome}}
-									</a>
-								</td>
-								<td>{{typeTask.fields.Tipo}}</td>
-								<td>{{typeTask.fields.Descricao}}</td>
+								<td>{{typeTask.fields.Nome}}</td>
 
 							</tr>
 						</tbody>
