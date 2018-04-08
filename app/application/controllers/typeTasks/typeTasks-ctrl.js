@@ -7,7 +7,7 @@
 		const parameter = {
 			"interactors": [{
 				"recordAction": "QUERY_ADD",
-				"entityName": "Projeto"
+				"entityName": "Tipo Tarefa"
 			}]
 		};
 		var self = this;
@@ -15,7 +15,7 @@
 		var language = {
 			"sEmptyTable": "Nenhum registro encontrado",
 			"sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-			"sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+			"sInfoEmpty": "Nenhum registro encontrado",
 			"sInfoFiltered": "(Filtrados de _MAX_ registros)",
 			"sInfoPostFix": "",
 			"sInfoThousands": ".",
@@ -40,68 +40,60 @@
 
 		$scope.dtOptions = DTOptionsBuilder.newOptions().withLanguage(language);
 
-		function _findPretty(projects) {
-			CrudService.projects.findAllPretty(projects)
-				.then(function (response) {
-					$scope.projectsPretty = response.data;
-				})
-				.catch(function (error) {
-					$scope.error(error.message);
-				});
-		};
-
 		//Immediately-invoked function expression (IIFE)
 		(function () {
-			CrudService.projects.findAll(parameter)
+			CrudService.typeTasks.findAll(parameter)
 				.then(function (response) {
-					var projects = response.data;
-					_findPretty(projects);
+					var typeTasks = response.data;
+					_findPretty(typeTasks);
 				})
 				.catch(function (error) {
-					$scope.error(error.message);
+					commonsService.error('Erro ao obter os dados');
 				});
 		})();
 
+		function _findPretty(typeTasks) {
+			CrudService.typeTasks.findAllPretty(typeTasks)
+				.then(function (response) {
+					$scope.typeTasksPretty = response.data;
+				})
+				.catch(function (error) {
+					commonsService.error('Erro ao obter os dados');
+				});
+		};
+
+
 		//Modal
-		self.openModal = function (projects) {
+		self.openModal = function (typeTask) {
 			var modalInstance = $uibModal.open({
 				animation: true,
-				templateUrl: 'application/views/projects/modal/projects-modal.html',
+				templateUrl: 'application/views/typeTasks/modal/typeTasks-modal.html',
 				size: 'md',
-				controller: 'ProjectsModalController',
+				controller: 'typeTasksModalController',
 				controllerAs: '$ctrl',
 				resolve: {
-					projects: function () {
-						return projects;
+					typeTask: function () {
+						return typeTask;
 					}
 				}
 			});
 		};
 
 		//Modal
-		self.openModalConfirmation = function (projects) {
+		self.openModalConfirmation = function (typeTask) {
 			var modalInstance = $uibModal.open({
 				animation: true,
-				templateUrl: 'application/views/projects/modal/confirmation-modal.html',
+				templateUrl: 'application/views/typeTasks/modal/confirmation-modal.html',
 				size: 'md',
-				controller: 'ProjectsConfirmationController',
-				controllerAs: 'projectsConfirmationCtrl',
+				controller: 'TypeTasksConfirmationController',
+				controllerAs: 'typeTasksConfirmationController',
 				resolve: {
-					projects: function () {
-						return projects;
+					typeTask: function () {
+						return typeTask;
 					}
 				}
 			});
 		};
-
-		//Remove
-		self.remove = function (id) {
-			CrudService.projects.remove(id)
-				.then(function (response) {
-					self.load();
-					commonsService.success('projects.alert.success');
-				});
-		}
 
 	};
 
