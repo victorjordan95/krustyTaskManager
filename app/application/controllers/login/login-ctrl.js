@@ -5,21 +5,18 @@
 		.controller('LoginCtrl', LoginCtrl);
 
 	function LoginCtrl($scope, $rootScope, $translate, CrudService, $httpParamSerializer, $location, commonsService) {
-
-		
+	
 		$scope.user = {};
 
 		$scope.logon = function () {
-			$location.path("home");
-		// 	$rootScope.user = $scope.user.username;
-		// 	CrudService.login.logon($scope.user).then(function (response) {
-		// 		sessionStorage.setItem('user', JSON.stringify(response.data));
-		// 		$location.path("home");
-		// 		commonsService.success('Bem-vindo, ' + $rootScope.user + '!');
-		// 	}).catch(function (error) {
-		// 		commonsService.error('login.loginError');
-		// 	});
-		}
+			CrudService.login.logon($scope.user).then(function (response) {
+				sessionStorage.setItem('user', JSON.stringify(response.data));
+				$location.path("home");
+				commonsService.success('Bem-vindo, ' + $rootScope.user + '!');
+			}).catch(function (error) {
+				commonsService.error('Erro ao realizar login na aplicação.');
+			});
+		};
 
 		
 

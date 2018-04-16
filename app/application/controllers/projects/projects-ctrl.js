@@ -2,7 +2,6 @@
 	angular
 		.module('ktm')
 		.controller('ProjectsCtrl', ProjectsCtrl);
-
 	function ProjectsCtrl($scope, CrudService, DTOptionsBuilder, DTColumnDefBuilder, $httpParamSerializer, $location, $uibModal, commonsService, DataTableService) {
 		const parameter = {
 			"interactors": [{
@@ -40,20 +39,16 @@
 
 		$scope.dtOptions = DTOptionsBuilder.newOptions().withLanguage(language);
 
-
-
 		function _findPretty(projects) {
 			CrudService.projects.findAllPretty(projects)
 				.then(function (response) {
 					$scope.projectsPretty = response.data;
-					console.log($scope.projectsPretty);
 				})
 				.catch(function (error) {
 					$scope.error(error.message);
 				});
 		};
 
-		//Immediately-invoked function expression (IIFE)
 		(function () {
 			CrudService.projects.findAll(parameter)
 				.then(function (response) {
@@ -96,15 +91,6 @@
 				}
 			});
 		};
-
-		//Remove
-		self.remove = function (id) {
-			CrudService.projects.remove(id)
-				.then(function (response) {
-					self.load();
-					commonsService.success('projects.alert.success');
-				});
-		}
 
 	};
 

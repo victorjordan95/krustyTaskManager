@@ -56,6 +56,7 @@
 			CrudService.typeTasks.findAllPretty(typeTasks)
 				.then(function (response) {
 					$scope.typeTasksPretty = response.data;
+					console.log($scope.typeTasksPretty );
 				})
 				.catch(function (error) {
 					commonsService.error('Erro ao obter os dados');

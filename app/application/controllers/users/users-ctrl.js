@@ -4,13 +4,7 @@
 		.controller('UsersCtrl', UsersCtrl);
 
 	function UsersCtrl($scope, CrudService, DTOptionsBuilder, DTColumnDefBuilder, $httpParamSerializer, $location, $uibModal, commonsService, DataTableService) {
-		// const url = 'https://chatbotbycasseb.herokuapp.com/setTransaction';
-		const parameter = {
-			"interactors": [{
-				"recordAction": "QUERY_ADD",
-				"entityName": "DJ"
-			}]
-		};
+
 		var self = this;
 
 		var language = DataTableService.language;
@@ -19,29 +13,31 @@
 
 		$scope.dtOptions = DTOptionsBuilder.newOptions().withLanguage(language);
 
+		const parameter = {
+			"interactors": [{
+				"recordAction": "QUERY_ADD",
+				"entityName": "BotUser"
+			}]
+		};
 
-
-		function _findPretty(tasks) {
-			CrudService.tasks.findAllPretty(tasks)
+		function _findPretty(users) {
+			CrudService.users.findAllPretty(users)
 				.then(function (response) {
-					$scope.tasksPretty = response.data;
-					console.log($scope.tasksPretty);
+					$scope.usersPretty = response.data;
 				})
 				.catch(function (error) {
-					$scope.error(error.message);
+					commonsService.error('Erro ao obter os dados');
 				});
 		};
 
-		//Immediately-invoked function expression (IIFE)
 		(function () {
-			console.log('IIFE');
-			CrudService.tasks.findAll(parameter)
+			CrudService.users.findAll(parameter)
 				.then(function (response) {
-					var tasks = response.data;
-					_findPretty(tasks);
+					var users = response.data;
+					_findPretty(users);
 				})
 				.catch(function (error) {
-					$scope.error(error.message);
+					commonsService.error('Erro ao obter os dados');
 				});
 		})();
 
@@ -76,17 +72,6 @@
 				}
 			});
 		};
-
-		//Remove
-		self.remove = function (id) {
-			CrudService.users.remove(id)
-				.then(function (response) {
-					self.load();
-					commonsService.success('users.alert.success');
-				});
-		}
-
-
 
 	};
 
