@@ -8,12 +8,13 @@
 		var pathArray = window.location.hash.split( '/' );
 		var withoutSpace = pathArray[pathArray.length - 1].split("%20");
 		var nameProject = "";
-		
 		withoutSpace.forEach(function(element) {
 			element === withoutSpace[withoutSpace.length - 1] ? nameProject += `${element}` : nameProject += `${element} `;
 		});
 		
-		var id = `${pathArray[2]}|${nameProject}`;
+		var id = decodeURI(`${pathArray[2]}|${nameProject}`);
+
+		var allTasks = [];
 
 		var self = this;
 
@@ -79,38 +80,37 @@
 			});
 		};
 
-		const parameter = {
-			"interactors": [
-				{
-					"recordAction": "QUERY_ADD",
-					"entityName": "DJ"
-				}
-			]
-		};
-	
-		$scope.load = function(){
-			console.log('entrei no projeto: ' + id)
-			CrudService.tasks.findAll(parameter)
-			.then(function(response){
-				$scope.tasks = response.data;
-				console.log($scope.tasks);
-			})
-			.catch(function (error) {
-				$scope.error(error.message);
-			});
-		}();
+		 const parameter = {
+			 "interactors": [
+				 {
+					 "recordAction": "QUERY_ADD",
+					 "entityName": "Tarefa",
+					 "fieldAndValue": {
+						 "Projeto": `Projeto|${id}`
+					 }
+				 }
+			 ]
+		 };
 
-		$scope.pretty = function(){
-			$scope.load();
-			console.log($scope.tasks);
-			CrudService.tasks.findAllPretty($scope.tasks)
-			.then(function(response){
-				$scope.tasksPretty = response.data;
-				console.log($scope.tasksPretty);
-			})
-			.catch(function (error) {
-				$scope.error(error.message);
-			});
+		(function () {
+			CrudService.tasks.findAll(parameter)
+				.then(function (response) {
+					var tasks = response.data;
+					_findPretty(tasks);
+				})
+				.catch(function (error) {
+					commonsService.error('Erro ao obter os dados');
+				});
+		})();
+
+		function _findPretty(tasks) {
+			CrudService.tasks.findAllPretty(tasks)
+				.then(function (response) {
+					$scope.tasks = response.data;
+				})
+				.catch(function (error) {
+					commonsService.error('Erro ao obter os dados');
+				});
 		};
     	
     	//Remove

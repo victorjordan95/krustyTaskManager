@@ -6,6 +6,12 @@
 			<div class="col-xs-12 col-sm-6">
 				<h2>Tarefas</h2>
 			</div>
+			<div class="col-xs-12 col-sm-6">
+				<button class="btn btn-primary btn-add" data-ng-click="tasksCtrl.openModal()">
+					<i class="fa fa-plus" aria-hidden="true"></i>
+					<span class="btn-add--text">Cadastrar tarefa</span>
+				</button>
+			</div>
 		</div>
 	</div>
 
@@ -19,31 +25,29 @@
 						<thead>
 							<tr>
 								<th>Ação</th>
+								<th>Projeto</th>
 								<th>Nome</th>
-								<th>RG</th>
-								<th>CPF</th>
-								<th>Endereço</th>
-								<th>Número</th>
-								<th>Bairro</th>
-								<th>Cidade</th>
-								<th>Estado</th>
+								<th>Tipo</th>
+								<th>Responsável</th>
+								<th>Descricao</th>
+								<th>Data Inicial</th>
+								<th>Data Final</th>
 							</tr>
 						</thead>
 						<tfoot>
 							<tr>
 								<th>Ação</th>
+								<th>Projeto</th>
 								<th>Nome</th>
-								<th>RG</th>
-								<th>CPF</th>
-								<th>Endereço</th>
-								<th>Número</th>
-								<th>Bairro</th>
-								<th>Cidade</th>
-								<th>Estado</th>
+								<th>Tipo</th>
+								<th>Responsável</th>
+								<th>Descricao</th>
+								<th>Data Inicial</th>
+								<th>Data Final</th>
 							</tr>
 						</tfoot>
 						<tbody>
-							<tr ng-repeat="patient in patients">
+							<tr ng-repeat="task in tasks">
 								<td>
 									<button class="btn btn-default btn-circle" uib-tooltip="Editar" ng-click="rankCtrl.openModal(patient)">
 										<i class="fa fa-pencil" aria-hidden="true"></i>
@@ -52,14 +56,13 @@
 										<i class="fa fa-trash-o" aria-hidden="true"></i>
 									</button>
 								</td>
-								<td>{{patient.nome}}</td>
-								<td>{{patient.rg}}</td>
-								<td>{{patient.cpf}}</td>
-								<td>{{patient.endereco}}</td>
-								<td>{{patient.numero}}</td>
-								<td>{{patient.bairro}}</td>
-								<td>{{patient.cidade}}</td>
-								<td>{{patient.estado}}</td>
+								<td>{{task.fields.Projeto}}</td>
+								<td>{{task.fields.Nome}}</td>
+								<td>{{task.fields.Tipo}}</td>
+								<td>{{task.fields.Responsavel}}</td>
+								<td>{{task.fields.Descricao}}</td>
+								<td>{{task.fields["Data Inicial"]}}</td>
+								<td>{{task.fields["Data Final"]}}</td>
 							</tr>
 						</tbody>
 					</table>

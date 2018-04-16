@@ -3,48 +3,51 @@
 		.module('ktm')
 		.service('CrudService', ['RestService', function (rest) {
 
-			const url = "https://krusty-api.herokuapp.com";
+			const url = "https://chatbotbycasseb.herokuapp.com";
 			
 			return {
 				users : {
-					findAll : function(){
-						return rest.get(`${url}/users/`)
+					findAll : function(parameters){
+						return rest.post(`${url}/setTransaction`, JSON.stringify(parameters));
+					},
+					findAllPretty : function(parameters){
+						return rest.post(`${url}/parseToEasyRecord`, JSON.stringify(parameters));
 					}
 				},
 				projects: {
 					findAll: function(parameters) {
-						return rest.post('https://chatbotbycasseb.herokuapp.com/setTransaction', JSON.stringify(parameters));
+						return rest.post(`${url}/setTransaction`, JSON.stringify(parameters));
 					},
 					findAllPretty : function(parameters){
-						return rest.post('https://chatbotbycasseb.herokuapp.com/parseToEasyRecord', JSON.stringify(parameters));
+						return rest.post(`${url}/parseToEasyRecord`, JSON.stringify(parameters));
 					},
 					save : function(project) {
-						return rest.post('https://chatbotbycasseb.herokuapp.com/setTransaction', JSON.stringify(project))
+						return rest.post(`${url}/setTransaction`, JSON.stringify(project))
 					},
 					delete : function(project) {
-						return rest.post('https://chatbotbycasseb.herokuapp.com/setTransaction', JSON.stringify(project))
+						return rest.post(`${url}/setTransaction`, JSON.stringify(project))
 					}
 				},
 				tasks : {
 					findAll : function(parameters) {
-						return rest.post('https://chatbotbycasseb.herokuapp.com/setTransaction', JSON.stringify(parameters));
+						return rest.post(`${url}/setTransaction`, JSON.stringify(parameters));
 					},
 					findAllPretty : function(parameters){
-						return rest.post('https://chatbotbycasseb.herokuapp.com/parseToEasyRecord', JSON.stringify(parameters));
+						return rest.post(`${url}/parseToEasyRecord`, JSON.stringify(parameters));
 					}
 				},
 				typeTasks : {
 					findAll : function(parameters) {
-						return rest.post('https://chatbotbycasseb.herokuapp.com/setTransaction', JSON.stringify(parameters));
+						return rest.post(`${url}/setTransaction`, JSON.stringify(parameters));
 					},
 					findAllPretty : function(parameters){
-						return rest.post('https://chatbotbycasseb.herokuapp.com/parseToEasyRecord', JSON.stringify(parameters));
+						return rest.post(`${url}/parseToEasyRecord`, JSON.stringify(parameters));
 					},
 					save : function(typeTask) {
-						return rest.post('https://chatbotbycasseb.herokuapp.com/setTransaction', JSON.stringify(typeTask));
+						return rest.post(`${url}/setTransaction`, JSON.stringify(typeTask));
 					},
 					delete : function(typeTask) {
-						return rest.post('https://chatbotbycasseb.herokuapp.com/setTransaction', JSON.stringify(typeTask));
+						return rest.post(`${url}/setTransaction`, JSON.stringify(typeTask));
 					}
 				},
 				user: {
@@ -66,30 +69,7 @@
 				},
 				login: {
 					logon: function (user) {
-						return rest.post(url + '/theCemDente/login', user);
-					},
-					forget: function (user) {
-						return rest.post('/ktm/login/forgot-password', user);
-					},
-					change: function (user) {
-						return rest.post('/ktm/login/change-password', user);
-					},
-					logout: function () {
-						return rest.get('/ktm/login/logout');
-					},
-					userAuthenticated: function () {
-						return rest.get('/ktm/login/userAuthenticated');
-					}
-				},
-				paciente: {
-					findAll : function(){
-						return rest.get(url + '/theCemDente/paciente/getall')
-					},
-					save: function (paciente) {
-						return rest.post(url + '/theCemDente/paciente/savePaciente/', paciente);
-					},
-					delete: function (id) {
-						return rest.delete(url + '/theCemDente/paciente/deletePaciente/' + id);
+						return rest.post(`${url}/setTransaction`, JSON.stringify(user));
 					}
 				},
 			};
