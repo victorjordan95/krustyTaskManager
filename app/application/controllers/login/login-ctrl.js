@@ -9,16 +9,40 @@
 		$scope.user = {};
 
 		$scope.logon = function () {
-			CrudService.login.logon($scope.user).then(function (response) {
-				sessionStorage.setItem('user', JSON.stringify(response.data));
-				$location.path("home");
-				commonsService.success('Bem-vindo, ' + $rootScope.user + '!');
+
+			var paramether = {
+				"interactors": [
+					{
+						"recordAction": "QUERY_ADD",
+						"entityName": "BotUser",
+						"fieldAndValue": {
+							"E-mail": $scope.user.login
+						}
+					},
+					{
+						"recordAction": "QUERY_REMOVE",
+						"entityName": "BotUser",
+						"fieldAndValue": {
+							"Senha": $scope.user.password
+						}
+					}
+				]
+			};
+
+			console.log($scope.user);
+			CrudService.login.logon(paramether).then(function (response) {
+				console.log(response);
+				debugger;
+				if (response.data.recordsResult.length === 0) {
+					$location.path("home");
+					commonsService.success('Bem-vindo, ' + $rootScope.user + '!');
+				} else {
+					commonsService.error('Login ou senha inválidos!');
+				}
 			}).catch(function (error) {
 				commonsService.error('Erro ao realizar login na aplicação.');
 			});
 		};
-
-		
 
 		$scope.changeLang = function (lang) {
 			$scope.language = lang;

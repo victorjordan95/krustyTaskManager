@@ -1,7 +1,7 @@
 (function () {
 	angular
 		.module('ktm')
-        .service('RestService', ['$http', '$sce', 'LoggerService', function restUtil($http, $sce, LoggerService) {
+        .service('RestService', ['$http', '$sce', function restUtil($http, $sce) {
 
         var config = {
             headers: {
@@ -23,18 +23,6 @@
 
         var configExport = {
             responseType: 'arraybuffer'
-        };
-
-        var logSuccess = function (type, data) {
-            LoggerService.debug(' -> SUCCESS with:');
-            LoggerService.debug(data);
-            LoggerService.debug('END ' + type);
-        };
-
-        var logError = function (type, data) {
-            LoggerService.debug(' -> ERROR with:');
-            LoggerService.debug(data);
-            LoggerService.debug('END ' + type);
         };
 
         var CustomError = function (status) {

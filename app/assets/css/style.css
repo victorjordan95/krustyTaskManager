@@ -1563,6 +1563,8 @@ hr.form-hr {
           background-color: #007d71;
           border-color: transparent;
           color: #fff; } }
+    .main input[type="submit"]:disabled {
+      background-color: #00635a; }
   .main .form-box {
     align-items: center;
     box-shadow: 1px 0px 30px 1px rgba(0, 0, 0, 0.53);
