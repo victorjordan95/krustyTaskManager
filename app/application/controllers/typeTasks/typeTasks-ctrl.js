@@ -3,7 +3,7 @@
 		.module('ktm')
 		.controller('TypeTaskCtrl', TypeTaskCtrl);
 
-	function TypeTaskCtrl($scope, CrudService, DTOptionsBuilder, DTColumnDefBuilder, $httpParamSerializer, $location, $uibModal, commonsService, DataTableService) {
+	function TypeTaskCtrl($scope, CrudService, DTOptionsBuilder, DTColumnDefBuilder, $httpParamSerializer, $location, $uibModal, commonsService) {
 		const parameter = {
 			"interactors": [{
 				"recordAction": "QUERY_ADD",
@@ -56,7 +56,6 @@
 			CrudService.typeTasks.findAllPretty(typeTasks)
 				.then(function (response) {
 					$scope.typeTasksPretty = response.data;
-					console.log($scope.typeTasksPretty );
 				})
 				.catch(function (error) {
 					commonsService.error('Erro ao obter os dados');
@@ -98,5 +97,5 @@
 
 	};
 
-	TypeTaskCtrl.$inject = ['$scope', 'CrudService', 'DTOptionsBuilder', 'DTColumnDefBuilder', '$httpParamSerializer', '$location', '$uibModal', 'commonsService', 'DataTableService'];
+	TypeTaskCtrl.$inject = ['$scope', 'CrudService', 'DTOptionsBuilder', 'DTColumnDefBuilder', '$httpParamSerializer', '$location', '$uibModal', 'commonsService'];
 })();

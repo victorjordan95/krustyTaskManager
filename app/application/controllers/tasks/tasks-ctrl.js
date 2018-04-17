@@ -3,16 +3,10 @@
 		.module('ktm')
 		.controller('TasksCtrl', TasksCtrl);
 	
-	function TasksCtrl($scope, CrudService,DTOptionsBuilder, DTColumnDefBuilder, $httpParamSerializer, $location, $uibModal) {
+	function TasksCtrl($scope, CrudService,DTOptionsBuilder, DTColumnDefBuilder, $httpParamSerializer, $location, $uibModal, ConvertUrlService) {
 		
-		var pathArray = window.location.hash.split( '/' );
-		var withoutSpace = pathArray[pathArray.length - 1].split("%20");
-		var nameProject = "";
-		withoutSpace.forEach(function(element) {
-			element === withoutSpace[withoutSpace.length - 1] ? nameProject += `${element}` : nameProject += `${element} `;
-		});
-		
-		var id = decodeURI(`${pathArray[2]}|${nameProject}`);
+		var url = window.location.hash;
+		var id = ConvertUrlService.convertUrl(url);
 
 		var allTasks = [];
 
@@ -107,25 +101,13 @@
 			CrudService.tasks.findAllPretty(tasks)
 				.then(function (response) {
 					$scope.tasks = response.data;
+					console.log($scope.tasks);
 				})
 				.catch(function (error) {
 					commonsService.error('Erro ao obter os dados');
 				});
 		};
-    	
-    	//Remove
-        self.remove = function (id) {
-    		CrudService.tasks.remove(id)
-    		.then(function(response){
-    			self.load();
-    			commonsService.success('tasks.alert.success');
-    		});
-		}
-		
-		
-        
-        
 	};
 	
-	TasksCtrl.$inject = ['$scope', 'CrudService','DTOptionsBuilder','DTColumnDefBuilder', '$httpParamSerializer', '$location', '$uibModal'];
+	TasksCtrl.$inject = ['$scope', 'CrudService','DTOptionsBuilder','DTColumnDefBuilder', '$httpParamSerializer', '$location', '$uibModal', 'ConvertUrlService'];
 })();

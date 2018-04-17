@@ -2,6 +2,7 @@
 	angular
 		.module('ktm')
 		.service('CrudService', ['RestService', function (rest) {
+			'use strict';
 
 			const url = "https://chatbotbycasseb.herokuapp.com";
 			
@@ -22,10 +23,10 @@
 						return rest.post(`${url}/parseToEasyRecord`, JSON.stringify(parameters));
 					},
 					save : function(project) {
-						return rest.post(`${url}/setTransaction`, JSON.stringify(project))
+						return rest.post(`${url}/setTransaction`, JSON.stringify(project));
 					},
 					delete : function(project) {
-						return rest.post(`${url}/setTransaction`, JSON.stringify(project))
+						return rest.post(`${url}/setTransaction`, JSON.stringify(project));
 					}
 				},
 				tasks : {
