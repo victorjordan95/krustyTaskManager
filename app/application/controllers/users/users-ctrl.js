@@ -43,7 +43,7 @@
 		};
 
 		function _findPretty(users) {
-			CrudService.users.findAllPretty(users)
+			CrudService.common.findAllPretty(users)
 				.then(function (response) {
 					$scope.usersPretty = response.data;
 				})
@@ -53,7 +53,7 @@
 		};
 
 		(function () {
-			CrudService.users.findAll(parameter)
+			CrudService.common.findAll(parameter)
 				.then(function (response) {
 					var users = response.data;
 					_findPretty(users);

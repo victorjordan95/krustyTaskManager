@@ -40,7 +40,7 @@
 		$scope.dtOptions = DTOptionsBuilder.newOptions().withLanguage(language);
 
 		function _findPretty(projects) {
-			CrudService.projects.findAllPretty(projects)
+			CrudService.common.findAllPretty(projects)
 				.then(function (response) {
 					$scope.projectsPretty = response.data;
 				})
@@ -50,7 +50,7 @@
 		};
 
 		(function () {
-			CrudService.projects.findAll(parameter)
+			CrudService.common.findAll(parameter)
 				.then(function (response) {
 					var projects = response.data;
 					_findPretty(projects);
@@ -91,6 +91,8 @@
 				}
 			});
 		};
+
+		$scope.isAdmin = () => sessionStorage.getItem('role') === 'Admin' ? true : false;
 
 	};
 

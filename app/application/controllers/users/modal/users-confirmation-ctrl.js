@@ -7,7 +7,7 @@
         var self = this;
 
         self.load = function(){
-			CrudService.users.findAll()
+			CrudService.common.findAll()
 			.then(function(response){
 				$scope.patients = response.data;
 			})

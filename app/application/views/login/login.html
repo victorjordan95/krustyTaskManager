@@ -22,25 +22,24 @@
 				</p>
 
 				<form novalidate name="userForm" ng-submit="logon()">
-
 						<div class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon">
 									<i class="glyphicon glyphicon-user" aria-hidden="true"></i>
 								</span>
-								<input type="text" class="form-control" name="username" ng-model="user.login" placeholder="Login" aria-describedby="basic-addon1"
-								 required autofocus>
+								<input type="text" class="form-control" name="username" ng-model="user.login" 
+									placeholder="Login" aria-describedby="basic-addon1" ng-blur="verifyEmail()" required>
 							</div>
 							<span ng-show="userForm.username.$touched && userForm.username.$error.required" class="alert-danger">
 								Campo obrigatório
 							</span>
 						</div>
-						<div class="form-group">
+						<div id="password-login" class="form-group hidden">
 							<div class="input-group">
 								<span class="input-group-addon">
 									<i class="glyphicon glyphicon-lock" aria-hidden="true"></i>
 								</span>
-								<input type="password" class="form-control" name="password" ng-model="user.password" placeholder="Senha" aria-describedby="basic-addon1"
+								<input type="password" id="password-input" class="form-control" name="password" ng-model="user.password" placeholder="Senha" aria-describedby="basic-addon1"
 								 required>
 							</div>
 							<span ng-show="userForm.password.$touched && userForm.password.$error.required" class="alert-danger">

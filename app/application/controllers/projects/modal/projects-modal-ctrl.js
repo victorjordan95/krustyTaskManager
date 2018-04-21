@@ -21,7 +21,7 @@
 		$scope.reloadData = () => $scope.dtInstance.rerender();
 
 		self.load = function(){
-			CrudService.projects.findAll()
+			CrudService.common.findAll()
 			.then(function(response){
 				$scope.patients = response.data;
 			})
@@ -68,7 +68,8 @@
 
 		var init = function() {
 			//new / edit
-			if(_.isUndefined(projects)){
+			debugger;
+			if(projects === undefined){
 				$scope.selected_client = $scope.clients[0];
 				$scope.projectModal = angular.copy(projects);
 			}else{
