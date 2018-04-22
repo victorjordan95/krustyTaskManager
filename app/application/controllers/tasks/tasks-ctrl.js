@@ -87,7 +87,7 @@
 		 };
 
 		(function () {
-			CrudService.tasks.findAll(parameter)
+			CrudService.common.findAll(parameter)
 				.then(function (response) {
 					var tasks = response.data;
 					_findPretty(tasks);
@@ -98,15 +98,16 @@
 		})();
 
 		function _findPretty(tasks) {
-			CrudService.tasks.findAllPretty(tasks)
+			CrudService.common.findAllPretty(tasks)
 				.then(function (response) {
 					$scope.tasks = response.data;
-					console.log($scope.tasks);
 				})
 				.catch(function (error) {
 					commonsService.error('Erro ao obter os dados');
 				});
 		};
+
+		$scope.isAdmin = () => sessionStorage.getItem('role') === 'Admin' ? true : false;
 	};
 	
 	TasksCtrl.$inject = ['$scope', 'CrudService','DTOptionsBuilder','DTColumnDefBuilder', '$httpParamSerializer', '$location', '$uibModal', 'ConvertUrlService'];

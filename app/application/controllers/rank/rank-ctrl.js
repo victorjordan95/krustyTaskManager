@@ -71,7 +71,7 @@
 		};
 		
 		// $scope.load = function(){
-		// 	CrudService.rank.findAll()
+		// 	CrudService.common.findAll()
 		// 	.then(function(response){
 		// 		$scope.patients = response.data;
 		// 	})

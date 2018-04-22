@@ -6,7 +6,7 @@
 			<div class="col-xs-12 col-sm-6">
 				<h2>Projetos Ativos</h2>
 			</div>
-			<div class="col-xs-12 col-sm-6">
+			<div class="col-xs-12 col-sm-6" ng-if="isAdmin()">
 				<button class="btn btn-primary btn-add" data-ng-click="projectsCtrl.openModal()">
 					<i class="fa fa-plus" aria-hidden="true"></i>
 					<span class="btn-add--text">Cadastrar projeto</span>
@@ -24,7 +24,7 @@
 					<table datatable="ng" dt-column-defs="dtColumnDefs" dt-options="dtOptions" class="table table-striped">
 						<thead>
 							<tr>
-								<th>Ação</th>
+								<th ng-if="isAdmin()">Ação</th>
 								<th>Nome</th>
 								<th>Cliente</th>
 								<th>Custo</th>
@@ -34,7 +34,7 @@
 						</thead>
 						<tfoot>
 							<tr>
-								<th>Ação</th>
+								<th ng-if="isAdmin()">Ação</th>
 								<th>Nome</th>
 								<th>Cliente</th>
 								<th>Custo</th>
@@ -44,7 +44,7 @@
 						</tfoot>
 						<tbody>
 							<tr ng-repeat="project in projectsPretty">
-								<td>
+								<td ng-if="isAdmin()">
 									<button class="btn btn-default btn-circle" uib-tooltip="Editar" ng-click="projectsCtrl.openModal(project)">
 										<i class="fa fa-pencil" aria-hidden="true"></i>
 									</button>

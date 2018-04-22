@@ -42,7 +42,7 @@
 
 		//Immediately-invoked function expression (IIFE)
 		(function () {
-			CrudService.typeTasks.findAll(parameter)
+			CrudService.common.findAll(parameter)
 				.then(function (response) {
 					var typeTasks = response.data;
 					_findPretty(typeTasks);
@@ -53,7 +53,7 @@
 		})();
 
 		function _findPretty(typeTasks) {
-			CrudService.typeTasks.findAllPretty(typeTasks)
+			CrudService.common.findAllPretty(typeTasks)
 				.then(function (response) {
 					$scope.typeTasksPretty = response.data;
 				})
