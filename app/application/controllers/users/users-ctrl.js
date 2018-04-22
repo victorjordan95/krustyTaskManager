@@ -52,7 +52,7 @@
 				});
 		};
 
-		(function () {
+		function _findUsers() {
 			CrudService.common.findAll(parameter)
 				.then(function (response) {
 					var users = response.data;
@@ -61,7 +61,7 @@
 				.catch(function (error) {
 					commonsService.error('Erro ao obter os dados');
 				});
-		})();
+		};
 
 		//Modal
 		self.openModal = function (users) {
@@ -94,6 +94,38 @@
 				}
 			});
 		};
+
+		var init = function() {
+			var userParamether = {
+				"interactors": [
+					{
+						"recordAction": "QUERY_ADD",
+						"entityName": "BotUser",
+						"fieldAndValue": {
+							"Id": sessionStorage.getItem('id')
+						}
+					}
+				]
+			};
+
+			CrudService.common.findAll(userParamether)
+				.then(function (response) {
+					if (response.data.recordsResult.length === 1) {
+						_findUsers();
+					} else {
+						sessionStorage.setItem("id", undefined);
+						sessionStorage.setItem("username", undefined);
+						sessionStorage.setItem("name", undefined);
+						sessionStorage.setItem("role", undefined);
+						$location.path("/");
+					}
+				}).catch(function (error) {
+					commonsService.error('Erro ao realizar consulta de usuário.');
+				})
+			;
+		}
+
+		init();
 
 	};
 

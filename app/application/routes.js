@@ -28,8 +28,7 @@
             resolve: {
                 loggedIn: function () {
                     if (sessionStorage.getItem('id') === 'undefined' || sessionStorage.getItem('id') === null) {
-                        $location.go('login');
-                        commonsService.error('Faz login porra.');
+                        $location.path('/');
                     }
                 }
             }
@@ -45,7 +44,7 @@
             resolve: {
                 loggedIn: function () {
                     if (sessionStorage.getItem('id') === 'undefined' || sessionStorage.getItem('id') === null) {
-                        $stateProvider.go('login');
+                        $location.path('/');
                     }
                 }
             }
@@ -61,7 +60,7 @@
             resolve: {
                 loggedIn: function () {
                     if (sessionStorage.getItem('id') === 'undefined' || sessionStorage.getItem('id') === null) {
-                        $stateProvider.go('login');
+                        $location.path('/');
                     }
                 }
             }
@@ -77,7 +76,7 @@
             resolve: {
                 loggedIn: function () {
                     if (sessionStorage.getItem('id') === 'undefined' || sessionStorage.getItem('id') === null) {
-                        $stateProvider.go('login');
+                        $location.path('/');
                     }
                 }
             }
@@ -93,7 +92,7 @@
             resolve: {
                 loggedIn: function () {
                     if (sessionStorage.getItem('id') === 'undefined' || sessionStorage.getItem('id') === null) {
-                        $stateProvider.go('login');
+                        $location.path('/');
                     }
                 }
             }
@@ -109,7 +108,7 @@
             resolve: {
                 loggedIn: function () {
                     if (sessionStorage.getItem('id') === 'undefined' || sessionStorage.getItem('id') === null) {
-                        $stateProvider.go('login');
+                        $location.path('/');
                     }
                 }
             }
@@ -126,7 +125,7 @@
             resolve: {
                 loggedIn: function () {
                     if (sessionStorage.getItem('id') === 'undefined' || sessionStorage.getItem('id') === null) {
-                        $stateProvider.go('login');
+                        $location.path('/');
                     }
                 }
             }
