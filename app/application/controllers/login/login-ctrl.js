@@ -82,7 +82,6 @@
 		};
 
 		focusMethod = function getFocus(id) {
-
 			document.getElementById(id).focus();
 		}
 

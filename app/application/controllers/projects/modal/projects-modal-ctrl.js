@@ -67,8 +67,6 @@
 		};
 
 		var init = function() {
-			//new / edit
-			debugger;
 			if(projects === undefined){
 				$scope.selected_client = $scope.clients[0];
 				$scope.projectModal = angular.copy(projects);

@@ -49,7 +49,7 @@
 				});
 		};
 
-		(function () {
+		function _findProjects() {
 			CrudService.common.findAll(parameter)
 				.then(function (response) {
 					var projects = response.data;
@@ -58,7 +58,7 @@
 				.catch(function (error) {
 					$scope.error(error.message);
 				});
-		})();
+		};
 
 		//Modal
 		self.openModal = function (projects) {
@@ -93,6 +93,38 @@
 		};
 
 		$scope.isAdmin = () => sessionStorage.getItem('role') === 'Admin' ? true : false;
+
+		var init = function() {
+			var userParamether = {
+				"interactors": [
+					{
+						"recordAction": "QUERY_ADD",
+						"entityName": "BotUser",
+						"fieldAndValue": {
+							"Id": sessionStorage.getItem('id')
+						}
+					}
+				]
+			};
+
+			CrudService.common.findAll(userParamether)
+				.then(function (response) {
+					if (response.data.recordsResult.length === 1) {
+						_findProjects();
+					} else {
+						sessionStorage.setItem("id", undefined);
+						sessionStorage.setItem("username", undefined);
+						sessionStorage.setItem("name", undefined);
+						sessionStorage.setItem("role", undefined);
+						$location.path("/");
+					}
+				}).catch(function (error) {
+					commonsService.error('Erro ao realizar consulta de usuário.');
+				})
+			;
+		}
+
+		init();
 
 	};
 

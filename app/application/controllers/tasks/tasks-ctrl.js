@@ -2,13 +2,10 @@
 	angular
 		.module('ktm')
 		.controller('TasksCtrl', TasksCtrl);
-	
-	function TasksCtrl($scope, CrudService,DTOptionsBuilder, DTColumnDefBuilder, $httpParamSerializer, $location, $uibModal, ConvertUrlService) {
-		
-		var url = window.location.hash;
-		var id = ConvertUrlService.convertUrl(url);
 
-		var allTasks = [];
+	function TasksCtrl($scope, CrudService, DTOptionsBuilder, DTColumnDefBuilder, $httpParamSerializer, $location, $uibModal, ConvertUrlService) {
+
+		var id = ConvertUrlService.convertUrl(window.location.hash);
 
 		var self = this;
 
@@ -42,12 +39,12 @@
 
 		$scope.dtOptions = DTOptionsBuilder.newOptions().withLanguage(language);
 
-        //Modal
-		self.openModal = function(tasks) {
-            var modalInstance = $uibModal.open({
+		//Modal
+		self.openModal = function (tasks) {
+			var modalInstance = $uibModal.open({
 				animation: true,
 				templateUrl: 'application/views/tasks/modal/tasks-modal.html',
-				size: 'md',	
+				size: 'md',
 				controller: 'TasksModalController',
 				controllerAs: '$ctrl',
 				resolve: {
@@ -56,14 +53,14 @@
 					}
 				}
 			});
-        };
-        
-    	//Modal
-		 self.openModalConfirmation = function(tasks) {
-            var modalInstance = $uibModal.open({
+		};
+
+		//Modal
+		self.openModalConfirmation = function (tasks) {
+			var modalInstance = $uibModal.open({
 				animation: true,
 				templateUrl: 'application/views/tasks/modal/confirmation-modal.html',
-				size: 'md',	
+				size: 'md',
 				controller: 'TasksConfirmationController',
 				controllerAs: 'tasksConfirmationCtrl',
 				resolve: {
@@ -74,19 +71,19 @@
 			});
 		};
 
-		 const parameter = {
-			 "interactors": [
-				 {
-					 "recordAction": "QUERY_ADD",
-					 "entityName": "Tarefa",
-					 "fieldAndValue": {
-						 "Projeto": `Projeto|${id}`
-					 }
-				 }
-			 ]
-		 };
+		const parameter = {
+			"interactors": [
+				{
+					"recordAction": "QUERY_ADD",
+					"entityName": "Tarefa",
+					"fieldAndValue": {
+						"Projeto": `Projeto|${id}`
+					}
+				}
+			]
+		};
 
-		(function () {
+		function _findTasks() {
 			CrudService.common.findAll(parameter)
 				.then(function (response) {
 					var tasks = response.data;
@@ -95,7 +92,7 @@
 				.catch(function (error) {
 					commonsService.error('Erro ao obter os dados');
 				});
-		})();
+		};
 
 		function _findPretty(tasks) {
 			CrudService.common.findAllPretty(tasks)
@@ -108,7 +105,39 @@
 		};
 
 		$scope.isAdmin = () => sessionStorage.getItem('role') === 'Admin' ? true : false;
+
+		var init = function () {
+			var userParamether = {
+				"interactors": [
+					{
+						"recordAction": "QUERY_ADD",
+						"entityName": "BotUser",
+						"fieldAndValue": {
+							"Id": sessionStorage.getItem('id')
+						}
+					}
+				]
+			};
+
+			CrudService.common.findAll(userParamether)
+				.then(function (response) {
+					if (response.data.recordsResult.length === 1) {
+						_findTasks();
+					} else {
+						sessionStorage.setItem("id", undefined);
+						sessionStorage.setItem("username", undefined);
+						sessionStorage.setItem("name", undefined);
+						sessionStorage.setItem("role", undefined);
+						$location.path("/");
+					}
+				}).catch(function (error) {
+					commonsService.error('Erro ao realizar consulta de usuário.');
+				})
+				;
+		}
+
+		init();
 	};
-	
-	TasksCtrl.$inject = ['$scope', 'CrudService','DTOptionsBuilder','DTColumnDefBuilder', '$httpParamSerializer', '$location', '$uibModal', 'ConvertUrlService'];
+
+	TasksCtrl.$inject = ['$scope', 'CrudService', 'DTOptionsBuilder', 'DTColumnDefBuilder', '$httpParamSerializer', '$location', '$uibModal', 'ConvertUrlService'];
 })();
