@@ -28,7 +28,7 @@
 									<i class="glyphicon glyphicon-user" aria-hidden="true"></i>
 								</span>
 								<input type="text" class="form-control" name="username" ng-model="user.login" 
-									placeholder="Login" aria-describedby="basic-addon1" ng-blur="verifyEmail()" required>
+									placeholder="Login" aria-describedby="basic-addon1" ng-keyup="$event.keyCode == 13 ? verifyEmail() : null" ng-blur="verifyEmail()" required>
 							</div>
 							<span ng-show="userForm.username.$touched && userForm.username.$error.required" class="alert-danger">
 								Campo obrigatório
