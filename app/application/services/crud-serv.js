@@ -24,9 +24,6 @@
 					}
 				},
 				typeTasks : {
-					findAll : function(parameters) {
-						return rest.post(`${url}/setTransaction`, JSON.stringify(parameters));
-					},
 					save : function(typeTask) {
 						return rest.post(`${url}/setTransaction`, JSON.stringify(typeTask));
 					},

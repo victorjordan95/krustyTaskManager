@@ -3,6 +3,7 @@
 		.module('ktm')
 		.controller('ProjectsCtrl', ProjectsCtrl);
 	function ProjectsCtrl($scope, CrudService, DTOptionsBuilder, DTColumnDefBuilder, $httpParamSerializer, $location, $uibModal, commonsService) {
+		
 		const parameter = {
 			"interactors": [{
 				"recordAction": "QUERY_ADD",
@@ -34,6 +35,8 @@
 				"sSortDescending": ": Ordenar colunas de forma descendente"
 			}
 		};
+
+		$scope.isAdmin = () => sessionStorage.getItem('role') === 'Admin' ? true : false;
 
 		$scope.dtColumnDefs = [DTColumnDefBuilder.newColumnDef(0).notSortable().withOption('width', '100px')];
 
@@ -91,8 +94,6 @@
 				}
 			});
 		};
-
-		$scope.isAdmin = () => sessionStorage.getItem('role') === 'Admin' ? true : false;
 
 		var init = function() {
 			var userParamether = {
