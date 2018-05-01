@@ -11,7 +11,6 @@ define([ 'ktm' ], function(app) {
 			];
 			
 			$scope.save = function(){
-				console.log($scope.user);
 				CrudService.user.save($scope.user)
 				.then(function(response){
 					$location.path("users");
@@ -34,7 +33,6 @@ define([ 'ktm' ], function(app) {
 	        	}else{
 	        		CrudService.user.findOne(urlParams.id)
 	        		.then(function(response){
-	        			console.log(response.data);
 	        			$scope.user = response.data;
 	        		})
 	        		.catch()

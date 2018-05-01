@@ -115,7 +115,6 @@
         };
         states.push(taskType);
 
-        // Exemplo nested route
         var tasks = {
             name: 'Tarefas',
             url: '/tarefas/:id/:nome',
@@ -131,6 +130,23 @@
             }
         };
         states.push(tasks);
+
+        var taskStatus = {
+            name: 'Status Tarefa',
+            url: '/status-tarefa',
+            controller: 'TypeStatusCtrl',
+            controllerAs: 'typeStatusCtrl',
+            templateUrl: 'application/views/typeStatus/typeStatus.html',
+            resolve: {
+                loggedIn: function () {
+                    if (sessionStorage.getItem('id') === 'undefined' || sessionStorage.getItem('id') === null) {
+                        $location.path('/');
+                    }
+                }
+            }
+        };
+        states.push(taskStatus);
+
 
         states.forEach(function (state) {
             $stateProvider.state(state);

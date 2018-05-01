@@ -1,8 +1,8 @@
 (function () {
 	angular
 		.module('ktm')
-		.controller('ProjectsCtrl', ProjectsCtrl);
-	function ProjectsCtrl($scope, CrudService, DTOptionsBuilder, DTColumnDefBuilder, $httpParamSerializer, $location, $uibModal, commonsService) {
+		.controller('TypeStatusCtrl', TypeStatusCtrl);
+	function TypeStatusCtrl($scope, CrudService, DTOptionsBuilder, DTColumnDefBuilder, $httpParamSerializer, $location, $uibModal, commonsService) {
 		
 		const parameter = {
 			"interactors": [{
@@ -10,7 +10,6 @@
 				"entityName": "Projeto"
 			}]
 		};
-
 		var self = this;
 
 		var language = {
@@ -65,32 +64,32 @@
 		};
 
 		//Modal
-		self.openModal = function (projects) {
+		self.openModal = function (typeStatus) {
 			var modalInstance = $uibModal.open({
 				animation: true,
-				templateUrl: 'application/views/projects/modal/projects-modal.html',
+				templateUrl: 'application/views/typeStatus/modal/typeStatus-modal.html',
 				size: 'md',
-				controller: 'ProjectsModalController',
+				controller: 'TypeStatusModalController',
 				controllerAs: '$ctrl',
 				resolve: {
-					projects: function () {
-						return projects;
+					typeStatus: function () {
+						return typeStatus;
 					}
 				}
 			});
 		};
 
 		//Modal
-		self.openModalConfirmation = function (projects) {
+		self.openModalConfirmation = function (typeStatus) {
 			var modalInstance = $uibModal.open({
 				animation: true,
-				templateUrl: 'application/views/projects/modal/confirmation-modal.html',
+				templateUrl: 'application/views/typeStatus/modal/confirmation-modal.html',
 				size: 'md',
-				controller: 'ProjectsConfirmationController',
-				controllerAs: 'projectsConfirmationCtrl',
+				controller: 'TypeStatusConfirmationController',
+				controllerAs: 'typeStatusConfirmationCtrl',
 				resolve: {
-					projects: function () {
-						return projects;
+					typeStatus: function () {
+						return typeStatus;
 					}
 				}
 			});
@@ -109,26 +108,26 @@
 				]
 			};
 
-			CrudService.common.findAll(userParamether)
-				.then(function (response) {
-					if (response.data.recordsResult.length === 1) {
-						_findProjects();
-					} else {
-						sessionStorage.setItem("id", undefined);
-						sessionStorage.setItem("username", undefined);
-						sessionStorage.setItem("name", undefined);
-						sessionStorage.setItem("role", undefined);
-						$location.path("/");
-					}
-				}).catch(function (error) {
-					commonsService.error('Erro ao realizar consulta de usuário.');
-				})
-			;
+			// CrudService.common.findAll(userParamether)
+			// 	.then(function (response) {
+			// 		if (response.data.recordsResult.length === 1) {
+			// 			// _findProjects();
+			// 		} else {
+			// 			sessionStorage.setItem("id", undefined);
+			// 			sessionStorage.setItem("username", undefined);
+			// 			sessionStorage.setItem("name", undefined);
+			// 			sessionStorage.setItem("role", undefined);
+			// 			$location.path("/");
+			// 		}
+			// 	}).catch(function (error) {
+			// 		commonsService.error('Erro ao realizar consulta de usuário.');
+			// 	})
+			// ;
 		}
 
 		init();
 
 	};
 
-	ProjectsCtrl.$inject = ['$scope', 'CrudService', 'DTOptionsBuilder', 'DTColumnDefBuilder', '$httpParamSerializer', '$location', '$uibModal', 'commonsService'];
+	TypeStatusCtrl.$inject = ['$scope', 'CrudService', 'DTOptionsBuilder', 'DTColumnDefBuilder', '$httpParamSerializer', '$location', '$uibModal', 'commonsService'];
 })();

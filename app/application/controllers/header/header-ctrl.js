@@ -10,15 +10,6 @@
 
 				$scope.logout = function () {
 					$location.path("#/login");
-					// CrudService.login.logout()
-					// 	.then(function (response) {
-					// 		$scope.currentUser = undefined;
-					// 		sessionStorage.setItem('user', undefined);
-					// 		$location.path("login");
-					// 	}
-					// 	).catch(function () {
-					// 		console.log('Logout error');
-					// 	});
 					sessionStorage.setItem("id", undefined);
 					sessionStorage.setItem("username", undefined);
 					sessionStorage.setItem("name", undefined);

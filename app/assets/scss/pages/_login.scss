@@ -19,20 +19,30 @@
     .login-form {
         color: #424242;
         padding: 0 15px;
+
+        .login-title{
+            margin: 0 0 36px;
+            padding: 0 15%;
+        }
     }
     .full-height {
         min-height: calc(100vh);
     }
     .login-logo {
-        background-color: $primary;
+        background-image: url('../img/bg-1.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
         display: flex;
         flex-flow: column wrap;
         justify-content: center;
-    }
-    .img-flag-login {
-        cursor: pointer;
-        width: 30px;
-        margin: 10px 5px;
+
+        .login-content {
+            bottom: 25%;
+            color: white;
+            left: 48px;
+            position: absolute;
+            text-shadow: 1px 1px black;
+        }
     }
     form {
         display: flex;
@@ -41,11 +51,13 @@
     }
     .form-group {
         @media screen and (min-width: 768px) {
-            padding: 0 25%;
+            padding: 0 15%;
         }
         .form-control {
             height: 50px;
-            @media screen and (min-width: 768px) {}
+        }
+        .input-group-addon {
+            background-color: #fff;
         }
     }
     input[type="submit"] {
@@ -63,7 +75,7 @@
         width: 100%;
         @media screen and (min-width: 768px) {
             transition: background-color 1s, color .5s;
-            width: 50%;
+            width: 70%;
             &:hover {
                 background-color: darken($green, 5%);
                 border-color: transparent;
@@ -80,11 +92,8 @@
         display: flex;
         flex-flow: row;
         z-index: 2;
-        .alert-danger {
-            background-color: transparent;
-            border-color: #ebccd1;
+        .help-block {
             color: #a94442;
-            margin: 8px 0;
         }
         .form-group {
             margin-bottom: 8px;
@@ -97,19 +106,7 @@
 
 @media screen and (min-width: 768px) {
     .main {
-        .form-box {
-            .alert-danger {
-                background-color: #f2dede;
-                border-color: #ebccd1;
-                color: #a94442;
-                float: none;
-                margin: 8px auto;
-                width: 50%;
-            }
-            .form-group {
-                margin-bottom: 8px;
-            }
-        }
+
         .forget-password {
             color: #fff;
             padding: 9px 0;
