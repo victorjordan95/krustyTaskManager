@@ -7,12 +7,34 @@
 
 		$scope.changePassword = function () {
 
-			CrudService.user.change($scope.newPassword).then(function (data) {
-				commonsService.success('changePassword.alert.success');
-				$location.path('/home');
-			}).catch(function () {
-				commonsService.error("changePassword.alert.error");
-			});
+			var newPassword = document.getElementById('psw2').value;
+			var parameter = {
+				"interactors": [
+					{
+						"recordAction": "EDIT",
+						"entityName": "BotUser",
+						"fieldName": "Senha",
+						"recordLine": sessionStorage.getItem('key'),
+						"newValue": newPassword
+					}
+					
+				]
+			};
+			return CrudService.projects.save(parameter)
+				.then(function (response) {
+					commonsService.success('Senha alterada com sucesso!');
+				})
+				.catch(function (error) {
+					if (error.objeto.data.exception.includes('EmptyOrNullValueException')) {
+						commonsService.error('Campo vazio!');
+						return;
+					} else {
+						if (error.objeto.data.exception.includes('UniqueConstraintException')) {
+							commonsService.error('Erro ao alterar senha!');
+							return;
+						}
+					}
+				});
 		};
 
 		$(function () {
@@ -146,5 +168,5 @@
 	};
 
 
-	ChangePasswordCtrl.$inject = ['$scope', 'CrudService', '$httpParamSerializer', '$location', 'commonsService'];
+	ChangePasswordCtrl.$inject = ['$scope', '$rootScope', '$translate', 'CrudService', '$httpParamSerializer', '$location', 'commonsService'];
 })();

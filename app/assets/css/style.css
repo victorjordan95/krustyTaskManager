@@ -1719,6 +1719,9 @@ hr.form-hr {
   margin-top: 0;
   width: 95%; }
 
+.w-50 {
+  width: 50%; }
+
 .main {
   z-index: 2; }
   .main .login-form {

@@ -13,6 +13,12 @@
 					},
 					findAllPretty : function(parameters){
 						return rest.post(`${url}/parseToEasyRecord`, JSON.stringify(parameters));
+					},
+					save : function(parameter) {
+						return rest.post(`${url}/setTransaction`, JSON.stringify(parameter));
+					},
+					edit : function(parameter) {
+						return rest.post(`${url}/setTransaction`, JSON.stringify(parameter));
 					}
 				},
 				projects: {
