@@ -87,15 +87,11 @@
 			$scope.usersModal = angular.copy(users);
 			//new / edit
 			if(_.isUndefined($scope.usersModal)){
-				console.log('creating');
-				console.log($scope.states[0]);
 		        $scope.selected_state = $scope.states[0];
 			}else{
 				_.each($scope.states, function(state) {
 					//$scope.usersModal.estado = $scope.selected_state.estado;
 					if($scope.usersModal.estado == state.estado){
-						console.log('entrou no if ', $scope.usersModal.estado);
-						console.log(state)
 						$scope.selected_state = state;
 					}
 				});

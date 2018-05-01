@@ -34,7 +34,6 @@
 					}
 				]
 			};
-			console.log('Usuário a ser procurando: ', $scope.user.login);
 			CrudService.login.logon(paramether).then(function (response) {
 				if (response.data.recordsResult.length === 1) {
 					_findPretty(response.data);
@@ -68,7 +67,6 @@
 				]
 			};
 
-			console.log($scope.user);
 			CrudService.login.logon(paramether).then(function (response) {
 				if (response.data.recordsResult.length === 0) {
 					$location.path("home");

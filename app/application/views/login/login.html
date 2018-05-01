@@ -11,53 +11,49 @@
 		</svg>
 	</div>
 	<div class="row">
-		<div class="col-md-6 full-height form-box">
+
+		<div class="col-md-5 full-height form-box">
 
 			<div class="login-form">
-				<h2 class="text-center">Krusty Task Manager</h2>
-				<p class="text-center">Insira seu usuário e senha para acessar a aplicação!</p>
 				
-				<p class="text-center hidden-sm hidden-md hidden-lg">
-					<!-- <img src="assets/img/logo.png" alt="" width="200"> -->
-				</p>
+				<h2 class="login-title">Krusty login</h2>
 
 				<form novalidate name="userForm" ng-submit="logon()">
-						<div class="form-group">
-							<div class="input-group">
-								<span class="input-group-addon">
-									<i class="glyphicon glyphicon-user" aria-hidden="true"></i>
-								</span>
-								<input type="text" class="form-control" name="username" ng-model="user.login" 
-									placeholder="Login" aria-describedby="basic-addon1" ng-keyup="$event.keyCode == 13 ? verifyEmail() : null" ng-blur="verifyEmail()" required>
-							</div>
-							<span ng-show="userForm.username.$touched && userForm.username.$error.required" class="alert-danger">
-								Campo obrigatório
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon">
+								<i class="glyphicon glyphicon-user" aria-hidden="true"></i>
 							</span>
+							<input type="text" class="form-control" name="username" ng-model="user.login" placeholder="Login" aria-describedby="basic-addon1"
+							 ng-keyup="$event.keyCode == 13 ? verifyEmail() : null" ng-blur="verifyEmail()" required>
 						</div>
-						<div id="password-login" class="form-group hidden">
-							<div class="input-group">
-								<span class="input-group-addon">
-									<i class="glyphicon glyphicon-lock" aria-hidden="true"></i>
-								</span>
-								<input type="password" id="password-input" class="form-control" name="password" ng-model="user.password" placeholder="Senha" aria-describedby="basic-addon1"
-								 required>
-							</div>
-							<span ng-show="userForm.password.$touched && userForm.password.$error.required" class="alert-danger">
-								Campo obrigatório
+						<span ng-show="userForm.username.$touched && userForm.username.$error.required" class="help-block">
+							Campo obrigatório
+						</span>
+					</div>
+					<div id="password-login" class="form-group hidden">
+						<div class="input-group">
+							<span class="input-group-addon">
+								<i class="glyphicon glyphicon-lock" aria-hidden="true"></i>
 							</span>
+							<input type="password" id="password-input" class="form-control" name="password" ng-model="user.password" placeholder="Senha"
+							 aria-describedby="basic-addon1" required>
 						</div>
+						<span ng-show="userForm.password.$touched && userForm.password.$error.required" class="help-block">
+							Campo obrigatório
+						</span>
+					</div>
 
-						<input type="submit" value="Entrar" class="btn btn-primary btn-lg" data-ng-disabled="userForm.$invalid">
+					<input type="submit" value="Entrar" class="btn btn-primary btn-lg" data-ng-disabled="userForm.$invalid">
 				</form>
 			</div>
 
 		</div>
 
-		<div class="col-md-6 full-height login-logo hidden-xs hidden-sm">
+		<div class="col-md-7 full-height login-logo hidden-xs hidden-sm">
 			<div class="login-content">
-				<p class="text-center">
-					<!-- <img src="assets/img/logo-header.png" alt="" width="200"> -->
-				</p>
+				<h2>Gerencie seu projeto!</h2>
+				<p>Tenha o gerenciamento do seu projeto pelo smartphone ou pela aplicação!</p>
 			</div>
 		</div>
 
