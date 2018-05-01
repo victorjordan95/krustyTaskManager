@@ -17,8 +17,12 @@ $loader-direction: normal;
 	width:148px;
 	height: 100px;
     top: 40%;
-    left: 45%;
+    left: 40%;
 	position: absolute;
+	@media screen and (min-width: 1024px) {
+		top: 40%;
+		left: 45%;
+	}
   
   &:after{
     content: "";
