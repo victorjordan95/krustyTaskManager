@@ -12,6 +12,7 @@
 			CrudService.common.findAllPretty(user)
 				.then(function (response) {
 					$("#password-login").removeClass('hidden').focus();
+					sessionStorage.setItem("key", response.data[0].key);
 					sessionStorage.setItem("id", response.data[0].fields.Id);
 					sessionStorage.setItem("username", response.data[0].fields["E-mail"]);
 					sessionStorage.setItem("name", response.data[0].fields.Nome);

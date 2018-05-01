@@ -15,60 +15,58 @@
 		</div>
 	</div>
 
-	<section>
-		<div class="container">
+	<section class="container">
 
-			<div class="card">
+		<div class="card">
 
-				<div class="table-responsive">
-					<table datatable="ng" dt-column-defs="dtColumnDefs" dt-options="dtOptions" class="table table-striped">
-						<thead>
-							<tr>
-								<th ng-if="isAdmin()">Ação</th>
-								<th>Nome</th>
-								<th>Cliente</th>
-								<th>Custo</th>
-								<th>Descrição</th>
-								<th>Requisito</th>
-							</tr>
-						</thead>
-						<tfoot>
-							<tr>
-								<th ng-if="isAdmin()">Ação</th>
-								<th>Nome</th>
-								<th>Cliente</th>
-								<th>Custo</th>
-								<th>Descrição</th>
-								<th>Requisito</th>
-							</tr>
-						</tfoot>
-						<tbody>
-							<tr ng-repeat="project in projectsPretty">
-								<td ng-if="isAdmin()">
-									<button class="btn btn-default btn-circle" uib-tooltip="Editar" ng-click="projectsCtrl.openModal(project)">
-										<i class="fa fa-pencil" aria-hidden="true"></i>
-									</button>
-									<button class="btn btn-default btn-circle" uib-tooltip="Excluir" ng-click="projectsCtrl.openModalConfirmation(project)">
-										<i class="fa fa-trash-o" aria-hidden="true"></i>
-									</button>
-								</td>
-								<td>
-									<a ng-href="#/tarefas/{{project.fields.Id}}/{{project.fields.Nome}}">
-										{{project.fields.Nome}}
-									</a>
-								</td>
-								<td>{{project.fields.Cliente}}</td>
-								<td>{{project.fields.Custo}}</td>
-								<td>{{project.fields.Descricao}}</td>
-								<td>{{project.fields.Requisitos}}</td>
+			<div class="table-responsive">
+				<table datatable="ng" dt-column-defs="dtColumnDefs" dt-options="dtOptions" class="table table-striped">
+					<thead>
+						<tr>
+							<th ng-if="isAdmin()">Ação</th>
+							<th>Nome</th>
+							<th>Cliente</th>
+							<th>Custo</th>
+							<th>Descrição</th>
+							<th>Requisito</th>
+						</tr>
+					</thead>
+					<tfoot>
+						<tr>
+							<th ng-if="isAdmin()">Ação</th>
+							<th>Nome</th>
+							<th>Cliente</th>
+							<th>Custo</th>
+							<th>Descrição</th>
+							<th>Requisito</th>
+						</tr>
+					</tfoot>
+					<tbody>
+						<tr ng-repeat="project in projectsPretty">
+							<td ng-if="isAdmin()">
+								<button class="btn btn-default btn-circle" uib-tooltip="Editar" ng-click="projectsCtrl.openModal(project)">
+									<i class="fa fa-pencil" aria-hidden="true"></i>
+								</button>
+								<button class="btn btn-default btn-circle" uib-tooltip="Excluir" ng-click="projectsCtrl.openModalConfirmation(project)">
+									<i class="fa fa-trash-o" aria-hidden="true"></i>
+								</button>
+							</td>
+							<td>
+								<a ng-href="#/tarefas/{{project.fields.Id}}/{{project.fields.Nome}}">
+									{{project.fields.Nome}}
+								</a>
+							</td>
+							<td>{{project.fields.Cliente}}</td>
+							<td>{{project.fields.Custo}}</td>
+							<td>{{project.fields.Descricao}}</td>
+							<td>{{project.fields.Requisitos}}</td>
 
-							</tr>
-						</tbody>
-					</table>
-				</div>
+						</tr>
+					</tbody>
+				</table>
 			</div>
-
 		</div>
+
 	</section>
 
 </main>

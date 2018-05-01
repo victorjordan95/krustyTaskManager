@@ -4,10 +4,8 @@
 		.controller('HeaderCtrl', ['$scope', '$rootScope', '$translate', 'toastr', 'CrudService', 'Idle', '$location', '$uibModal', '$uibModalStack',
 			function ($scope, $rootScope, $translate, toastr, CrudService, Idle, $location, $uibModal, $uibModalStack) {
 
-				//$scope.actualUser = JSON.parse(sessionStorage.user);
-
-				$scope.currentUser = undefined;
-
+				$scope.actualUser = sessionStorage.getItem('name');
+				
 				$scope.logout = function () {
 					$location.path("#/login");
 					sessionStorage.setItem("id", undefined);
@@ -19,13 +17,6 @@
 				$scope.hasUser = function () {
 					return sessionStorage.user !== "undefined";
 				};
-
-				$scope.language = 'en-us';
-				$scope.changeLang = function (lang) {
-					$scope.language = lang;
-					$translate.use(lang);
-				};
-
 
 				$(function () {
 					var url = window.location.href.split("/")[3];
