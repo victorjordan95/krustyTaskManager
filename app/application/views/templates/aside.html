@@ -1,21 +1,25 @@
 <aside id="sidebar" ng-controller="AsideCtrl">
 	<ul class="sidebar-menu">
-		<a ng-href="#/{{field.route}}" ng-repeat="field in navbarFields">
-			<li ng-class="selectedMenu(field)">
+		<li class="sidebar-logo">
+			<svg class="icon icon-chameleon"><use xlink:href="#icon-chameleon"></use></svg>
+		</li>
+
+		<li ng-class="selectedMenu(field)" ng-repeat="field in navbarFields">
+			<a ng-href="#/{{field.route}}" >
 				<span class="sidebar-link">
-					<i class="fa {{field.icon}} sidebar-user-icon" aria-hidden="true" ></i>
+					<i class="fa {{field.icon}} sidebar-user-icon" aria-hidden="true"></i>
 					<span class="sidebar-fieldname">{{field.name}}</span>
 				</span>
-			</li>
-		</a>
-		<a ng-click="logout()" class="hidden-md hidden-lg">
-			<li class="sidebar-user sidebar-links">
+			</a>
+		</li>
+		<li class="sidebar-user sidebar-links hidden-md hidden-lg">
+			<a ng-click="logout()">
 				<span class="sidebar-link">
-					<i class="fa fa-sign-out sidebar-user-icon" aria-hidden="true" ></i>
+					<i class="fa fa-sign-out sidebar-user-icon" aria-hidden="true"></i>
 					<span class="sidebar-fieldname">Logout</span>
 				</span>
-			</li>
-		</a>
+			</a>
+		</li>
 
 	</ul>
 </aside>

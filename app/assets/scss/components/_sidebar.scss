@@ -49,6 +49,21 @@
                 }
             }
         }
+        .sidebar-logo {
+            background-color: #FAFAFA;
+            border-bottom: 1px solid #499788;
+            border-right: 1px solid #499788;
+            padding: 16px 0 8px;
+            position: relative;
+            text-align: center;
+
+            .icon {
+                fill: $primary;
+                height: 30px;
+                text-align: center;
+                width: 30px;  
+            }
+        }
         .sidebar-link {
             border-right: 5px solid transparent;
             color: $text-color;
@@ -56,15 +71,11 @@
             display: block;
             font-weight: 300;
             position: relative;
-            // padding: 30px 20px 30px 0;
-            padding: 16px 0;
+            padding: 8px 0;
             text-align: center;
             text-decoration: none;
             transition: border-left 0.4s cubic-bezier(0.46, 0.03, 0.52, 0.96);
-            i {
-                color: $text-color;
-                font-size: 26px;
-            }
+
             .sidebar-fieldname {
                 color: #fff;
                 display: block;
@@ -138,14 +149,15 @@
     }
     .sidebar-user {
         background-color: $primary;
-        font-size: 14px;
+        border-left: 4px solid $primary;
         color: $text-sidebar;
+        clear: both;
+        font-size: 14px;
         display: block;
         margin: 0;
-        clear: both;
         .sidebar-user-icon {
             bottom: 0;
-            font-size: 30px;
+            font-size: 24px;
             height: 34px;
             margin: auto;
             left: 10px;
@@ -180,11 +192,11 @@
         background-color: $primary;
         &.active {
             background-color: rgba(238, 238, 238, 0.3);
-            border-left: 4px solid $light-green;
+            border-left: 4px solid #fff;
         }
         &:hover {
             background-color: rgba(238, 238, 238, 0.3);
-            border-left: 4px solid $light-green;
+            border-left: 4px solid #fff;
         }
     }
 }

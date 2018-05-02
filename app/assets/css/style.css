@@ -427,6 +427,18 @@ textarea {
     right: 20px;
     top: 17px;
     transition: transform 0.2s ease; }
+  #sidebar .sidebar-menu .sidebar-logo {
+    background-color: #FAFAFA;
+    border-bottom: 1px solid #499788;
+    border-right: 1px solid #499788;
+    padding: 16px 0 8px;
+    position: relative;
+    text-align: center; }
+    #sidebar .sidebar-menu .sidebar-logo .icon {
+      fill: #009688;
+      height: 30px;
+      text-align: center;
+      width: 30px; }
   #sidebar .sidebar-menu .sidebar-link {
     border-right: 5px solid transparent;
     color: #fff;
@@ -434,13 +446,10 @@ textarea {
     display: block;
     font-weight: 300;
     position: relative;
-    padding: 16px 0;
+    padding: 8px 0;
     text-align: center;
     text-decoration: none;
     transition: border-left 0.4s cubic-bezier(0.46, 0.03, 0.52, 0.96); }
-    #sidebar .sidebar-menu .sidebar-link i {
-      color: #fff;
-      font-size: 26px; }
     #sidebar .sidebar-menu .sidebar-link .sidebar-fieldname {
       color: #fff;
       display: block;
@@ -501,14 +510,15 @@ textarea {
     background-color: #009688; }
   #sidebar .sidebar-user {
     background-color: #009688;
-    font-size: 14px;
+    border-left: 4px solid #009688;
     color: #fff;
+    clear: both;
+    font-size: 14px;
     display: block;
-    margin: 0;
-    clear: both; }
+    margin: 0; }
     #sidebar .sidebar-user .sidebar-user-icon {
       bottom: 0;
-      font-size: 30px;
+      font-size: 24px;
       height: 34px;
       margin: auto;
       left: 10px;
@@ -540,10 +550,10 @@ textarea {
     background-color: #009688; }
     #sidebar .sidebar-links.active {
       background-color: rgba(238, 238, 238, 0.3);
-      border-left: 4px solid #b2dfdb; }
+      border-left: 4px solid #fff; }
     #sidebar .sidebar-links:hover {
       background-color: rgba(238, 238, 238, 0.3);
-      border-left: 4px solid #b2dfdb; }
+      border-left: 4px solid #fff; }
 
 .sidebar-collapse-active {
   overflow-x: hidden; }
@@ -1804,20 +1814,13 @@ hr.form-hr {
     color: #fff;
     font-weight: bolder; } }
 
-.bg-pink {
-  background-color: #fce4ec !important; }
+.icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor; }
 
-.bg-red {
-  background-color: #ef5350 !important; }
-
-.font-red {
-  color: #ef5350 !important; }
-
-.font-orange {
-  color: #FF9800 !important; }
-
-.font-green {
-  color: #4caf50 !important; }
-
-.size-18 {
-  font-size: 18px; }
+.icon-chameleon {
+  width: 0.7998046875em; }
