@@ -15,15 +15,6 @@
 
 		$scope.reloadData = () => $scope.dtInstance.rerender();
 
-		self.load = function () {
-			CrudService.common.findAll()
-				.then(function (response) {
-					$scope.patients = response.data;
-				})
-				.catch(function (error) {
-					$scope.error(error.message);
-				});
-		};
 
 		$scope.save = function () {
 			var typeTask = {
@@ -55,7 +46,6 @@
 					}
 				});
 		};
-
 		var init = () => typeTask  === undefined ? $scope.typeTask = angular.copy(typeTask) : $scope.typeTask = angular.copy(typeTask.fields);
 		init();
 	};

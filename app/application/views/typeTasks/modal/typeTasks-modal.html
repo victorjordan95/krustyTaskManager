@@ -1,7 +1,7 @@
 <form name="form" novalidate data-ng-submit="save()">
     <div class="modal-header">
         <h3 class="modal-title">
-            {{ (projectModal.Id == null ? 'Inserir' : 'Editar') | translate }} tipo de tarefa
+            {{ (typeTask === undefined ? 'Inserir' : 'Editar') | translate }} tipo de tarefa
         </h3>
     </div>
     <div class="modal-body">

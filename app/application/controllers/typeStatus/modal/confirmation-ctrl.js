@@ -6,16 +6,6 @@
 
         var self = this;
 
-        self.load = function(){
-			CrudService.common.findAll()
-			.then(function(response){
-				$scope.patients = response.data;
-			})
-			.catch(function (error) {
-				$scope.error(error.message);
-			});
-        };
-        
         self.typeStatusElement = {};
 
         self.cancel = function () {
@@ -50,6 +40,7 @@
         var init = function () {
             //To preserve original projects.
             self.typeStatusElement = angular.copy(typeStatus);
+            console.log(self.typeStatusElement);
         }
 
         init();

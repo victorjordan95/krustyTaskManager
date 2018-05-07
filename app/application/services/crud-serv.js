@@ -19,6 +19,9 @@
 					},
 					edit : function(parameter) {
 						return rest.post(`${url}/setTransaction`, JSON.stringify(parameter));
+					},
+					delete : function(parameter) {
+						return rest.post(`${url}/setTransaction`, JSON.stringify(parameter));
 					}
 				},
 				projects: {

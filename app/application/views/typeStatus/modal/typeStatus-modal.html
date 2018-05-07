@@ -1,7 +1,7 @@
 <form name="form" novalidate data-ng-submit="save()">
     <div class="modal-header">
         <h3 class="modal-title">
-            {{ (typeStatusModal.Id == null ? 'Inserir' : 'Editar') | translate }} status de Tarefa
+            {{ (typeStatusModal.Nome === undefined ? 'Inserir' : 'Editar') | translate }} status de tarefa
         </h3>
     </div>
     <div class="modal-body">
@@ -9,7 +9,7 @@
             <div class="form-group col-xs-12">
                 <label>Status</label>
                 <input name="nome" type="text" placeholder="Novo tipo de Status" 
-                data-ng-model="typeStatusModal.Status" maxlength="50" class="form-control" autofocus="autofocus" required>
+                data-ng-model="typeStatusModal.Nome" maxlength="50" class="form-control" autofocus="autofocus" required>
             </div>
         </div>
     </div>

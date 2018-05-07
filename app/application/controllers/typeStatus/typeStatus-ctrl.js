@@ -7,7 +7,7 @@
 		const parameter = {
 			"interactors": [{
 				"recordAction": "QUERY_ADD",
-				"entityName": "Projeto"
+				"entityName": "Status Tarefa"
 			}]
 		};
 		var self = this;
@@ -42,21 +42,21 @@
 
 		$scope.dtOptions = DTOptionsBuilder.newOptions().withLanguage(language);
 
-		function _findPretty(projects) {
-			CrudService.common.findAllPretty(projects)
+		function _findPretty(status) {
+			CrudService.common.findAllPretty(status)
 				.then(function (response) {
-					$scope.projectsPretty = response.data;
+					$scope.statusPretty = response.data;
 				})
 				.catch(function (error) {
 					$scope.error(error.message);
 				});
 		};
 
-		function _findProjects() {
+		function _findStatus() {
 			CrudService.common.findAll(parameter)
 				.then(function (response) {
-					var projects = response.data;
-					_findPretty(projects);
+					var status = response.data;
+					_findPretty(status);
 				})
 				.catch(function (error) {
 					$scope.error(error.message);
@@ -108,21 +108,21 @@
 				]
 			};
 
-			// CrudService.common.findAll(userParamether)
-			// 	.then(function (response) {
-			// 		if (response.data.recordsResult.length === 1) {
-			// 			// _findProjects();
-			// 		} else {
-			// 			sessionStorage.setItem("id", undefined);
-			// 			sessionStorage.setItem("username", undefined);
-			// 			sessionStorage.setItem("name", undefined);
-			// 			sessionStorage.setItem("role", undefined);
-			// 			$location.path("/");
-			// 		}
-			// 	}).catch(function (error) {
-			// 		commonsService.error('Erro ao realizar consulta de usuário.');
-			// 	})
-			// ;
+			CrudService.common.findAll(userParamether)
+				.then(function (response) {
+					if (response.data.recordsResult.length === 1) {
+						_findStatus();
+					} else {
+						sessionStorage.setItem("id", undefined);
+						sessionStorage.setItem("username", undefined);
+						sessionStorage.setItem("name", undefined);
+						sessionStorage.setItem("role", undefined);
+						$location.path("/");
+					}
+				}).catch(function (error) {
+					commonsService.error('Erro ao realizar consulta de usuário.');
+				})
+			;
 		}
 
 		init();

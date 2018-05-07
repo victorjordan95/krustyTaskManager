@@ -1,23 +1,23 @@
 <form name="form">
 	<div class="modal-header">
-		<button type="button" class="close" data-ng-click="projectsConfirmationCtrl.cancel()">
+		<button type="button" class="close" data-ng-click="typeStatusConfirmationCtrl.cancel()">
 			<span aria-hidden="true">&times;</span>
 		</button>
 	
 		<h4 class="modal-title">
-			Excluir projeto
+			Excluir Status
 		</h4>
 	</div>
 	<div class="modal-body">
-		<p>Você selecionou para excluir: <strong>{{projectsConfirmationCtrl.projectsElement.fields.Nome}}</strong></p>
+		<p>Você selecionou para excluir: <strong>{{typeStatusConfirmationCtrl.typeStatusElement.fields.Nome}}</strong></p>
 		<p>Deseja continuar com essa ação?</p>
 	</div>
 
 	<div class="modal-footer">
-		<button type="button" class="btn btn-default" data-dismiss="modal" data-ng-click="projectsConfirmationCtrl.cancel()">
+		<button type="button" class="btn btn-default" data-dismiss="modal" data-ng-click="typeStatusConfirmationCtrl.cancel()">
 			Cancelar
 		</button>
-		<button type="button" class="btn btn-danger" data-dismiss="modal" data-ng-click="projectsConfirmationCtrl.delete()">
+		<button type="button" class="btn btn-danger" data-dismiss="modal" data-ng-click="typeStatusConfirmationCtrl.delete()">
 			<i class="glyphicon glyphicon-trash"></i>
 			Excluir
 		</button>

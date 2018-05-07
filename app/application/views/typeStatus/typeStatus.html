@@ -35,19 +35,17 @@
 							</tr>
 						</tfoot>
 						<tbody>
-							<tr ng-repeat="project in projectsPretty">
+							<tr ng-repeat="status in statusPretty">
 								<td ng-if="isAdmin()">
-									<button class="btn btn-default btn-circle" uib-tooltip="Editar" ng-click="typeStatusCtrl.openModal(project)">
+									<button class="btn btn-default btn-circle" uib-tooltip="Editar" ng-click="typeStatusCtrl.openModal(status)">
 										<i class="fa fa-pencil" aria-hidden="true"></i>
 									</button>
-									<button class="btn btn-default btn-circle" uib-tooltip="Excluir" ng-click="typeStatusCtrl.openModalConfirmation(project)">
+									<button class="btn btn-default btn-circle" uib-tooltip="Excluir" ng-click="typeStatusCtrl.openModalConfirmation(status)">
 										<i class="fa fa-trash-o" aria-hidden="true"></i>
 									</button>
 								</td>
 								<td>
-									<a ng-href="#/tarefas/{{project.fields.Id}}/{{project.fields.Nome}}">
-										{{project.fields.Nome}}
-									</a>
+									{{status.fields.Nome}}
 								</td>
 							</tr>
 						</tbody>
