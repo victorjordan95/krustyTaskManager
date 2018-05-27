@@ -84,18 +84,8 @@
 
 		var init = function() {
 			//To preserve original organization.
-			$scope.usersModal = angular.copy(users);
-			//new / edit
-			if(_.isUndefined($scope.usersModal)){
-		        $scope.selected_state = $scope.states[0];
-			}else{
-				_.each($scope.states, function(state) {
-					//$scope.usersModal.estado = $scope.selected_state.estado;
-					if($scope.usersModal.estado == state.estado){
-						$scope.selected_state = state;
-					}
-				});
-			}
+			$scope.userModal = angular.copy(users);
+			console.log($scope.userModal)
 		}
 
 		init();

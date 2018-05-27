@@ -80,7 +80,7 @@
 		};
 
 		//Modal
-		self.openModalConfirmation = function (users) {
+		self.openModalConfirmation = function (user) {
 			var modalInstance = $uibModal.open({
 				animation: true,
 				templateUrl: 'application/views/users/modal/confirmation-modal.html',
@@ -88,8 +88,8 @@
 				controller: 'UsersConfirmationController',
 				controllerAs: 'usersConfirmationCtrl',
 				resolve: {
-					users: function () {
-						return users;
+					user: function () {
+						return user;
 					}
 				}
 			});

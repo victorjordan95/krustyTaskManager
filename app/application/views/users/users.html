@@ -6,12 +6,6 @@
 			<div class="col-xs-12 col-sm-6">
 				<h2>Usuários</h2>
 			</div>
-			<!-- <div class="col-xs-12 col-sm-6">
-				<button class="btn btn-primary btn-create" data-ng-click="pacienteCtrl.openModal()">
-					<i class="fa fa-plus" aria-hidden="true"></i>
-					Cadastrar usuário
-				</button>
-			</div> -->
 		</div>
 	</div>
 
@@ -41,10 +35,10 @@
 						<tbody>
 							<tr ng-repeat="user in usersPretty">
 								<td>
-									<button class="btn btn-default btn-circle" uib-tooltip="Editar" ng-click="pacienteCtrl.openModal(patient)">
+									<button class="btn btn-default btn-circle" uib-tooltip="Editar" ng-click="usersCtrl.openModal(user)">
 										<i class="fa fa-pencil" aria-hidden="true"></i>
 									</button>
-									<button class="btn btn-default btn-circle" uib-tooltip="Excluir" ng-click="pacienteCtrl.openModalConfirmation(patient)">
+									<button class="btn btn-default btn-circle" uib-tooltip="Excluir" ng-click="usersCtrl.openModalConfirmation(user)">
 										<i class="fa fa-trash-o" aria-hidden="true"></i>
 									</button>
 								</td>

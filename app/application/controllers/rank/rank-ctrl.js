@@ -2,9 +2,9 @@
 	angular
 		.module('ktm')
 		.controller('RankCtrl', RankCtrl);
-	
-	function RankCtrl($scope, CrudService,DTOptionsBuilder, DTColumnDefBuilder, $httpParamSerializer, $location, $uibModal) {
-		
+
+	function RankCtrl($scope, CrudService, DTOptionsBuilder, DTColumnDefBuilder, $httpParamSerializer, $location, $uibModal) {
+
 		var self = this;
 
 		var language = {
@@ -32,18 +32,22 @@
 		}
 
 		$scope.dtColumnDefs = [
-			DTColumnDefBuilder.newColumnDef(0).notSortable().withOption('width', '100px'),
+			DTColumnDefBuilder.newColumnDef(0).withOption('width', '100px'),
+			DTOptionsBuilder.newOptions().withOption('order', [
+				[2, 'asc']
+			])
 		];
 
-		$scope.dtOptions = DTOptionsBuilder.newOptions()
-		.withLanguage(language);
+		$scope.dtOptions = DTOptionsBuilder.newOptions().withLanguage(language).withOption('order', [
+			[2, 'desc']
+		]);
 
-        //Modal
-		self.openModal = function(rank) {
-            var modalInstance = $uibModal.open({
+		//Modal
+		self.openModal = function (rank) {
+			var modalInstance = $uibModal.open({
 				animation: true,
 				templateUrl: 'application/views/rank/modal/rank-modal.html',
-				size: 'md',	
+				size: 'md',
 				controller: 'RankModalController',
 				controllerAs: '$ctrl',
 				resolve: {
@@ -52,14 +56,14 @@
 					}
 				}
 			});
-        };
-        
-    	//Modal
-		 self.openModalConfirmation = function(rank) {
-            var modalInstance = $uibModal.open({
+		};
+
+		//Modal
+		self.openModalConfirmation = function (rank) {
+			var modalInstance = $uibModal.open({
 				animation: true,
 				templateUrl: 'application/views/rank/modal/confirmation-modal.html',
-				size: 'md',	
+				size: 'md',
 				controller: 'RankConfirmationController',
 				controllerAs: 'rankConfirmationCtrl',
 				resolve: {
@@ -69,30 +73,76 @@
 				}
 			});
 		};
-		
-		// $scope.load = function(){
-		// 	CrudService.common.findAll()
-		// 	.then(function(response){
-		// 		$scope.patients = response.data;
-		// 	})
-		// 	.catch(function (error) {
-		// 		$scope.error(error.message);
-		// 	});
-		// };
-    	
-    	//Remove
-        self.remove = function (id) {
-    		CrudService.rank.remove(id)
-    		.then(function(response){
-    			self.load();
-    			commonsService.success('rank.alert.success');
-    		});
+
+		function _findUsers() {
+			const parameter = {
+				"interactors": [{
+					"recordAction": "QUERY_ADD",
+					"entityName": "BotUser"
+				}]
+			};
+
+			CrudService.common.findAll(parameter)
+				.then(function (response) {
+					var users = response.data;
+					_findPretty(users);
+				})
+				.catch(function (error) {
+					commonsService.error('Erro ao obter os dados');
+				});
+		};
+
+		function _findPretty(users) {
+			CrudService.common.findAllPretty(users)
+				.then(function (response) {
+					$scope.users = response.data;
+				})
+				.catch(function (error) {
+					commonsService.error('Erro ao obter os dados');
+				});
+		};
+
+		//Remove
+		self.remove = function (id) {
+			CrudService.rank.remove(id)
+				.then(function (response) {
+					self.load();
+					commonsService.success('rank.alert.success');
+				});
 		}
-		
+
 		// $scope.load();
-        
-        
+		var init = function () {
+			var userParamether = {
+				"interactors": [{
+					"recordAction": "QUERY_ADD",
+					"entityName": "BotUser",
+					"fieldAndValue": {
+						"Id": sessionStorage.getItem('id')
+					}
+				}]
+			};
+
+			CrudService.common.findAll(userParamether)
+				.then(function (response) {
+					if (response.data.recordsResult.length === 1) {
+						_findUsers();
+					} else {
+						sessionStorage.setItem("id", undefined);
+						sessionStorage.setItem("username", undefined);
+						sessionStorage.setItem("name", undefined);
+						sessionStorage.setItem("role", undefined);
+						$location.path("/");
+					}
+				}).catch(function (error) {
+					commonsService.error('Erro ao realizar consulta de usuário.');
+				});
+		}
+
+		init();
+
+
 	};
-	
-	RankCtrl.$inject = ['$scope', 'CrudService','DTOptionsBuilder','DTColumnDefBuilder', '$httpParamSerializer', '$location', '$uibModal'];
+
+	RankCtrl.$inject = ['$scope', 'CrudService', 'DTOptionsBuilder', 'DTColumnDefBuilder', '$httpParamSerializer', '$location', '$uibModal'];
 })();
