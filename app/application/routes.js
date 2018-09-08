@@ -147,6 +147,22 @@
         };
         states.push(taskStatus);
 
+        var client = {
+            name: 'Clientes',
+            url: '/clientes',
+            controller: 'ClientCtrl',
+            controllerAs: 'clientCtrl',
+            templateUrl: 'application/views/client/client.html',
+            resolve: {
+                loggedIn: function () {
+                    if (sessionStorage.getItem('id') === 'undefined' || sessionStorage.getItem('id') === null) {
+                        $location.path('/');
+                    }
+                }
+            }
+        };
+        states.push(client);
+
 
         states.forEach(function (state) {
             $stateProvider.state(state);

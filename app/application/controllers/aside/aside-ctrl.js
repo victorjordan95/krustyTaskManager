@@ -20,6 +20,7 @@
 			{ "name":"Projetos", "route" : "projetos", "icon" : "fa-handshake-o"},
 			{ "name":"Tipo tarefa", "route" : "tipo-tarefa", "icon" : "fa-clipboard"},
 			{ "name":"Status tarefa", "route" : "status-tarefa", "icon" : "fa-clipboard"},
+			{ "name":"Clientes", "route" : "clientes", "icon" : "fa-clipboard"},
 		];
 
 		$scope.selectedMenu = function(navbarFields){

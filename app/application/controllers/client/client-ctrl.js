@@ -1,12 +1,9 @@
 (function () {
 	angular
 		.module('ktm')
-		.controller('TasksCtrl', TasksCtrl);
-
-	function TasksCtrl($scope, CrudService, DTOptionsBuilder, DTColumnDefBuilder, $httpParamSerializer, $location, $uibModal, ConvertUrlService) {
-
-		var id = ConvertUrlService.convertUrl(window.location.hash);
-
+		.controller('ClientCtrl', ClientCtrl);
+	function ClientCtrl($scope, CrudService, DTOptionsBuilder, DTColumnDefBuilder, $httpParamSerializer, $location, $uibModal, commonsService) {
+		
 		var self = this;
 
 		var language = {
@@ -31,83 +28,76 @@
 				"sSortAscending": ": Ordenar colunas de forma ascendente",
 				"sSortDescending": ": Ordenar colunas de forma descendente"
 			}
-		}
-
-		$scope.dtColumnDefs = [
-			DTColumnDefBuilder.newColumnDef(0).notSortable().withOption('width', '100px'),
-		];
-
-		$scope.dtOptions = DTOptionsBuilder.newOptions().withLanguage(language);
-
-		//Modal
-		self.openModal = function (tasks) {
-			debugger;
-			var modalInstance = $uibModal.open({
-				animation: true,
-				templateUrl: 'application/views/tasks/modal/task-modal.html',
-				size: 'md',
-				controller: 'TasksModalController',
-				controllerAs: '$ctrl',
-				resolve: {
-					tasks: function () {
-						return tasks;
-					}
-				}
-			});
-		};
-
-		//Modal
-		self.openModalConfirmation = function (tasks) {
-			var modalInstance = $uibModal.open({
-				animation: true,
-				templateUrl: 'application/views/tasks/modal/confirmation-modal.html',
-				size: 'md',
-				controller: 'TasksConfirmationController',
-				controllerAs: 'tasksConfirmationCtrl',
-				resolve: {
-					tasks: function () {
-						return tasks;
-					}
-				}
-			});
-		};
-
-		const parameter = {
-			"interactors": [
-				{
-					"recordAction": "QUERY_ADD",
-					"entityName": "Tarefa",
-					"fieldAndValue": {
-						"Projeto": `Projeto|${id}`
-					}
-				}
-			]
-		};
-
-		function _findTasks() {
-			CrudService.common.findAll(parameter)
-				.then(function (response) {
-					var tasks = response.data;
-					_findPretty(tasks);
-				})
-				.catch(function (error) {
-					commonsService.error('Erro ao obter os dados');
-				});
-		};
-
-		function _findPretty(tasks) {
-			CrudService.common.findAllPretty(tasks)
-				.then(function (response) {
-					$scope.tasks = response.data;
-				})
-				.catch(function (error) {
-					commonsService.error('Erro ao obter os dados');
-				});
 		};
 
 		$scope.isAdmin = () => sessionStorage.getItem('role') === 'Admin' ? true : false;
 
-		var init = function () {
+		$scope.dtColumnDefs = [DTColumnDefBuilder.newColumnDef(0).notSortable().withOption('width', '100px')];
+
+		$scope.dtOptions = DTOptionsBuilder.newOptions().withLanguage(language);
+
+		function _findPretty(clients) {
+			CrudService.common.findAllPretty(clients)
+				.then(function (response) {
+					console.log(response.data);
+					$scope.clientsPretty = response.data;
+				})
+				.catch(function (error) {
+					$scope.error(error.message);
+				});
+		};
+
+		function _findClients() {
+			const parameter = {
+				"interactors": [{
+					"recordAction": "QUERY_ADD",
+					"entityName": "Cliente"
+				}]
+			};
+
+			CrudService.common.findAll(parameter)
+				.then(function (response) {
+					var clients = response.data;
+					_findPretty(clients);
+				})
+				.catch(function (error) {
+					$scope.error(error.message);
+				});
+		};
+
+		//Modal
+		self.openModal = function (client) {
+			var modalInstance = $uibModal.open({
+				animation: true,
+				templateUrl: 'application/views/client/modal/client-modal.html',
+				size: 'md',
+				controller: 'ClientModalController',
+				controllerAs: '$ctrl',
+				resolve: {
+					client: function () {
+						return client;
+					}
+				}
+			});
+		};
+
+		//Modal
+		self.openModalConfirmation = function (client) {
+			var modalInstance = $uibModal.open({
+				animation: true,
+				templateUrl: 'application/views/client/modal/confirmation-modal.html',
+				size: 'md',
+				controller: 'ClientConfirmationController',
+				controllerAs: 'clientConfirmationController',
+				resolve: {
+					client: function () {
+						return client;
+					}
+				}
+			});
+		};
+
+		var init = function() {
 			var userParamether = {
 				"interactors": [
 					{
@@ -123,7 +113,7 @@
 			CrudService.common.findAll(userParamether)
 				.then(function (response) {
 					if (response.data.recordsResult.length === 1) {
-						_findTasks();
+						_findClients();
 					} else {
 						sessionStorage.setItem("id", undefined);
 						sessionStorage.setItem("username", undefined);
@@ -134,11 +124,12 @@
 				}).catch(function (error) {
 					commonsService.error('Erro ao realizar consulta de usuário.');
 				})
-				;
+			;
 		}
 
 		init();
+
 	};
 
-	TasksCtrl.$inject = ['$scope', 'CrudService', 'DTOptionsBuilder', 'DTColumnDefBuilder', '$httpParamSerializer', '$location', '$uibModal', 'ConvertUrlService'];
+	ClientCtrl.$inject = ['$scope', 'CrudService', 'DTOptionsBuilder', 'DTColumnDefBuilder', '$httpParamSerializer', '$location', '$uibModal', 'commonsService'];
 })();

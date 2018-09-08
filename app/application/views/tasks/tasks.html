@@ -24,7 +24,7 @@
 					<table datatable="ng" dt-column-defs="dtColumnDefs" dt-options="dtOptions" class="table table-striped">
 						<thead>
 							<tr>
-								<th ng-if="isAdmin()">Ação</th>
+								<th>Ação</th>
 								<th>Projeto</th>
 								<th>Nome</th>
 								<th>Tipo</th>
@@ -36,7 +36,7 @@
 						</thead>
 						<tfoot>
 							<tr>
-								<th ng-if="isAdmin()">Ação</th>
+								<th>Ação</th>
 								<th>Projeto</th>
 								<th>Nome</th>
 								<th>Tipo</th>
@@ -48,11 +48,11 @@
 						</tfoot>
 						<tbody>
 							<tr ng-repeat="task in tasks">
-								<td ng-if="isAdmin()">
-									<button class="btn btn-default btn-circle" uib-tooltip="Editar" ng-click="rankCtrl.openModal(patient)">
+								<td>
+									<button class="btn btn-default btn-circle" uib-tooltip="Editar" ng-click="tasksCtrl.openModal(task)">
 										<i class="fa fa-pencil" aria-hidden="true"></i>
 									</button>
-									<button class="btn btn-default btn-circle" uib-tooltip="Excluir" ng-click="rankCtrl.openModalConfirmation(patient)">
+									<button  ng-if="isAdmin()" class="btn btn-default btn-circle" uib-tooltip="Excluir" ng-click="tasksCtrl.openModalConfirmation(task)">
 										<i class="fa fa-trash-o" aria-hidden="true"></i>
 									</button>
 								</td>
