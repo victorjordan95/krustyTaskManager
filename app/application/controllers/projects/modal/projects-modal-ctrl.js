@@ -11,24 +11,60 @@
 
 		$scope.dtInstance = {};
 
-		$scope.clients = [
-			{ Cliente : "Selecione uma opção" },
-			{ Cliente : "Cliente|Iniciativa|1" },
-		];
-
 		$scope.cancel = () => $uibModalInstance.close();
 
 		$scope.reloadData = () => $scope.dtInstance.rerender();
 
-		self.load = function(){
-			CrudService.common.findAll()
-			.then(function(response){
-				$scope.patients = response.data;
-			})
-			.catch(function (error) {
-				$scope.error(error.message);
-			});
+		// self.load = function(){
+		// 	CrudService.common.findAll()
+		// 	.then(function(response){
+		// 		$scope.patients = response.data;
+		// 	})
+		// 	.catch(function (error) {
+		// 		$scope.error(error.message);
+		// 	});
+		// };
+
+		function _findPretty(clientes) {
+			CrudService.common.findAllPretty(clientes)
+				.then(function (response) {
+					$scope.clientesPretty = response.data;
+					
+					if(projects === undefined){
+						$scope.selected_client = $scope.clientesPretty[0];
+						$scope.projectModal = angular.copy(projects);
+					}else{
+						$scope.projectModal = angular.copy(projects.fields);
+						projectKey = projects.key;
+						$scope.clientesPretty.forEach(element => {
+							if($scope.projectModal.Cliente == `${element.entityName}|${element.key}`){
+								$scope.selected_client = element;
+							}
+						});
+					}
+				})
+				.catch(function (error) {
+					$scope.error(error.message);
+				});
 		};
+
+		function _findClients() {
+			const parameter = {
+				"interactors": [{
+					"recordAction": "QUERY_ADD",
+					"entityName": "Cliente"
+				}]
+			};
+			CrudService.common.findAll(parameter)
+				.then(function (response) {
+					var clientes = response.data;
+					_findPretty(clientes);
+				})
+				.catch(function (error) {
+					$scope.error(error.message);
+				});
+		};
+
 
 		$scope.save = function () {
 			$scope.projectModal.Cliente = $scope.selected_client.Cliente;
@@ -37,13 +73,7 @@
 					{
 						"recordAction" : "ADD",
 						"entityName" : "Projeto",
-						"fieldAndValue" : {
-							"Nome" : $scope.projectModal.Nome,
-							"Custo" : $scope.projectModal.Custo,
-							"Cliente" : $scope.projectModal.Cliente,
-							"Descricao" : $scope.projectModal.Descricao,
-							"Requisitos" : $scope.projectModal.Requisitos
-						}
+						"fieldAndValue" : $scope.projectModal
 					}	
 				]
 			};
@@ -66,20 +96,10 @@
 				});
 		};
 
+
+
 		var init = function() {
-			if(projects === undefined){
-				$scope.selected_client = $scope.clients[0];
-				$scope.projectModal = angular.copy(projects);
-			}else{
-				$scope.projectModal = angular.copy(projects.fields);
-				projectKey = projects.key;
-				_.each($scope.clients, function(client) {
-					if($scope.projectModal.Cliente == client.Cliente){
-						$scope.selected_client = client;
-					}
-				});
-			}
-			CrudService.common.ge
+			_findClients();
 		}
 
 		init();

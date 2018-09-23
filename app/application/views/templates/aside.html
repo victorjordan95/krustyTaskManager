@@ -5,7 +5,7 @@
 			<svg class="icon icon-chameleon"><use xlink:href="#icon-chameleon"></use></svg>
 		</li>
 
-		<li ng-class="selectedMenu(field)" ng-repeat="field in navbarFields">
+		<li ng-class="selectedMenu(field)" ng-repeat="field in navbarFields" ng-if="field.admin">
 			<a ng-href="#/{{field.route}}" >
 				<span class="sidebar-link">
 					<i class="fa {{field.icon}} sidebar-user-icon" aria-hidden="true"></i>

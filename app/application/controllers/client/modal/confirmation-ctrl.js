@@ -25,14 +25,14 @@
             return CrudService.projects.delete(parameter)
                 .then(function (response) {
                     $uibModalInstance.close(response.data);
-                    commonsService.success('Projeto removido com sucesso!');
+                    commonsService.success('Cliente removido com sucesso!');
 					location.reload();
                 })
                 .catch(function (error) {
                     if (error.objeto.data.exception.includes('LinkedExpcetion')) {
-                        commonsService.error('Erro ao excluir o projeto!');
+                        commonsService.error('Erro ao excluir o cliente!');
                     } else {
-                        commonsService.error('Erro ao excluir o projeto!');
+                        commonsService.error('Erro ao excluir o cliente!');
                     }
                 });
         };

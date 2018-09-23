@@ -41,7 +41,6 @@
 
 		//Modal
 		self.openModal = function (tasks) {
-			debugger;
 			var modalInstance = $uibModal.open({
 				animation: true,
 				templateUrl: 'application/views/tasks/modal/task-modal.html',

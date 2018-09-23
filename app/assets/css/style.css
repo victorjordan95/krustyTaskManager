@@ -1827,7 +1827,8 @@ hr.form-hr {
     .main .form-box .help-block {
       color: #a94442; }
     .main .form-box .form-group {
-      margin-bottom: 8px; }
+      margin-bottom: 8px;
+      width: 100%; }
       .main .form-box .form-group .input-group {
         margin: 0 auto; }
 

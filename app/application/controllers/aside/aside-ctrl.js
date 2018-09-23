@@ -3,8 +3,11 @@
 		.module('ktm')
 		.controller('AsideCtrl', AsideCtrl);
 
-	function AsideCtrl($scope, $rootScope, $translate, CrudService, $httpParamSerializer, $location, commonsService) {
+	function AsideCtrl($scope, $rootScope, $location, commonsService) {
 		$scope.actualUser = sessionStorage.getItem('name');
+		$scope.isAdmin = () => sessionStorage.getItem('role') === 'Admin' ? true : false;
+
+		const userRole = $scope.isAdmin();
 
 		$scope.logout = function () {
 			$location.path("#/login");
@@ -14,13 +17,15 @@
 			sessionStorage.setItem("role", undefined);
 		};
 
+		$scope.isAdmin = () => sessionStorage.getItem('role') === 'Admin' ? true : false;
+
 		$scope.navbarFields = [
-			{ "name":"Usuários", "route" : "usuarios",  "icon" : "fa-users"},
-			{ "name":"Rank", "route" : "rank", "icon" : "fa-trophy"},
-			{ "name":"Projetos", "route" : "projetos", "icon" : "fa-handshake-o"},
-			{ "name":"Tipo tarefa", "route" : "tipo-tarefa", "icon" : "fa-clipboard"},
-			{ "name":"Status tarefa", "route" : "status-tarefa", "icon" : "fa-clipboard"},
-			{ "name":"Clientes", "route" : "clientes", "icon" : "fa-clipboard"},
+			{ "admin": userRole, "name":"Usuários", "route" : "usuarios",  "icon" : "fa-users"},
+			{ "admin": true, "name":"Rank", "route" : "rank", "icon" : "fa-trophy"},
+			{ "admin": true, "name":"Projetos", "route" : "projetos", "icon" : "fa-handshake-o"},
+			{ "admin": userRole, "name":"Tipo tarefa", "route" : "tipo-tarefa", "icon" : "fa-clipboard"},
+			{ "admin": userRole, "name":"Status tarefa", "route" : "status-tarefa", "icon" : "fa-clipboard"},
+			{ "admin": userRole, "name":"Clientes", "route" : "clientes", "icon" : "fa-clipboard"},
 		];
 
 		$scope.selectedMenu = function(navbarFields){
@@ -32,5 +37,5 @@
 		}
 
 	};
-	AsideCtrl.$inject = ['$scope', '$rootScope', '$translate', 'CrudService', '$httpParamSerializer', '$location', 'commonsService',];
+	AsideCtrl.$inject = ['$scope', '$location', 'commonsService',];
 })();

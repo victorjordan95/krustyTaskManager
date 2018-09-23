@@ -5,6 +5,7 @@
         </h3>
     </div>
     <div class="modal-body">
+        <input type="hidden" name="" data-ng-model="projectModal.Id">
         <div class="row">
             <div class="form-group col-xs-12 col-md-6">
                 <label>Nome</label>
@@ -19,7 +20,7 @@
         <div class="row">
             <div class="form-group col-xs-12">
                 <label>Cliente</label>
-                <select ng-model="selected_client" ng-options="client as client.Cliente for client in clients" class="form-control">           
+                <select ng-model="selected_client" ng-options="client as client.fields.Nome for client in clientesPretty" class="form-control">           
                 </select>
             </div>
         </div>

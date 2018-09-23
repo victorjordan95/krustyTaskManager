@@ -1,4 +1,3 @@
-
 (function () {
 	angular
 		.module('ktm')
@@ -24,34 +23,34 @@
 		};
 
 		$scope.verifyEmail = function () {
-			var paramether = {
-				"interactors": [
-					{
+			if ($scope.user.login) {
+				var paramether = {
+					"interactors": [{
 						"recordAction": "QUERY_ADD",
 						"entityName": "BotUser",
 						"fieldAndValue": {
 							"E-mail": $scope.user.login
 						}
+					}]
+				};
+				CrudService.login.logon(paramether).then(function (response) {
+					if (response.data.recordsResult.length === 1) {
+						_findPretty(response.data);
+					} else {
+						commonsService.error('Usuário inexistente!');
+						$("#password-input").val('');
 					}
-				]
-			};
-			CrudService.login.logon(paramether).then(function (response) {
-				if (response.data.recordsResult.length === 1) {
-					_findPretty(response.data);
-				} else {
-					commonsService.error('Usuário inexistente!');
-					$("#password-input").val('');
-				}
-			}).catch(function (error) {
-				commonsService.error('Erro ao realizar consulta de usuário.');
-			});
+				}).catch(function (error) {
+					commonsService.error('Erro ao realizar consulta de usuário.');
+				});
+			}
+
 		};
 
 		$scope.logon = function () {
 
 			var paramether = {
-				"interactors": [
-					{
+				"interactors": [{
 						"recordAction": "QUERY_ADD",
 						"entityName": "BotUser",
 						"fieldAndValue": {
@@ -85,5 +84,5 @@
 		}
 
 	};
-	LoginCtrl.$inject = ['$scope', '$rootScope', '$translate', 'CrudService', '$httpParamSerializer', '$location', 'commonsService',];
+	LoginCtrl.$inject = ['$scope', '$rootScope', '$translate', 'CrudService', '$httpParamSerializer', '$location', 'commonsService', ];
 })();
