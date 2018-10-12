@@ -1,7 +1,7 @@
 <div ng-include="'application/views/templates/header.html'"></div>
 <div ng-include="'application/views/templates/aside.html'"></div>
 <main>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-12 col-sm-6">
 				<h2>Tarefas</h2>
@@ -16,7 +16,7 @@
 	</div>
 
 	<section>
-		<div class="container">
+		<div class="container-fluid">
 
 			<div class="card">
 
@@ -27,10 +27,12 @@
 								<th>Ação</th>
 								<th>Nome</th>
 								<th>Tipo</th>
+								<th>Pontos</th>
 								<th>Responsável</th>
 								<th>Descricao</th>
 								<th>Data Inicial</th>
 								<th>Data Final</th>
+								<th>Status</th>
 							</tr>
 						</thead>
 						<tfoot>
@@ -38,31 +40,41 @@
 								<th>Ação</th>
 								<th>Nome</th>
 								<th>Tipo</th>
+								<th>Pontos</th>
 								<th>Responsável</th>
 								<th>Descricao</th>
 								<th>Data Inicial</th>
 								<th>Data Final</th>
+								<th>Status</th>
 							</tr>
 						</tfoot>
 						<tbody>
 							<tr ng-repeat="task in tasks">
 								<td>
-									<button class="btn btn-default btn-circle" uib-tooltip="Editar" ng-click="tasksCtrl.openModal(task)">
+									<button ng-if="isAdmin()" class="btn btn-default btn-circle" uib-tooltip="Editar" ng-click="tasksCtrl.openModal(task)">
 										<i class="fa fa-pencil" aria-hidden="true"></i>
 									</button>
-									<button  ng-if="isAdmin()" class="btn btn-default btn-circle" uib-tooltip="Excluir" ng-click="tasksCtrl.openModalConfirmation(task)">
+									<button ng-if="isAdmin()" class="btn btn-default btn-circle" uib-tooltip="Excluir" ng-click="tasksCtrl.openModalConfirmation(task)">
 										<i class="fa fa-trash-o" aria-hidden="true"></i>
+									</button>
+									<button class="btn btn-default btn-circle" uib-tooltip="Finalizar" ng-click="finishTask(task)">
+										<i class="fa fa-check" aria-hidden="true"></i>
 									</button>
 								</td>
 								<td>{{task.fields.Nome}}</td>
 								<td>{{task.fields.Tipo}}</td>
-								<td>{{task.fields.Responsavel}}</td>
+								<td>{{task.fields.Pontos}}</td>
+								<td>{{formatName(task.fields.Responsavel)}}</td>
 								<td>{{task.fields.Descricao}}</td>
 								<td>{{task.fields["Data Inicial"]}}</td>
 								<td>{{task.fields["Data Final"]}}</td>
+								<td>{{task.fields.Status}}</td>
 							</tr>
 						</tbody>
 					</table>
+				</div>
+				<div class="checkbox">
+					<label><input type="checkbox" ng-model="check" ng-change="toggleTasks(check)">Mostrar tarefas concluídas</label>
 				</div>
 			</div>
 

@@ -3,7 +3,7 @@
 		.module('ktm')
 		.controller('TasksCtrl', TasksCtrl);
 
-	function TasksCtrl($scope, CrudService, DTOptionsBuilder, DTColumnDefBuilder, $httpParamSerializer, $location, $uibModal, ConvertUrlService) {
+	function TasksCtrl($scope, CrudService, DTOptionsBuilder, DTColumnDefBuilder, $httpParamSerializer, $location, $uibModal, ConvertUrlService, commonsService) {
 
 		var id = ConvertUrlService.convertUrl(window.location.hash);
 
@@ -83,6 +83,84 @@
 			]
 		};
 
+		$scope.formatName = function(name) {
+			const newName = name.split('|')
+			return `${newName[newName.length - 2]} ${newName[newName.length - 1]}`
+		}
+
+		$scope.finishTask = function (task) {
+			const points = task.fields.Pontos;
+
+			console.log(task);
+
+			const user = {
+				"interactors": [{
+					"recordAction": "QUERY_ADD",
+					"entityName": "BotUser",
+					"recordLine": sessionStorage.getItem('key')
+				}]
+			}
+
+			CrudService.common.findAll(user)
+				.then(function (response) {
+					CrudService.common.findAllPretty(response.data)
+						.then(function (response) {
+							var currentUser = response.data;
+							_addToUserTaskPoints(currentUser, points);
+						})
+						.catch(function (error) {
+							commonsService.error('Erro ao obter os dados');
+						});
+
+
+				})
+				.catch(function (error) {
+					commonsService.error('Erro ao obter os dados');
+				});
+
+
+			const taskToUpdate = {
+				"interactors": [{
+					"recordAction": "EDIT",
+					"entityName": "Tarefa",
+					"fieldName" : "Status",
+					"recordLine" : task.key,
+					"newValue" : "Status Tarefa|Concluído"
+				}]
+			}
+
+			CrudService.common.edit(taskToUpdate)
+			.then(function (response) {
+				commonsService.success('Tarefa atualizada!');
+			})
+			.catch(function (error) {
+				commonsService.error('Erro ao atualizar');
+			});
+		};
+
+		function _addToUserTaskPoints(user, taskPoints) {
+			const newPoints = (parseInt(user[0].fields.Pontos) + parseInt(taskPoints)).toString();
+			const updatedPoints = {
+				"interactors": [{
+					"recordAction": "EDIT",
+					"entityName": "BotUser",
+					"fieldName": "Pontos",
+					"recordLine": user[0].key,
+					"newValue": newPoints
+				}]
+			};
+			CrudService.common.findAll(updatedPoints)
+				.then(function (response) {
+					commonsService.success('Pontos atualizados!');
+				})
+				.catch(function (error) {
+					commonsService.error('Erro ao obter os dados');
+				});
+
+			location.reload();
+
+		};
+
 		function _findTasks() {
 			CrudService.common.findAll(parameter)
 				.then(function (response) {
@@ -94,10 +172,23 @@
 				});
 		};
 
+		$scope.toggleTasks = function(check) {
+			if (check) {
+				$scope.tasks = $scope.allTasks;
+			} else {
+				$scope.tasks = $scope.tasks.filter(item => {
+					return (item.fields.Status === 'Status Tarefa|Pendente');
+				});
+			}
+		}
+
 		function _findPretty(tasks) {
 			CrudService.common.findAllPretty(tasks)
 				.then(function (response) {
-					$scope.tasks = response.data;
+					$scope.tasks = response.data.filter(item => {
+						return (item.fields.Status === 'Status Tarefa|Pendente');
+					});
+					$scope.allTasks = response.data;
 				})
 				.catch(function (error) {
 					commonsService.error('Erro ao obter os dados');
@@ -139,5 +230,5 @@
 		init();
 	};
 
-	TasksCtrl.$inject = ['$scope', 'CrudService', 'DTOptionsBuilder', 'DTColumnDefBuilder', '$httpParamSerializer', '$location', '$uibModal', 'ConvertUrlService'];
+	TasksCtrl.$inject = ['$scope', 'CrudService', 'DTOptionsBuilder', 'DTColumnDefBuilder', '$httpParamSerializer', '$location', '$uibModal', 'ConvertUrlService', 'commonsService'];
 })();

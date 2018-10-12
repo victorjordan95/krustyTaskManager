@@ -154,10 +154,6 @@
 			$scope.task.Responsavel = `BotUser|${$scope.selected_responsible.key}`;
 			$scope.task.Status = `Status Tarefa|${$scope.selected_status.key}`;
 
-			// $scope.selected_typeTask = $scope.tiposTarefa[0];
-			// $scope.selected_status = $scope.statusTarefa[0];
-			// $scope.selected_project = $scope.projetos[0];
-			// $scope.selected_responsible = $scope.responsaveis[0];
 			var status = {
 				"interactors": [{
 					"recordAction": "ADD",

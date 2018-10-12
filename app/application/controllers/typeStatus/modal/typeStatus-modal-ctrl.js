@@ -15,7 +15,6 @@
 		$scope.reloadData = () => $scope.dtInstance.rerender();
 
 		$scope.save = function () {
-			debugger;
 			var status = {
 				"interactors":[
 					{
