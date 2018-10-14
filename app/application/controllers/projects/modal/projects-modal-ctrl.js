@@ -33,9 +33,14 @@
 					if(projects === undefined){
 						$scope.selected_client = $scope.clientesPretty[0];
 						$scope.projectModal = angular.copy(projects);
+						$scope.isNew = true;
 					}else{
+						$scope.isNew = false;
 						$scope.projectModal = angular.copy(projects.fields);
+						
+						$scope.fieldList = projects.fieldList;
 						projectKey = projects.key;
+
 						$scope.clientesPretty.forEach(element => {
 							if($scope.projectModal.Cliente == `${element.entityName}|${element.key}`){
 								$scope.selected_client = element;
@@ -67,36 +72,66 @@
 
 
 		$scope.save = function () {
-			$scope.projectModal.Cliente = $scope.selected_client.Cliente;
-			var project = {
-				"interactors":[
-					{
-						"recordAction" : "ADD",
-						"entityName" : "Projeto",
-						"fieldAndValue" : $scope.projectModal
-					}	
-				]
-			};
-			return CrudService.projects.save(project)
-				.then(function (response) {
-					commonsService.success('Projeto criado com sucesso!');
-					$uibModalInstance.close(response.data);
-					location.reload();
-				})
-				.catch(function (error) {
-					if (error.objeto.data.exception.includes('EmptyOrNullValueException')) {
-						commonsService.error('Campo vazio!');
-						return;
-					} else {
-						if (error.objeto.data.exception.includes('UniqueConstraintException')) {
-							commonsService.error('Erro ao salvar projeto!');
+			$scope.projectModal.Cliente = $scope.selected_client.key;
+
+			if ($scope.isNew) {
+				var project = {
+					"interactors":[
+						{
+							"recordAction" : "ADD",
+							"entityName" : "Projeto",
+							"fieldAndValue" : $scope.projectModal
+						}	
+					]
+				};
+				return CrudService.projects.save(project)
+					.then(function (response) {
+						commonsService.success('Projeto criado com sucesso!');
+						$uibModalInstance.close(response.data);
+						location.reload();
+					})
+					.catch(function (error) {
+						if (error.objeto.data.exception.includes('EmptyOrNullValueException')) {
+							commonsService.error('Campo vazio!');
 							return;
+						} else {
+							if (error.objeto.data.exception.includes('UniqueConstraintException')) {
+								commonsService.error('Erro ao salvar projeto!');
+								return;
+							}
 						}
-					}
+					});
+			} else {
+				$scope.fieldList.forEach(element => {
+					var project = {
+						"interactors":[
+							{
+								"recordAction" : "EDIT",
+								"entityName" : "Projeto",
+								"recordLine": projectKey,
+								"fieldName" : element,
+								"newValue" : $scope.projectModal[element],
+							}	
+						]
+					};
+					CrudService.common.save(project)
+						.then(function (response) {
+							console.log('saved');
+						})
+						.catch(function (error) {
+							if (error.objeto.data.exception.includes('EmptyOrNullValueException')) {
+								commonsService.error('Campo vazio!');
+								return;
+							} else {
+								if (error.objeto.data.exception.includes('UniqueConstraintException')) {
+									commonsService.error('Erro ao salvar projeto!');
+									return;
+								}
+							}
+						});
 				});
+			}
 		};
-
-
 
 		var init = function() {
 			_findClients();

@@ -163,6 +163,22 @@
         };
         states.push(client);
 
+        var changeProfile = {
+            name: 'changeProfile',
+            url: '/alterar-perfil',
+            controller: 'ChangeProfileCtrl',
+            controllerAs: 'changeProfilectrl',
+            templateUrl: 'application/views/changeProfile/changeProfile.html',
+            resolve: {
+                loggedIn: function () {
+                    if (sessionStorage.getItem('id') === 'undefined' || sessionStorage.getItem('id') === null) {
+                        $location.path('/');
+                    }
+                }
+            }
+        };
+        states.push(changeProfile);
+
 
         states.forEach(function (state) {
             $stateProvider.state(state);

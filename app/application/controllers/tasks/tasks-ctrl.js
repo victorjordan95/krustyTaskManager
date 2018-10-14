@@ -37,8 +37,10 @@
 			DTColumnDefBuilder.newColumnDef(0).notSortable().withOption('width', '100px'),
 		];
 
-		$scope.dtOptions = DTOptionsBuilder.newOptions().withLanguage(language);
 
+		$scope.dtOptions = DTOptionsBuilder.newOptions().withLanguage(language).withOption('order', [[8, 'asc']]);
+
+		
 		//Modal
 		self.openModal = function (tasks) {
 			var modalInstance = $uibModal.open({
@@ -90,8 +92,6 @@
 
 		$scope.finishTask = function (task) {
 			const points = task.fields.Pontos;
-
-			console.log(task);
 
 			const user = {
 				"interactors": [{
