@@ -905,6 +905,26 @@ main {
     padding: 0;
     width: 40%; } }
 
+.flex-row {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  margin: 24px 0; }
+  .flex-row .chart-card {
+    background-color: #FFF;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    padding: 16px 16px;
+    width: 30%; }
+    .flex-row .chart-card .card-name {
+      font-size: 22px; }
+    .flex-row .chart-card .card-number {
+      color: #757575;
+      font-size: 64px; }
+
 .search {
   margin: 0 -15px; }
   .search .search-col {

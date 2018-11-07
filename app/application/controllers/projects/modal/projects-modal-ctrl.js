@@ -116,7 +116,7 @@
 					};
 					CrudService.common.save(project)
 						.then(function (response) {
-							console.log('saved');
+							commonsService.success('Projeto alterado com sucesso!');
 						})
 						.catch(function (error) {
 							if (error.objeto.data.exception.includes('EmptyOrNullValueException')) {
@@ -130,6 +130,32 @@
 							}
 						});
 				});
+
+				debugger;
+				var nomeProjeto = {
+					"interactors":[
+						{
+							"recordAction" : "EDIT",
+							"entityName" : "Projeto",
+							"recordLine": projectKey,
+							"fieldName" : "Nome",
+							"newValue" : $scope.userInfo.fields['Nome'],
+						}	
+					]
+				};
+				CrudService.common.save(nomeProjeto)
+					.then(function (response) {})
+					.catch(function (error) {
+						if (error.objeto.data.exception.includes('EmptyOrNullValueException')) {
+							commonsService.error('Campo vazio!');
+							return;
+						} else {
+							if (error.objeto.data.exception.includes('UniqueConstraintException')) {
+								commonsService.error('Erro ao salvar projeto!');
+								return;
+							}
+						}
+					});
 			}
 		};
 

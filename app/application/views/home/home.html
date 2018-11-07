@@ -5,7 +5,27 @@
 	<div class="container-fluid home-screen">
 		<div class="row">
 			<div class="col-xs-12">
-				<h2 class="">Bem-vindo, <span class="capitalize">{{actualUser}}</span>!</h2>
+				<h2>Dashboard</h2>
+			</div>
+		</div>
+		<div class="flex-row">
+			<div class="chart-card">
+				<span class="card-name">Projetos Ativos</span>
+				<span class="card-number">
+					{{countProjects}}
+				</span>
+			</div>
+			<div class="chart-card">
+				<span class="card-name">Suas Atividades</span>
+				<span class="card-number">
+					{{associatedTasks}}
+				</span>
+			</div>
+			<div class="chart-card">
+				<span class="card-name">Seus Pontos</span>
+				<span class="card-number">
+					{{userPoints}}
+				</span>
 			</div>
 		</div>
 	</div>
