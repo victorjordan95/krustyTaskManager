@@ -7,7 +7,7 @@
         var self = this;
 
         self.load = function(){
-			CrudService.projects.findAll()
+			CrudService.common.findAll()
 			.then(function(response){
 				$scope.patients = response.data;
 			})
@@ -23,19 +23,26 @@
         };
 
         self.delete = function () {
-            console.log(self.projectsElement);
-            return CrudService.projects.delete(self.projectsElement.id)
+            var parameter = {
+                "interactors": [
+                    {
+                        "recordAction": "DELETE",
+                        "entityName": self.projectsElement.entityName,
+                        "recordLine": self.projectsElement.key
+                    }
+                ]
+            };
+            return CrudService.projects.delete(parameter)
                 .then(function (response) {
                     $uibModalInstance.close(response.data);
-                    
-                    commonsService.success('Users removido com sucesso!');
+                    commonsService.success('Projeto removido com sucesso!');
 					location.reload();
                 })
                 .catch(function (error) {
                     if (error.objeto.data.exception.includes('LinkedExpcetion')) {
-                        commonsService.error('projects.alert.linkedException');
+                        commonsService.error('Erro ao excluir o projeto!');
                     } else {
-                        commonsService.error('common.alert.genericError');
+                        commonsService.error('Erro ao excluir o projeto!');
                     }
                 });
         };

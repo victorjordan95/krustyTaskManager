@@ -1,32 +1,27 @@
-<aside id="sidebar" class="" ng-controller="AsideCtrl">
+<aside id="sidebar" ng-controller="AsideCtrl">
 	<ul class="sidebar-menu">
-		<li class="sidebar-dropdown sidebar-user hidden-md hidden-lg">
-			<span class="sidebar-link collapsed capitalize" data-toggle="collapse" data-target="#sidebar-user" aria-expanded="false">
-			  <i class="fa fa-user-circle-o sidebar-user-icon" aria-hidden="true"></i>
-                  {{actualUser.userName}}
-            </span>
-			<ul id="sidebar-user" class="sidebar-submenu collapse" aria-expanded="false" style="height: 0px">
-				<li>
-					<a href="" class="sidebar-submenu-link">
-                		{{'header.user.edtUser' | translate}}
-                    </a>
-				</li>
-				<li>
-					<a href="#/change-password" class="sidebar-submenu-link">
-                		{{'header.user.edtPassword' | translate}}
-                    </a>
-				</li>
-			</ul>
+
+		<li class="sidebar-logo">
+			<svg class="icon icon-chameleon"><use xlink:href="#icon-chameleon"></use></svg>
 		</li>
-		
-		<a ng-href="#/{{field.route}}" ng-repeat="field in navbarFields">
-			<li ng-class="selectedMenu(field)">
+
+		<li ng-class="selectedMenu(field)" ng-repeat="field in navbarFields" ng-if="field.admin">
+			<a ng-href="#/{{field.route}}" >
 				<span class="sidebar-link">
-					<i class="fa {{field.icon}} sidebar-user-icon" aria-hidden="true" ></i>
+					<i class="fa {{field.icon}} sidebar-user-icon" aria-hidden="true"></i>
 					<span class="sidebar-fieldname">{{field.name}}</span>
 				</span>
-			</li>
-		</a>
+			</a>
+		</li>
 		
+		<li class="sidebar-user sidebar-links hidden-md hidden-lg">
+			<a ng-click="logout()">
+				<span class="sidebar-link">
+					<i class="fa fa-sign-out sidebar-user-icon" aria-hidden="true"></i>
+					<span class="sidebar-fieldname">Logout</span>
+				</span>
+			</a>
+		</li>
+
 	</ul>
 </aside>

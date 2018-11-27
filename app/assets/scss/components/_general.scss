@@ -36,6 +36,12 @@ body {
   right: 0;
   top: 0;
   z-index: 0;
+  @media screen and (min-width: 768px) {
+  	width: 200%;
+  }
+  @media screen and (min-width: 1024px) {
+  	width: 100%;
+  }
   svg {
     height: 100%;
     position: relative;

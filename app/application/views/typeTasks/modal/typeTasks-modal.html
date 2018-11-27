@@ -1,0 +1,23 @@
+<form name="form" novalidate data-ng-submit="save()">
+    <div class="modal-header">
+        <h3 class="modal-title">
+            {{ (typeTask === undefined ? 'Inserir' : 'Editar') | translate }} tipo de tarefa
+        </h3>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-group col-xs-12">
+                <label>Nome</label>
+                <input name="nome" type="text" placeholder="Nome" data-ng-model="typeTask.Nome" maxlength="50" class="form-control" autofocus="autofocus" required>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" data-ng-click="cancel()">
+            Cancelar
+        </button>
+        <button type="submit" class="btn btn-primary" data-dismiss="modal" data-ng-disabled="form.$invalid">
+            Salvar
+        </button>
+    </div>
+</form>

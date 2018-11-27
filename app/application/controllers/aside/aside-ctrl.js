@@ -3,43 +3,39 @@
 		.module('ktm')
 		.controller('AsideCtrl', AsideCtrl);
 
-	function AsideCtrl($scope, $rootScope, $translate, CrudService, $httpParamSerializer, $location, commonsService) {
-		$scope.actualUser = $rootScope.user;
+	function AsideCtrl($scope, $rootScope, $location, commonsService) {
+		$scope.actualUser = sessionStorage.getItem('name');
+		$scope.isAdmin = () => sessionStorage.getItem('role') === 'Admin' ? true : false;
 
-		$scope.language = 'pt-br';
-		$scope.changeLang = function (lang) {
-			$scope.language = lang;
-			$translate.use(lang);
-		};
+		const userRole = $scope.isAdmin();
 
 		$scope.logout = function () {
-			CrudService.login.logout()
-				.then(function (response) {
-					$scope.currentUser = undefined;
-					sessionStorage.setItem('user', undefined);
-					$location.path("login");
-				}).catch(function () {
-					console.log('Logout error');
-				}
-				);
+			$location.path("#/login");
+			sessionStorage.setItem("id", undefined);
+			sessionStorage.setItem("username", undefined);
+			sessionStorage.setItem("name", undefined);
+			sessionStorage.setItem("role", undefined);
 		};
 
+		$scope.isAdmin = () => sessionStorage.getItem('role') === 'Admin' ? true : false;
+
 		$scope.navbarFields = [
-			{ "name":"Perfil", "route" : "perfil",  "icon" : "fa-user"},
-			{ "name":"Usuários", "route" : "usuarios",  "icon" : "fa-users"},
-			{ "name":"Rank", "route" : "rank", "icon" : "fa-trophy"},
-			{ "name":"Projetos", "route" : "projetos", "icon" : "fa-handshake-o"},
-			{ "name":"Tarefas", "route" : "tarefas", "icon" : "fa-clipboard"},
+			{ "admin": userRole, "name":"Usuários", "route" : "usuarios",  "icon" : "fa-users"},
+			{ "admin": true, "name":"Rank", "route" : "rank", "icon" : "fa-trophy"},
+			{ "admin": true, "name":"Projetos", "route" : "projetos", "icon" : "fa-handshake-o"},
+			{ "admin": userRole, "name":"Tipo tarefa", "route" : "tipo-tarefa", "icon" : "fa-clipboard"},
+			{ "admin": userRole, "name":"Status tarefa", "route" : "status-tarefa", "icon" : "fa-clipboard"},
+			{ "admin": userRole, "name":"Clientes", "route" : "clientes", "icon" : "fa-clipboard"},
 		];
 
 		$scope.selectedMenu = function(navbarFields){
 			var menu = navbarFields.name.toLowerCase();
-			if (window.location.hash.split("#/")[1] == menu) {
+			if (window.location.hash.split("#/")[1] == menu || window.location.hash.split("#/")[1].split('-').join(' ') == menu ) {
 				return 'sidebar-user sidebar-links active';
 			}
 			return 'sidebar-user sidebar-links';
 		}
 
 	};
-	AsideCtrl.$inject = ['$scope', '$rootScope', '$translate', 'CrudService', '$httpParamSerializer', '$location', 'commonsService',];
+	AsideCtrl.$inject = ['$scope', '$location', 'commonsService',];
 })();

@@ -1,0 +1,70 @@
+<form name="form" novalidate data-ng-submit="save()">
+    <div class="modal-header">
+        <h3 class="modal-title">
+            {{ (typeStatusModal.Nome === undefined ? 'Inserir' : 'Editar') | translate }} tarefa
+        </h3>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-group col-xs-6">
+                <label>Nome</label>
+                <input name="nome" type="text" placeholder="Nome Tarefa" data-ng-model="task.Nome" maxlength="50" class="form-control"
+                    autofocus="autofocus" required>
+            </div>
+            <div class="form-group col-xs-6">
+                <label>Tipo Tarefa</label>
+                <select ng-model="selected_typeTask" ng-options="tipoTarefa as tipoTarefa.fields.Nome for tipoTarefa in tiposTarefa"
+                    class="form-control">
+                </select>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="form-group col-xs-6">
+                <label>Status</label>
+                <select ng-model="selected_status" ng-options="tipoStatus as tipoStatus.fields.Nome for tipoStatus in statusTarefa"
+                    class="form-control">
+                </select>
+            </div>
+            <div class="form-group col-xs-6">
+                <label>Responsável</label>
+                <select ng-model="selected_responsible" ng-options="responsavel as responsavel.fields.Nome for responsavel in responsaveis"
+                    class="form-control">
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-xs-4">
+                <label>Data Inicial</label>
+                <input name="nome" type="text" placeholder="Data Inicia" data-ng-model="task['Data Inicial']" maxlength="50"
+                    class="form-control" required mask="39/19/9999" >
+            </div>
+            <div class="form-group col-xs-4">
+                <label>Data Final</label>
+                <input name="nome" type="text" placeholder="Data Final" data-ng-model="task['Data Final']" maxlength="50"
+                    class="form-control" required mask="39/19/9999" >
+            </div>
+            <div class="form-group col-xs-4">
+                <label>Pontos</label>
+                <input name="nome" type="text" placeholder="Pontos" data-ng-model="task.Pontos" maxlength="50" class="form-control" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <label>Descrição</label>
+                    <textarea class="form-control" placeholder="Descrição" data-ng-model="task.Descricao" required></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" data-ng-click="cancel()">
+            Cancelar
+        </button>
+        <button type="submit" class="btn btn-primary" data-dismiss="modal" data-ng-disabled="form.$invalid">
+            Salvar
+        </button>
+    </div>
+</form>

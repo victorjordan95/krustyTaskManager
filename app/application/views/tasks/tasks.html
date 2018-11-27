@@ -1,16 +1,22 @@
 <div ng-include="'application/views/templates/header.html'"></div>
 <div ng-include="'application/views/templates/aside.html'"></div>
 <main>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-12 col-sm-6">
 				<h2>Tarefas</h2>
+			</div>
+			<div class="col-xs-12 col-sm-6" ng-if="isAdmin()">
+				<button class="btn btn-primary btn-add" data-ng-click="tasksCtrl.openModal()">
+					<i class="fa fa-plus" aria-hidden="true"></i>
+					<span class="btn-add--text">Cadastrar tarefa</span>
+				</button>
 			</div>
 		</div>
 	</div>
 
 	<section>
-		<div class="container">
+		<div class="container-fluid">
 
 			<div class="card">
 
@@ -20,49 +26,55 @@
 							<tr>
 								<th>Ação</th>
 								<th>Nome</th>
-								<th>RG</th>
-								<th>CPF</th>
-								<th>Endereço</th>
-								<th>Número</th>
-								<th>Bairro</th>
-								<th>Cidade</th>
-								<th>Estado</th>
+								<th>Tipo</th>
+								<th>Pontos</th>
+								<th>Responsável</th>
+								<th>Descricao</th>
+								<th>Data Inicial</th>
+								<th>Data Final</th>
+								<th>Status</th>
 							</tr>
 						</thead>
 						<tfoot>
 							<tr>
 								<th>Ação</th>
 								<th>Nome</th>
-								<th>RG</th>
-								<th>CPF</th>
-								<th>Endereço</th>
-								<th>Número</th>
-								<th>Bairro</th>
-								<th>Cidade</th>
-								<th>Estado</th>
+								<th>Tipo</th>
+								<th>Pontos</th>
+								<th>Responsável</th>
+								<th>Descricao</th>
+								<th>Data Inicial</th>
+								<th>Data Final</th>
+								<th>Status</th>
 							</tr>
 						</tfoot>
 						<tbody>
-							<tr ng-repeat="patient in patients">
+							<tr ng-repeat="task in tasks">
 								<td>
-									<button class="btn btn-default btn-circle" uib-tooltip="Editar" ng-click="rankCtrl.openModal(patient)">
+									<button ng-if="isAdmin()" class="btn btn-default btn-circle" uib-tooltip="Editar" ng-click="tasksCtrl.openModal(task)">
 										<i class="fa fa-pencil" aria-hidden="true"></i>
 									</button>
-									<button class="btn btn-default btn-circle" uib-tooltip="Excluir" ng-click="rankCtrl.openModalConfirmation(patient)">
+									<button ng-if="isAdmin()" class="btn btn-default btn-circle" uib-tooltip="Excluir" ng-click="tasksCtrl.openModalConfirmation(task)">
 										<i class="fa fa-trash-o" aria-hidden="true"></i>
 									</button>
+									<button class="btn btn-default btn-circle" uib-tooltip="Finalizar" ng-click="finishTask(task)" ng-if="task.fields.Status === 'Status Tarefa|Pendente'">
+										<i class="fa fa-check" aria-hidden="true"></i>
+									</button>
 								</td>
-								<td>{{patient.nome}}</td>
-								<td>{{patient.rg}}</td>
-								<td>{{patient.cpf}}</td>
-								<td>{{patient.endereco}}</td>
-								<td>{{patient.numero}}</td>
-								<td>{{patient.bairro}}</td>
-								<td>{{patient.cidade}}</td>
-								<td>{{patient.estado}}</td>
+								<td>{{task.fields.Nome}}</td>
+								<td>{{task.fields.Tipo}}</td>
+								<td>{{task.fields.Pontos}}</td>
+								<td>{{formatName(task.fields.Responsavel)}}</td>
+								<td>{{task.fields.Descricao}}</td>
+								<td>{{task.fields["Data Inicial"]}}</td>
+								<td>{{task.fields["Data Final"]}}</td>
+								<td>{{task.fields.Status}}</td>
 							</tr>
 						</tbody>
 					</table>
+				</div>
+				<div class="checkbox">
+					<label><input type="checkbox" ng-model="check" ng-change="toggleTasks(check)">Mostrar tarefas concluídas</label>
 				</div>
 			</div>
 

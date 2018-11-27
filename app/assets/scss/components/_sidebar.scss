@@ -1,7 +1,6 @@
 #sidebar {
     position: fixed;
     background-color: $primary;
-    box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.2);
     height: 100%;
     left: 0;
     top: 0;
@@ -10,13 +9,16 @@
     transition: transform ease 0.2s, width 0.25s linear;
     @include translate(-238px, 0);
     @include user-select();
-    width: 210px;
+    width: 90px;
     z-index: 10;
     &.active {
         @include translate(0, 0);
     }
     @media (min-width: $screen-desktop-min) {
         @include translate(0, 0);
+    }
+    @media (min-width: 1024px) {
+        width: 210px;
     }
     &::-webkit-scrollbar {
         width: 8px;
@@ -47,6 +49,21 @@
                 }
             }
         }
+        .sidebar-logo {
+            background-color: #FAFAFA;
+            border-bottom: 1px solid #499788;
+            border-right: 1px solid #499788;
+            padding: 16px 0 8px;
+            position: relative;
+            text-align: center;
+
+            .icon {
+                fill: $primary;
+                height: 30px;
+                text-align: center;
+                width: 30px;  
+            }
+        }
         .sidebar-link {
             border-right: 5px solid transparent;
             color: $text-color;
@@ -54,15 +71,11 @@
             display: block;
             font-weight: 300;
             position: relative;
-            // padding: 30px 20px 30px 0;
-            padding: 16px 0;
+            padding: 8px 0;
             text-align: center;
             text-decoration: none;
             transition: border-left 0.4s cubic-bezier(0.46, 0.03, 0.52, 0.96);
-            i {
-                color: $text-color;
-                font-size: 26px;
-            }
+
             .sidebar-fieldname {
                 color: #fff;
                 display: block;
@@ -136,14 +149,15 @@
     }
     .sidebar-user {
         background-color: $primary;
-        font-size: 14px;
+        border-left: 4px solid $primary;
         color: $text-sidebar;
+        clear: both;
+        font-size: 14px;
         display: block;
         margin: 0;
-        clear: both;
         .sidebar-user-icon {
             bottom: 0;
-            font-size: 30px;
+            font-size: 24px;
             height: 34px;
             margin: auto;
             left: 10px;
@@ -178,11 +192,11 @@
         background-color: $primary;
         &.active {
             background-color: rgba(238, 238, 238, 0.3);
-            border-left: 4px solid $light-green;
+            border-left: 4px solid #fff;
         }
         &:hover {
             background-color: rgba(238, 238, 238, 0.3);
-            border-left: 4px solid $light-green;
+            border-left: 4px solid #fff;
         }
     }
 }
@@ -190,10 +204,7 @@
 // SIDEBAR ATIVADO
 .sidebar-collapse-active {
     overflow-x: hidden;
-}
-
-@media (min-width: $screen-tablet-min) {
-    .sidebar-collapse-active {
+    @media (min-width: $screen-tablet-min) {
         #sidebar {
             overflow: hidden;
             width: 66px;
@@ -203,9 +214,6 @@
         }
         .sidebar-submenu {
             display: none;
-        }
-        main {
-            padding-left: 74px;
         }
         #sidebar {
             .sidebar-user {
@@ -221,7 +229,14 @@
             }
         }
     }
+    @media (min-width: 1024px) {
+        main {
+            padding-left: 74px;
+        }
+    }
 }
+
+
 
 #sidebar.sidebar-collapse-hover.active {
     width: 238px;
@@ -258,7 +273,7 @@ main {
 .btn-sidebar-collapse {
     background: none;
     border: none;
-    color: $text-color;
+    color: $primary;
     float: right;
     height: $header-height;
     padding: 14px 20px;
@@ -272,7 +287,7 @@ main {
     }
     .fa-bars {
         border-radius: 1px;
-        color: $text-color;
+        color: $primary;
         font-size: 24px;
         margin: 6px 0;
         transition-duration: .3s;

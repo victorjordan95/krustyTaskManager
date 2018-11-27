@@ -1,35 +1,40 @@
 <header class="header" ng-controller="HeaderCtrl">
-    <a ng-href="#/home" class="header-logo"> 
-		<span class="header-logo-name">Krusty</span>
-		<span class="header-logo-description">
-			Task <br>
-			Manager
-		</span> 
-  	</a>
-    <button type="button" class="btn-sidebar-collapse active hidden-lg">
+    <a ng-href="#/home" class="header-logo">
+        <span class="header-logo-name">Krusty</span>
+        <span class="header-logo-description">
+            Task <br>
+            Manager
+        </span>
+    </a>
+    <button type="button" class="btn-sidebar-collapse active hidden-lg hidden-md">
         <i class="fa fa-bars " aria-hidden="true"></i>
     </button>
     <div class="header-icons">
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown-toggle header-user">
-                <i class="fa fa-user sidebar-user-icon" aria-hidden="true"></i> {{actualUser.userName}}
+                {{actualUser}}
+                <i class="fa fa-user sidebar-user-icon" aria-hidden="true"></i>
             </li>
             <li class="dropdown">
-                <a href="javascript:void(0)" class="dropdown-toggle header-icons-action" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-cogs" aria-hidden="true"></i> </a>
+                <a href="javascript:void(0)" class="dropdown-toggle header-icons-action" data-toggle="dropdown" role="button"
+                    aria-haspopup="true" aria-expanded="false"> <i class="fa fa-cogs" aria-hidden="true"></i> </a>
                 <ul class="dropdown-menu">
-                    <li> <a href="#/alterar-senha">
-                			Alterar senha
-                    	</a>
+                    <li> 
+                        <a href="#/alterar-perfil">
+                            Alterar perfil
+                        </a>
                     </li>
                     <li> 
-                        <a href="#"> Editar Perfil </a> 
+                        <a href="#/alterar-senha">
+                            Alterar senha
+                        </a>
                     </li>
                 </ul>
             </li>
             <li>
-                <a ng-href="/login" class="dropdown-toggle header-icons-action" data-toggle="dropdown" role="button" aria-haspopup="true"
-                    aria-expanded="false"> <i class="fa fa-sign-out" aria-hidden="true"></i> </a> 
-                    <!-- ng-click="logout()" -->
+                <a ng-click="logout()" class="dropdown-toggle header-icons-action" data-toggle="dropdown" role="button"
+                    aria-haspopup="true" aria-expanded="false"> <i class="fa fa-sign-out" aria-hidden="true"></i>
+                </a>
             </li>
         </ul>
     </div>

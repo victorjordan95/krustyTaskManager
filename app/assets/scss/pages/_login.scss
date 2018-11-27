@@ -1,59 +1,49 @@
-.VYMape {
-    display: none;
-    @media screen and (min-width: 1024px) {
-        background: #fff;
-        bottom: 0;
-        direction: ltr;
-        display: block;
-        left: 0;
-        overflow: hidden;
-        position: absolute;
-        right: 0;
-        top: 0;
-        z-index: 1;
-    }
-}
-
 .main {
     z-index: 2;
     .login-form {
         color: #424242;
         padding: 0 15px;
+
+        .login-title{
+            margin: 0 0 36px;
+            padding: 0 15%;
+        }
     }
     .full-height {
         min-height: calc(100vh);
     }
     .login-logo {
-        background-color: $primary;
+        background-image: url('../img/bg-1.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
         display: flex;
         flex-flow: column wrap;
         justify-content: center;
-    }
-    .img-flag-login {
-        cursor: pointer;
-        width: 30px;
-        margin: 10px 5px;
-    }
 
+        .login-content {
+            bottom: 25%;
+            color: white;
+            left: 48px;
+            position: absolute;
+            text-shadow: 1px 1px black;
+        }
+    }
     form {
         display: flex;
         flex-flow: row wrap;
         justify-content: center;
     }
-
     .form-group {
         @media screen and (min-width: 768px) {
-            padding: 0 25%;
+            padding: 0 15%;
         }
-
         .form-control {
             height: 50px;
-            @media screen and (min-width: 768px) {
-            }
         }
-
+        .input-group-addon {
+            background-color: #fff;
+        }
     }
-
     input[type="submit"] {
         background-color: $green;
         border: 0px solid #fff;
@@ -69,53 +59,38 @@
         width: 100%;
         @media screen and (min-width: 768px) {
             transition: background-color 1s, color .5s;
-            width: 50%;
+            width: 70%;
             &:hover {
                 background-color: darken($green, 5%);
                 border-color: transparent;
                 color: #fff;
             }
-            
+        }
+        &:disabled{
+            background-color: darken($primary, 10%);
         }
     }
-
     .form-box {
         align-items: center;
         box-shadow: 1px 0px 30px 1px rgba(0, 0, 0, 0.53);
         display: flex;
         flex-flow: row;
-		z-index: 2;
-        .alert-danger {
-            background-color: transparent;
-            border-color: #ebccd1;
+        z-index: 2;
+        .help-block {
             color: #a94442;
-            margin: 8px 0;
         }
         .form-group {
             margin-bottom: 8px;
+            width: 100%;
             .input-group {
                 margin: 0 auto;
             }
         }
     }
-
 }
 
 @media screen and (min-width: 768px) {
     .main {
-        .form-box {
-            .alert-danger {
-                background-color: #f2dede;
-                border-color: #ebccd1;
-                color: #a94442;
-                float: none;
-                margin: 8px auto;
-                width: 50%;
-            }
-            .form-group {
-                margin-bottom: 8px;
-            }
-        }
 
         .forget-password {
             color: #fff;

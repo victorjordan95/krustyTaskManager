@@ -2,9 +2,11 @@
 	angular
 		.module('ktm')
 		.controller('TasksCtrl', TasksCtrl);
-	
-	function TasksCtrl($scope, CrudService,DTOptionsBuilder, DTColumnDefBuilder, $httpParamSerializer, $location, $uibModal) {
-		
+
+	function TasksCtrl($scope, CrudService, DTOptionsBuilder, DTColumnDefBuilder, $httpParamSerializer, $location, $uibModal, ConvertUrlService, commonsService) {
+
+		var id = ConvertUrlService.convertUrl(window.location.hash);
+
 		var self = this;
 
 		var language = {
@@ -35,15 +37,16 @@
 			DTColumnDefBuilder.newColumnDef(0).notSortable().withOption('width', '100px'),
 		];
 
-		$scope.dtOptions = DTOptionsBuilder.newOptions()
-		.withLanguage(language);
 
-        //Modal
-		self.openModal = function(tasks) {
-            var modalInstance = $uibModal.open({
+		$scope.dtOptions = DTOptionsBuilder.newOptions().withLanguage(language).withOption('order', [[8, 'asc']]);
+
+		
+		//Modal
+		self.openModal = function (tasks) {
+			var modalInstance = $uibModal.open({
 				animation: true,
-				templateUrl: 'application/views/tasks/modal/tasks-modal.html',
-				size: 'md',	
+				templateUrl: 'application/views/tasks/modal/task-modal.html',
+				size: 'md',
 				controller: 'TasksModalController',
 				controllerAs: '$ctrl',
 				resolve: {
@@ -52,14 +55,14 @@
 					}
 				}
 			});
-        };
-        
-    	//Modal
-		 self.openModalConfirmation = function(tasks) {
-            var modalInstance = $uibModal.open({
+		};
+
+		//Modal
+		self.openModalConfirmation = function (tasks) {
+			var modalInstance = $uibModal.open({
 				animation: true,
 				templateUrl: 'application/views/tasks/modal/confirmation-modal.html',
-				size: 'md',	
+				size: 'md',
 				controller: 'TasksConfirmationController',
 				controllerAs: 'tasksConfirmationCtrl',
 				resolve: {
@@ -74,48 +77,158 @@
 			"interactors": [
 				{
 					"recordAction": "QUERY_ADD",
-					"entityName": "DJ"
+					"entityName": "Tarefa",
+					"fieldAndValue": {
+						"Projeto": `Projeto|${id}`
+					}
 				}
 			]
 		};
-	
-		$scope.load = function(){
-			CrudService.tasks.findAll(parameter)
-			.then(function(response){
-				$scope.tasks = response.data;
-				console.log($scope.tasks);
-			})
-			.catch(function (error) {
-				$scope.error(error.message);
-			});
-		}();
 
-		$scope.pretty = function(){
-			$scope.load();
-			console.log($scope.tasks);
-			CrudService.tasks.findAllPretty($scope.tasks)
-			.then(function(response){
-				$scope.tasksPretty = response.data;
-				console.log($scope.tasksPretty);
+		$scope.formatName = function(name) {
+			const newName = name.split('|')
+			return `${newName[newName.length - 2]} ${newName[newName.length - 1]}`
+		}
+
+		$scope.finishTask = function (task) {
+			const points = task.fields.Pontos;
+
+			const user = {
+				"interactors": [{
+					"recordAction": "QUERY_ADD",
+					"entityName": "BotUser",
+					"recordLine": sessionStorage.getItem('key')
+				}]
+			}
+
+			CrudService.common.findAll(user)
+				.then(function (response) {
+					CrudService.common.findAllPretty(response.data)
+						.then(function (response) {
+							var currentUser = response.data;
+							_addToUserTaskPoints(currentUser, points);
+						})
+						.catch(function (error) {
+							commonsService.error('Erro ao obter os dados');
+						});
+
+
+				})
+				.catch(function (error) {
+					commonsService.error('Erro ao obter os dados');
+				});
+
+
+			const taskToUpdate = {
+				"interactors": [{
+					"recordAction": "EDIT",
+					"entityName": "Tarefa",
+					"fieldName" : "Status",
+					"recordLine" : task.key,
+					"newValue" : "Status Tarefa|Concluído"
+				}]
+			}
+
+			CrudService.common.edit(taskToUpdate)
+			.then(function (response) {
+				commonsService.success('Tarefa atualizada!');
 			})
 			.catch(function (error) {
-				$scope.error(error.message);
+				commonsService.error('Erro ao atualizar');
 			});
 		};
-    	
-    	//Remove
-        self.remove = function (id) {
-    		CrudService.tasks.remove(id)
-    		.then(function(response){
-    			self.load();
-    			commonsService.success('tasks.alert.success');
-    		});
+
+		function _addToUserTaskPoints(user, taskPoints) {
+			const newPoints = (parseInt(user[0].fields.Pontos) + parseInt(taskPoints)).toString();
+			const updatedPoints = {
+				"interactors": [{
+					"recordAction": "EDIT",
+					"entityName": "BotUser",
+					"fieldName": "Pontos",
+					"recordLine": user[0].key,
+					"newValue": newPoints
+				}]
+			};
+			CrudService.common.findAll(updatedPoints)
+				.then(function (response) {
+					commonsService.success('Pontos atualizados!');
+				})
+				.catch(function (error) {
+					commonsService.error('Erro ao obter os dados');
+				});
+
+			location.reload();
+
+		};
+
+		function _findTasks() {
+			CrudService.common.findAll(parameter)
+				.then(function (response) {
+					var tasks = response.data;
+					_findPretty(tasks);
+				})
+				.catch(function (error) {
+					commonsService.error('Erro ao obter os dados');
+				});
+		};
+
+		$scope.toggleTasks = function(check) {
+			if (check) {
+				$scope.tasks = $scope.allTasks;
+			} else {
+				$scope.tasks = $scope.tasks.filter(item => {
+					return (item.fields.Status === 'Status Tarefa|Pendente');
+				});
+			}
 		}
-		
-		
-        
-        
+
+		function _findPretty(tasks) {
+			CrudService.common.findAllPretty(tasks)
+				.then(function (response) {
+					$scope.tasks = response.data.filter(item => {
+						return (item.fields.Status === 'Status Tarefa|Pendente');
+					});
+					$scope.allTasks = response.data;
+				})
+				.catch(function (error) {
+					commonsService.error('Erro ao obter os dados');
+				});
+		};
+
+		$scope.isAdmin = () => sessionStorage.getItem('role') === 'Admin' ? true : false;
+
+		var init = function () {
+			var userParamether = {
+				"interactors": [
+					{
+						"recordAction": "QUERY_ADD",
+						"entityName": "BotUser",
+						"fieldAndValue": {
+							"Id": sessionStorage.getItem('id')
+						}
+					}
+				]
+			};
+
+			CrudService.common.findAll(userParamether)
+				.then(function (response) {
+					if (response.data.recordsResult.length === 1) {
+						_findTasks();
+					} else {
+						sessionStorage.setItem("id", undefined);
+						sessionStorage.setItem("username", undefined);
+						sessionStorage.setItem("name", undefined);
+						sessionStorage.setItem("role", undefined);
+						$location.path("/");
+					}
+				}).catch(function (error) {
+					commonsService.error('Erro ao realizar consulta de usuário.');
+				})
+				;
+		}
+
+		init();
 	};
-	
-	TasksCtrl.$inject = ['$scope', 'CrudService','DTOptionsBuilder','DTColumnDefBuilder', '$httpParamSerializer', '$location', '$uibModal'];
+
+	TasksCtrl.$inject = ['$scope', 'CrudService', 'DTOptionsBuilder', 'DTColumnDefBuilder', '$httpParamSerializer', '$location', '$uibModal', 'ConvertUrlService', 'commonsService'];
 })();

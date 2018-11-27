@@ -6,16 +6,16 @@
                 return {
                     // Notifications
                     info: function (message) {
-                        toastr.info($translate.instant(message), $translate.instant('notification.info.title'));
+                        toastr.info($translate.instant(message), 'Informação!');
                     },
                     success: function (message) {
-                        toastr.success($translate.instant(message), $translate.instant('notification.success.title'));
+                        toastr.success($translate.instant(message), 'Sucesso!');
                     },
                     warning: function (message) {
-                        toastr.warning($translate.instant(message), $translate.instant('notification.warning.title'));
+                        toastr.warning($translate.instant(message), 'Atenção!');
                     },
                     error: function (message) {
-                        toastr.error($translate.instant(message), $translate.instant('notification.error.title'));
+                        toastr.error($translate.instant(message), 'Erro!');
                     }
                 }
             }

@@ -2,14 +2,15 @@
 	angular
 		.module('ktm')
 		.controller('ProjectsCtrl', ProjectsCtrl);
-
-	function ProjectsCtrl($scope, CrudService, DTOptionsBuilder, DTColumnDefBuilder, $httpParamSerializer, $location, $uibModal, commonsService, DataTableService) {
+	function ProjectsCtrl($scope, CrudService, DTOptionsBuilder, DTColumnDefBuilder, $httpParamSerializer, $location, $uibModal, commonsService) {
+		
 		const parameter = {
 			"interactors": [{
 				"recordAction": "QUERY_ADD",
 				"entityName": "Projeto"
 			}]
 		};
+
 		var self = this;
 
 		var language = {
@@ -36,26 +37,24 @@
 			}
 		};
 
+		$scope.isAdmin = () => sessionStorage.getItem('role') === 'Admin' ? true : false;
+
 		$scope.dtColumnDefs = [DTColumnDefBuilder.newColumnDef(0).notSortable().withOption('width', '100px')];
 
 		$scope.dtOptions = DTOptionsBuilder.newOptions().withLanguage(language);
 
-
-
 		function _findPretty(projects) {
-			CrudService.projects.findAllPretty(projects)
+			CrudService.common.findAllPretty(projects)
 				.then(function (response) {
 					$scope.projectsPretty = response.data;
-					console.log($scope.projectsPretty);
 				})
 				.catch(function (error) {
 					$scope.error(error.message);
 				});
 		};
 
-		//Immediately-invoked function expression (IIFE)
-		(function () {
-			CrudService.projects.findAll(parameter)
+		function _findProjects() {
+			CrudService.common.findAll(parameter)
 				.then(function (response) {
 					var projects = response.data;
 					_findPretty(projects);
@@ -63,7 +62,7 @@
 				.catch(function (error) {
 					$scope.error(error.message);
 				});
-		})();
+		};
 
 		//Modal
 		self.openModal = function (projects) {
@@ -97,18 +96,39 @@
 			});
 		};
 
-		//Remove
-		self.remove = function (id) {
-			CrudService.projects.remove(id)
+		var init = function() {
+			var userParamether = {
+				"interactors": [
+					{
+						"recordAction": "QUERY_ADD",
+						"entityName": "BotUser",
+						"fieldAndValue": {
+							"Id": sessionStorage.getItem('id')
+						}
+					}
+				]
+			};
+
+			CrudService.common.findAll(userParamether)
 				.then(function (response) {
-					self.load();
-					commonsService.success('projects.alert.success');
-				});
+					if (response.data.recordsResult.length === 1) {
+						_findProjects();
+					} else {
+						sessionStorage.setItem("id", undefined);
+						sessionStorage.setItem("username", undefined);
+						sessionStorage.setItem("name", undefined);
+						sessionStorage.setItem("role", undefined);
+						$location.path("/");
+					}
+				}).catch(function (error) {
+					commonsService.error('Erro ao realizar consulta de usuário.');
+				})
+			;
 		}
 
-
+		init();
 
 	};
 
-	ProjectsCtrl.$inject = ['$scope', 'CrudService', 'DTOptionsBuilder', 'DTColumnDefBuilder', '$httpParamSerializer', '$location', '$uibModal', 'commonsService', 'DataTableService'];
+	ProjectsCtrl.$inject = ['$scope', 'CrudService', 'DTOptionsBuilder', 'DTColumnDefBuilder', '$httpParamSerializer', '$location', '$uibModal', 'commonsService'];
 })();

@@ -7,7 +7,7 @@
         var self = this;
 
         self.load = function(){
-			CrudService.users.findAll()
+			CrudService.common.findAll()
 			.then(function(response){
 				$scope.patients = response.data;
 			})
@@ -23,7 +23,6 @@
         };
 
         self.delete = function () {
-            console.log(self.usersElement);
             return CrudService.users.delete(self.usersElement.id)
                 .then(function (response) {
                     $uibModalInstance.close(response.data);

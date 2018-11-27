@@ -2,77 +2,47 @@
 	angular
 		.module('ktm')
 		.service('CrudService', ['RestService', function (rest) {
+			'use strict';
 
-			const url = "https://krusty-api.herokuapp.com";
+			const url = "https://chatbotbycasseb.herokuapp.com";
 			
 			return {
-				users : {
-					findAll : function(){
-						return rest.get(`${url}/users/`)
-					}
-				},
-				tasks : {
-					findAll : function(parameters) {
-						return rest.post('https://chatbotbycasseb.herokuapp.com/setTransaction', JSON.stringify(parameters));
+				common : {
+					findAll : function(parameters){
+						return rest.post(`${url}/setTransaction`, JSON.stringify(parameters));
 					},
 					findAllPretty : function(parameters){
-						return rest.post('https://chatbotbycasseb.herokuapp.com/parseToEasyRecord', JSON.stringify(parameters));
+						return rest.post(`${url}/parseToEasyRecord`, JSON.stringify(parameters));
+					},
+					save : function(parameter) {
+						return rest.post(`${url}/setTransaction`, JSON.stringify(parameter));
+					},
+					edit : function(parameter) {
+						return rest.post(`${url}/setTransaction`, JSON.stringify(parameter));
+					},
+					delete : function(parameter) {
+						return rest.post(`${url}/setTransaction`, JSON.stringify(parameter));
 					}
 				},
 				projects: {
-					findAll: function(parameters) {
-						return rest.post('https://chatbotbycasseb.herokuapp.com/setTransaction', JSON.stringify(parameters));
-					},
-					findAllPretty : function(parameters){
-						return rest.post('https://chatbotbycasseb.herokuapp.com/parseToEasyRecord', JSON.stringify(parameters));
-					},
 					save : function(project) {
-						return rest.post('https://chatbotbycasseb.herokuapp.com/setTransaction', JSON.stringify(project))
+						return rest.post(`${url}/setTransaction`, JSON.stringify(project));
+					},
+					delete : function(project) {
+						return rest.post(`${url}/setTransaction`, JSON.stringify(project));
 					}
 				},
-				user: {
-					findAll: function (filterData) {
-						return rest.get('/ktm/user/?' + filterData);
+				typeTasks : {
+					save : function(typeTask) {
+						return rest.post(`${url}/setTransaction`, JSON.stringify(typeTask));
 					},
-					save: function (user) {
-						return rest.post('/ktm/user', user);
-					},
-					findOne: function (id) {
-						return rest.get('/ktm/user/' + id);
-					},
-					delete: function (id) {
-						return rest.delete('/ktm/user/' + id);
-					},
-					change: function (user) {
-						return rest.post('/ktm/user/change-password', user);
+					delete : function(typeTask) {
+						return rest.post(`${url}/setTransaction`, JSON.stringify(typeTask));
 					}
 				},
 				login: {
 					logon: function (user) {
-						return rest.post(url + '/theCemDente/login', user);
-					},
-					forget: function (user) {
-						return rest.post('/ktm/login/forgot-password', user);
-					},
-					change: function (user) {
-						return rest.post('/ktm/login/change-password', user);
-					},
-					logout: function () {
-						return rest.get('/ktm/login/logout');
-					},
-					userAuthenticated: function () {
-						return rest.get('/ktm/login/userAuthenticated');
-					}
-				},
-				paciente: {
-					findAll : function(){
-						return rest.get(url + '/theCemDente/paciente/getall')
-					},
-					save: function (paciente) {
-						return rest.post(url + '/theCemDente/paciente/savePaciente/', paciente);
-					},
-					delete: function (id) {
-						return rest.delete(url + '/theCemDente/paciente/deletePaciente/' + id);
+						return rest.post(`${url}/setTransaction`, JSON.stringify(user));
 					}
 				},
 			};

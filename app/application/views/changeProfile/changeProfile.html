@@ -1,0 +1,106 @@
+<div ng-include="'application/views/templates/header.html'"></div>
+<div ng-include="'application/views/templates/aside.html'"></div>
+
+<main>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 col-sm-6">
+				<h2>Alterar Perfil</h2>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<div class="card">
+			<form name="form" novalidate data-ng-submit="save()">
+				<div class="row" style="margin-top:24px">
+					<div class="col-xs-12">
+						<h4>Dados Pessoais</h4>
+						<hr style="margin-top: 0">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-md-4">
+						<div class="form-group">
+							<label>Endereço</label>
+							<input type="text" class="form-control" data-ng-model="userInfo.fields['Endereço']" required>
+						</div>
+					</div>
+					<div class="col-xs-12 col-md-4">
+						<div class="form-group">
+							<label>Bairro</label>
+							<input type="text" class="form-control" data-ng-model="userInfo.fields['Bairro']" required>
+						</div>
+					</div>
+					<div class="col-xs-12 col-md-4">
+						<div class="form-group">
+							<label>CEP</label>
+							<input type="text" class="form-control" data-ng-model="userInfo.fields['CEP']" required>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-md-6">
+						<div class="form-group">
+							<label>Cidade</label>
+							<input type="text" class="form-control" data-ng-model="userInfo.fields['Cidade']" required>
+						</div>
+					</div>
+					<div class="col-xs-12 col-md-6">
+						<div class="form-group">
+							<label>UF</label>
+							<input type="text" class="form-control" data-ng-model="userInfo.fields['UF']" required>
+						</div>
+					</div>
+				</div>
+
+				<div class="row" style="margin-top:24px">
+					<div class="col-xs-12">
+						<h4>Dados para Pagamentos</h4>
+						<hr style="margin-top: 0">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-md-6">
+						<div class="form-group">
+							<label>E-mail</label>
+							<input type="text" class="form-control" data-ng-model="userInfo.fields['E-mail']" required>
+						</div>
+					</div>
+					<div class="col-xs-12 col-md-6">
+						<div class="form-group">
+							<label>CPF Conta Bancária</label>
+							<input type="text" class="form-control" data-ng-model="userInfo.fields['CPF Conta']" required>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-md-4">
+						<div class="form-group">
+							<label>Banco</label>
+							<input type="text" class="form-control" data-ng-model="userInfo.fields['Banco']" required>
+						</div>
+					</div>
+					<div class="col-xs-12 col-md-4">
+						<div class="form-group">
+							<label>Agência</label>
+							<input type="text" class="form-control" data-ng-model="userInfo.fields['Agência']" required>
+						</div>
+					</div>
+					<div class="col-xs-12 col-md-4">
+						<div class="form-group">
+							<label>Conta</label>
+							<input type="text" class="form-control" data-ng-model="userInfo.fields['Conta Corrente']" required>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 text-right">
+						<button type="submit" class="btn btn-default">Cancelar</button>
+						<button type="submit" class="btn btn-primary">Salvar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</main>

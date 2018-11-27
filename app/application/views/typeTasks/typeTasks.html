@@ -1,0 +1,60 @@
+<div ng-include="'application/views/templates/header.html'"></div>
+<div ng-include="'application/views/templates/aside.html'"></div>
+<main>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 col-sm-6">
+				<h2>Tipos de Tarefas</h2>
+			</div>
+			<div class="col-xs-12 col-sm-6" ng-if="isAdmin()">
+				<button class="btn btn-primary btn-add" data-ng-click="typeTaskCtrl.openModal()"> 
+					<i class="fa fa-plus" aria-hidden="true"></i>
+					<span class="btn-add--text">Cadastrar tipo de tarefa</span>
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<section>
+		<div class="container-fluid">
+
+			<div class="card">
+
+				<div class="table-responsive">
+					<table datatable="ng" dt-column-defs="dtColumnDefs" dt-options="dtOptions" class="table table-striped">
+						<thead>
+							<tr>
+								<th ng-if="isAdmin()">Ação</th>
+								<th>Nome</th>
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<th>Ação</th>
+								<th>Nome</th>
+							</tr>
+						</tfoot>
+						<tbody>
+							<tr ng-repeat="typeTask in typeTasksPretty">
+
+								<td ng-if="isAdmin()">
+									<button class="btn btn-default btn-circle" uib-tooltip="Editar" ng-click="typeTaskCtrl.openModal(typeTask)">
+										<i class="fa fa-pencil" aria-hidden="true"></i>
+									</button>
+									<button class="btn btn-default btn-circle" uib-tooltip="Excluir" ng-click="typeTaskCtrl.openModalConfirmation(typeTask)">
+										<i class="fa fa-trash-o" aria-hidden="true"></i>
+									</button>
+								</td>
+								<td>{{typeTask.fields.Nome}}</td>
+
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+		</div>
+	</section>
+
+</main>

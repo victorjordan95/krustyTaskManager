@@ -1,22 +1,16 @@
 <div ng-include="'application/views/templates/header.html'"></div>
 <div ng-include="'application/views/templates/aside.html'"></div>
 <main>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-12 col-sm-6">
 				<h2>Usuários</h2>
-			</div>
-			<div class="col-xs-12 col-sm-6">
-				<button class="btn btn-primary btn-create" data-ng-click="pacienteCtrl.openModal()">
-					<i class="fa fa-plus" aria-hidden="true"></i>
-					Cadastrar usuário
-				</button>
 			</div>
 		</div>
 	</div>
 
 	<section>
-		<div class="container">
+		<div class="container-fluid">
 
 			<div class="card">
 
@@ -25,29 +19,32 @@
 						<thead>
 							<tr>
 								<th>Ação</th>
+								<th>Id</th>
 								<th>Nome</th>
-								<th>CPF</th>
+								<th>Role</th>
 							</tr>
 						</thead>
 						<tfoot>
 							<tr>
 								<th>Ação</th>
+								<th>Id</th>
 								<th>Nome</th>
-								<th>CPF</th>
+								<th>Role</th>
 							</tr>
 						</tfoot>
 						<tbody>
-							<tr ng-repeat="task in tasksPretty">
+							<tr ng-repeat="user in usersPretty">
 								<td>
-									<button class="btn btn-default btn-circle" uib-tooltip="Editar" ng-click="pacienteCtrl.openModal(patient)">
-										<i class="fa fa-pencil" aria-hidden="true"></i>
+									<button class="btn btn-default btn-circle" uib-tooltip="Editar" ng-click="usersCtrl.openModal(user)">
+										<i class="fa fa-eye" aria-hidden="true"></i>
 									</button>
-									<button class="btn btn-default btn-circle" uib-tooltip="Excluir" ng-click="pacienteCtrl.openModalConfirmation(patient)">
+									<button class="btn btn-default btn-circle" uib-tooltip="Excluir" ng-click="usersCtrl.openModalConfirmation(user)">
 										<i class="fa fa-trash-o" aria-hidden="true"></i>
 									</button>
 								</td>
-								<td>{{task.fields.CampoA}}</td>
-								<td>{{task.fields.CampoB}}</td>
+								<td>{{user.fields.Id}}</td>
+								<td>{{user.fields.Nome}} {{user.fields.Sobrenome}}</td>
+								<td>{{user.fields.Role}}</td>
 							</tr>
 						</tbody>
 					</table>
