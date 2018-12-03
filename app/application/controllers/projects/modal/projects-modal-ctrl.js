@@ -72,7 +72,8 @@
 
 
 		$scope.save = function () {
-			$scope.projectModal.Cliente = $scope.selected_client.key;
+			$scope.projectModal.Cliente = `Cliente|${$scope.selected_client.key}`;
+			$scope.projectModal.Custo = parseInt($scope.projectModal.Custo, 10);
 
 			if ($scope.isNew) {
 				var project = {
@@ -116,7 +117,11 @@
 					};
 					CrudService.common.save(project)
 						.then(function (response) {
-							commonsService.success('Projeto alterado com sucesso!');
+							if (element === $scope.fieldList[$scope.fieldList.length - 1]) {
+								commonsService.success('Projeto alterado com sucesso!');
+								$uibModalInstance.close(response.data);
+								location.reload();
+							}
 						})
 						.catch(function (error) {
 							if (error.objeto.data.exception.includes('EmptyOrNullValueException')) {
@@ -131,31 +136,30 @@
 						});
 				});
 
-				debugger;
-				var nomeProjeto = {
-					"interactors":[
-						{
-							"recordAction" : "EDIT",
-							"entityName" : "Projeto",
-							"recordLine": projectKey,
-							"fieldName" : "Nome",
-							"newValue" : $scope.userInfo.fields['Nome'],
-						}	
-					]
-				};
-				CrudService.common.save(nomeProjeto)
-					.then(function (response) {})
-					.catch(function (error) {
-						if (error.objeto.data.exception.includes('EmptyOrNullValueException')) {
-							commonsService.error('Campo vazio!');
-							return;
-						} else {
-							if (error.objeto.data.exception.includes('UniqueConstraintException')) {
-								commonsService.error('Erro ao salvar projeto!');
-								return;
-							}
-						}
-					});
+				// var nomeProjeto = {
+				// 	"interactors":[
+				// 		{
+				// 			"recordAction" : "EDIT",
+				// 			"entityName" : "Projeto",
+				// 			"recordLine": projectKey,
+				// 			"fieldName" : "Nome",
+				// 			"newValue" : $scope.userInfo.fields['Nome'],
+				// 		}	
+				// 	]
+				// };
+				// CrudService.common.save(nomeProjeto)
+				// 	.then(function (response) {})
+				// 	.catch(function (error) {
+				// 		if (error.objeto.data.exception.includes('EmptyOrNullValueException')) {
+				// 			commonsService.error('Campo vazio!');
+				// 			return;
+				// 		} else {
+				// 			if (error.objeto.data.exception.includes('UniqueConstraintException')) {
+				// 				commonsService.error('Erro ao salvar projeto!');
+				// 				return;
+				// 			}
+				// 		}
+				// 	});
 			}
 		};
 

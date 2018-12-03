@@ -59,7 +59,7 @@
 							return;
 						} else {
 							if (error.objeto.data.exception.includes('UniqueConstraintException')) {
-								commonsService.error('Erro ao salvar projeto!');
+								commonsService.error('Erro ao salvar perfil!');
 								return;
 							}
 						}
@@ -87,12 +87,12 @@
 						return;
 					} else {
 						if (error.objeto.data.exception.includes('UniqueConstraintException')) {
-							commonsService.error('Erro ao salvar projeto!');
+							commonsService.error('Erro ao salvar perfil!');
 							return;
 						}
 					}
 				});
-			commonsService.success('Projeto criado com sucesso!');
+			commonsService.success('Perfil salvo com sucesso!');
 		}
 
 		var init = function () {

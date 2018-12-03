@@ -21,15 +21,15 @@
 						"entityName" : "Cliente",
 						"fieldAndValue" : {
 							"Nome" : $scope.client.Nome,
-							"Telefone" : $scope.client.Telefone,
-							"E-mail" : $scope.client['E-mail']
+							// "Telefone" : $scope.client.Telefone,
+							// "E-mail" : $scope.client['E-mail']
 						}
 					}	
 				]
 			};
 			return CrudService.common.save(status)
 				.then(function (response) {
-					commonsService.success('Projeto criado com sucesso!');
+					commonsService.success('Cliente criado com sucesso!');
 					$uibModalInstance.close(response.data);
 					location.reload();
 				})
